@@ -1,0 +1,6 @@
+{
+  "name": "rafael",
+  "dependencies": {
+    "jashkenas/underscore": "*"
+  }
+}

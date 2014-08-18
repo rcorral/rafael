@@ -1,0 +1,13 @@
+{
+  "apps" : [{
+    "name"        : "dev",
+    "script"      : "bin/www",
+    "log_date_format"  : "YYYY-MM-DD HH:mm Z",
+    "watch"       : "./",
+    "ignoreWatch" : ["[\\/\\\\]\\./", "node_modules"],
+    "env": {
+        "DEBUG": "server,express:*",
+        "NODE_PATH": "./lib"
+    }
+  }]
+}
