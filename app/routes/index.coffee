@@ -1,10 +1,11 @@
 express = require 'express'
 fs = require 'fs'
+path = require 'path'
 Util = require '../lib/util'
 _ = require Util.componentPath 'underscore'
 
 router = express.Router()
-projectsDir = './assets/javascripts/views/projects'
+projectsDir = path.join __dirname, '../assets/javascripts/views/projects'
 
 projectFiles = fs.readdirSync projectsDir
 _.each projectFiles, (file) ->

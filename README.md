@@ -1,6 +1,5 @@
 ## Requirements
-1. node & npm
-2. install compass
+* node & npm
 
 ## Installing
 `$ npm install -g component`
