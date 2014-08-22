@@ -11,9 +11,17 @@ projectFiles = fs.readdirSync projectsDir
 _.each projectFiles, (file) ->
     console.log file
 
-# GET home page.
-router.get '/', (req, res) ->
-    res.render 'index',
-        title: 'Portfolio – Rafael Corral'
+class routes
 
-module.exports = router
+    setup: (app) ->
+        # GET home page.
+        router.get '/', (req, res) ->
+            assets = app.get 'assets'
+            res.render 'index',
+                assets: assets
+                title: 'Portfolio – Rafael Corral'
+
+        # Finally set them up
+        app.use '/', router
+
+module.exports = new routes

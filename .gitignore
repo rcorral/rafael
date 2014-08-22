@@ -1,5 +1,11 @@
 .DS_Store
 /node_modules
 /.vagrant/
-
-/public/.sass-cache/
+!/components/
+/components/*
+!/components/components*
+!/public/
+/public/*
+!/public/assets*
+/public/assets/*
+!/public/assets/index.html

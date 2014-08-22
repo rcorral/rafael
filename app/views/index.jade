@@ -2,7 +2,9 @@ doctype html
 html(lang="en")
     head
         title=title
-        each script in scripts
-            script(src=script)
+        each asset in assets['js']
+            script(src='assets/' + asset)
+        each asset in assets['css']
+            style(href='assets/' + asset, link='text/css')
     body
         div something

@@ -1,3 +1,4 @@
+debugError = require('debug')('error')
 Mincer = require 'mincer'
 path = require 'path'
 
@@ -9,22 +10,27 @@ Util =
 
         assets = 'app/assets'
         publicAssets = path.join __dirname, '../../public/assets'
-        filenames = ['main.js', 'portfolio.css']
+        filenames = ['app.js', 'app.css']
 
         Mincer.logger.use console
         environment = new Mincer.Environment path.join __dirname, '../../'
         environment.appendPath path.join assets, 'javascripts'
+        environment.appendPath 'components'
         environment.appendPath path.join assets, 'stylesheets'
 
         manifest = new Mincer.Manifest environment, publicAssets
 
         manifest.compile filenames, (err) ->
-            if (err)
-                console.error err
-                process.exit 1
+            return unless err
+            debugError err
+            process.exit 1
 
-        console.log manifest.assets
-        console.log manifest.files
+        mappedAssets = {js: [], css: []}
+        for absoluteName,asset of manifest.assets
+            match = absoluteName.match /(js|css)$/
+            mappedAssets[match[1]].push asset
+
+        mappedAssets
 
     # Gets the path for a given component
     componentPath: (name) ->
