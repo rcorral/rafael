@@ -2,7 +2,7 @@ express = require 'express'
 fs = require 'fs'
 path = require 'path'
 Util = require '../lib/util'
-_ = require Util.componentPath 'underscore'
+_ = require Util.componentPath 'lodash'
 
 router = express.Router()
 projectsDir = path.join __dirname, '../assets/javascripts/views/projects'

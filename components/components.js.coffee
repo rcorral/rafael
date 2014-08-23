@@ -1,1 +1,1 @@
-#= require ./jashkenas-underscore/underscore
+#= require ./lodash-lodash/dist/lodash.compat.js

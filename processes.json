@@ -8,7 +8,8 @@
     "env": {
         "DEBUG": "server,error,express:*",
         "NODE_PATH": "./app:./app/lib",
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "NODE_PORT": 3010
     }
   }]
 }

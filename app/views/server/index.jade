@@ -5,6 +5,6 @@ html(lang="en")
         each asset in assets['js']
             script(src='assets/' + asset)
         each asset in assets['css']
-            style(href='assets/' + asset, link='text/css')
+            link(href='assets/' + asset, rel='stylesheet', type='text/css')
     body
         div something

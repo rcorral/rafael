@@ -5,9 +5,7 @@ path = require 'path'
 Util =
 
     getAssets: (env) ->
-        if env is 'development'
-            console.log 'in dev'
-
+        # inDevelopment = env is 'development'
         assets = 'app/assets'
         publicAssets = path.join __dirname, '../../public/assets'
         filenames = ['app.js', 'app.css']
@@ -19,13 +17,9 @@ Util =
         environment.appendPath path.join assets, 'stylesheets'
 
         manifest = new Mincer.Manifest environment, publicAssets
+        manifest.compile filenames
 
-        manifest.compile filenames, (err) ->
-            return unless err
-            debugError err
-            process.exit 1
-
-        mappedAssets = {js: [], css: []}
+        mappedAssets = js: [], css: []
         for absoluteName,asset of manifest.assets
             match = absoluteName.match /(js|css)$/
             mappedAssets[match[1]].push asset
@@ -37,7 +31,7 @@ Util =
         componentsFolder = '../../components'
 
         switch name
-            when 'underscore' then componentPath = 'jashkenas-underscore/underscore'
+            when 'lodash' then componentPath = 'lodash-lodash/dist/lodash.compat'
             else return ''
 
         path.join componentsFolder, componentPath
