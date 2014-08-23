@@ -1,4 +1,3 @@
-debugError = require('debug')('error')
 Mincer = require 'mincer'
 path = require 'path'
 

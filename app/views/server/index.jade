@@ -2,9 +2,11 @@ doctype html
 html(lang="en")
     head
         title=title
-        each asset in assets['js']
-            script(src='assets/' + asset)
         each asset in assets['css']
             link(href='assets/' + asset, rel='stylesheet', type='text/css')
+        each template in templates
+            | !{template}
     body
-        div something
+        .app-wrapper
+        each asset in assets['js']
+            script(src='assets/' + asset)

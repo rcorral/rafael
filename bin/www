@@ -2,12 +2,10 @@
 require('coffee-script').register()
 var debug = require('debug')('server');
 var app = require('app');
-var Util = require('lib/util');
 
 var port = process.env.NODE_PORT;
 
 app.set('port', port);
-app.set('assets', Util.getAssets(app.get('env')));
 
 var server = app.listen(app.get('port'), function() {
   return debug('Express server listening on port ' + server.address().port);

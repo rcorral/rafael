@@ -1,3 +1,5 @@
+Util = require 'lib/util'
+
 express = require 'express'
 path = require 'path'
 favicon = require 'static-favicon'
@@ -10,8 +12,9 @@ app.enable 'trust proxy'
 app.enable 'case sensitive routing'
 
 # view engine setup
-app.set 'views', path.join(__dirname, 'views')
+app.set 'views', path.join(__dirname, 'views', 'server')
 app.set 'view engine', 'jade'
+app.set 'assets', Util.getAssets(app.get('env'))
 app.use favicon()
 app.use logger 'dev'
 app.use express.static(path.join(__dirname, '..', 'public'))

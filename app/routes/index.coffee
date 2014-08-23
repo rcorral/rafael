@@ -1,24 +1,19 @@
 express = require 'express'
-fs = require 'fs'
-path = require 'path'
-Util = require '../lib/util'
-_ = require Util.componentPath 'lodash'
-
-router = express.Router()
-projectsDir = path.join __dirname, '../assets/javascripts/views/projects'
-
-projectFiles = fs.readdirSync projectsDir
-_.each projectFiles, (file) ->
-    console.log file
+routesHelper = require 'routes-helper'
 
 class routes
 
     setup: (app) ->
+
+        clientTemplates = routesHelper.getClientTemplates app.get('env') is 'development'
+        router = express.Router()
+
         # GET home page.
         router.get '/', (req, res) ->
             assets = app.get 'assets'
             res.render 'index',
                 assets: assets
+                templates: clientTemplates
                 title: 'Portfolio – Rafael Corral'
 
         # Finally set them up
