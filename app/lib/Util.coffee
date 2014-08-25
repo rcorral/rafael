@@ -1,7 +1,26 @@
 Mincer = require 'mincer'
+
+fs = require 'fs'
 path = require 'path'
 
 Util =
+
+    findFilesOfExtension: (directory, extension) ->
+        _ = require Util.componentPath 'lodash'
+        bucket = []
+        files = fs.readdirSync directory
+        regex = new RegExp "\.#{extension}$", 'i'
+
+        for file in files
+            absolutePath = path.join directory, file
+            if fs.lstatSync(absolutePath).isDirectory()
+                bucket.concat Util.findFilesOfExtension file, extension
+            else if regex.test file
+                bucket.push absolutePath
+            else
+                continue
+
+        bucket
 
     getAssets: (env) ->
         # inDevelopment = env is 'development'

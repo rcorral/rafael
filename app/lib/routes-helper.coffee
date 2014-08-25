@@ -9,11 +9,11 @@ routesHelper =
 
     getClientTemplates: (inDevelopment) ->
         projectsDir = path.join __dirname, '../views/client/projects'
-        projectFiles = fs.readdirSync projectsDir
+        templatePaths = Util.findFilesOfExtension projectsDir, 'jade'
         templates = []
 
-        _.each projectFiles, (file) ->
-            templates.push jade.renderFile path.join(projectsDir, file),
+        _.each templatePaths, (file) ->
+            templates.push jade.renderFile file,
                 pretty: inDevelopment
 
         templates
