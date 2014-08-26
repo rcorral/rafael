@@ -3,7 +3,7 @@
 /.vagrant/
 !/components/
 /components/*
-!/components/components*
+!/components/components.js.coffee
 !/public/
 /public/*
 !/public/assets*

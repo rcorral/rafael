@@ -22,6 +22,14 @@ Util =
 
         bucket
 
+    deleteFilesInDirectory: (directory, opts={}) ->
+        files = fs.readdirSync directory
+        exclude = opts.exclude or []
+
+        for file in files
+            continue if file in exclude
+            fs.unlinkSync path.join directory, file
+
     getAssets: (env) ->
         # inDevelopment = env is 'development'
         assets = 'app/assets'

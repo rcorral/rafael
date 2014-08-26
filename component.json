@@ -1,6 +1,8 @@
 {
   "name": "rafael",
   "dependencies": {
-    "lodash/lodash": "*"
+    "lodash/lodash": "*",
+    "jashkenas/backbone": "*",
+    "components/jquery": "*"
   }
 }
