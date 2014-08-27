@@ -5,16 +5,16 @@ class routes
 
     setup: (app) ->
 
+        assets = app.get 'assets'
         clientTemplates = routesHelper.getClientTemplates app.get('env') is 'development'
         router = express.Router()
 
         # GET home page.
         router.get '/', (req, res) ->
-            assets = app.get 'assets'
             res.render 'index',
                 assets: assets
                 templates: clientTemplates
-                title: 'Portfolio – Rafael Corral'
+                title: 'Rafael Corral – Software engineer in San Francisco'
 
         # Finally set them up
         app.use '/', router

@@ -40,6 +40,7 @@ Util =
         environment = new Mincer.Environment path.join __dirname, '../../'
         environment.appendPath path.join assets, 'javascripts'
         environment.appendPath 'components'
+        environment.appendPath 'node_modules'
         environment.appendPath path.join assets, 'stylesheets'
 
         manifest = new Mincer.Manifest environment, publicAssets
