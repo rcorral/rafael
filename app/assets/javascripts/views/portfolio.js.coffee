@@ -2,7 +2,7 @@ define 'PortfolioView', ->
 
     class PortfolioView extends Backbone.View
 
-        className: 'app-portfolios'
+        className: 'app-portfolio'
 
         initialize: ->
             templates = @collection.templates.get('templates')
