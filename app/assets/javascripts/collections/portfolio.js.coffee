@@ -7,7 +7,8 @@ define 'PortfolioCollection',
         model: PortfolioModel
 
         initialize: (models, options) ->
-            @loadTemplates options.templates.get 'templates'
+            @templates = options.templates
+            @loadTemplates @templates.get 'templates'
 
         loadTemplates: (templates) ->
             regex = new RegExp /^portfolio-/

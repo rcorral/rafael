@@ -6,6 +6,7 @@
 !/components/components.js.coffee
 !/public/
 /public/*
+!/public/fonts*
 !/public/assets*
 /public/assets/*
 !/public/assets/index.html

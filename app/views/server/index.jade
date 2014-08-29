@@ -1,12 +1,19 @@
 doctype html
 html(lang="en")
     head
+        meta(name='viewport', content='width=device-width', initial-scale='1.0')
+        base(href=baseURL)
         title=title
         each asset in assets['css']
             link(href='assets/' + asset, rel='stylesheet', type='text/css')
         each template in templates
             | !{template}
     body
-        .app-wrapper
+        .container-fluid
+            header
+            .row-fluid.main
+                .app-wrapper
+        footer
+
         each asset in assets['js']
             script(src='assets/' + asset)

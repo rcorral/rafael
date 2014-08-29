@@ -8,4 +8,4 @@
 `$ component install`
 
 ## Running in development
-`$ pm2 --run-as-user dev start processes.json --watch`
+`$ pm2 --run-as-user dev start processes.json`

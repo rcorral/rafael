@@ -18,6 +18,8 @@ app.enable 'trust proxy'
 app.enable 'case sensitive routing'
 
 # view engine setup
+app.set 'host', process.env.NODE_HOST
+app.set 'port', process.env.NODE_PORT
 app.set 'views', path.join(__dirname, 'views', 'server')
 app.set 'view engine', 'jade'
 app.set 'assets', Util.getAssets(environment)
