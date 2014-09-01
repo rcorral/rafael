@@ -1,110 +1,117 @@
 .app-portfolio
     padding: 0 20px
 
-.app-portfolio .arrow-up
-    width: 0
-    height: 0
-    border-left: 17px solid transparent
-    border-right: 17px solid transparent
-    border-bottom: 17px solid #5D5D5D
-    position: absolute
-    bottom: 0px
-    left: 109px
+    .arrow-up
+        width: 0
+        height: 0
+        border-left: 17px solid transparent
+        border-right: 17px solid transparent
+        border-bottom: 17px solid #5D5D5D
+        position: absolute
+        bottom: 0px
+        left: 109px
 
-.app-portfolio .outer
-    float: left
-    position: relative
+    .outer
+        float: left
+        position: relative
 
-.app-portfolio .inner
-    width: 100%
+    .inner
+        width: 100%
 
-.app-portfolio .content
-    max-width: 250px
-    margin: 0 auto
+    .content
+        max-width: 250px
+        margin: 0 auto
 
-.app-portfolio .portfolio-item h3,
-.app-portfolio .portfolio-item p
-    max-width: 250px
-    padding: 0 5px
+    .portfolio-item
+        h3, p
+            max-width: 250px
+            padding: 0 5px
+        p
+            font-size: 18px
 
-.app-portfolio .portfolio-item p
-    font-size: 18px
+    .portfolio-item img
+        max-width: 240px
+        height: 170px
 
-.app-portfolio .portfolio-item img
-    max-width: 240px
-    height: 170px
+    .item-full
+        width: 100%
+        clear: both
+        background-color: #DCDCDC
+        border: 1px solid #5D5D5D
+        font-size: 15px
+        font-weight: 200
+        line-height: 22px
+        margin: 20px 0
+        padding: 0 0 10px 0
+        position: relative
 
-.app-portfolio .item-full
-    width: 100%
-    clear: both
-    background-color: #DCDCDC
-    border: 1px solid #5D5D5D
-    font-size: 15px
-    font-weight: 200
-    line-height: 22px
-    margin: 20px 0
-    padding: 0 0 10px 0
-    position: relative
+        .close
+            padding: 6px 9px
+            position: absolute
+            right: -1px
+            top: -1px
+            z-index: 999
 
-.app-portfolio .item-full .close
-    padding: 6px 9px
-    position: absolute
-    right: -1px
-    top: -1px
-    z-index: 999
+        .images
+            overflow: hidden
+            position: relative
+            margin: 0 auto
 
-.app-portfolio .item-full .images
-    overflow: hidden
-    position: relative
-    margin: 0 auto
+            .btnl,
+            .btnr
+                background-color: #e6e6e6
+                background-image: none
+                border-radius: 0px
+                cursor: pointer
+                font-size: 13px
+                line-height: 18px
+                opacity 0.33
+                outline: none
+                padding-bottom: 4px
+                padding-top: 4px
+                position: absolute
+                top: 0
+                z-index: 99
 
-.app-portfolio .item-full .images .btnl,
-.app-portfolio .item-full .images .btnr
-    position: absolute
-    top: 0
-    z-index: 99
-    opacity 0.33
-    border-radius: 0px
-    cursor: pointer
+            .btnl
+                right: 50%
 
-.app-portfolio .item-full .images .btnl
-    right: 50%
+            .btnr
+                left: 50%
 
-.app-portfolio .item-full .images .btnr
-    left: 50%
+            .btn-mobile
+                top: 42%
 
-.app-portfolio .item-full .images .btn-mobile
-    top: 42%
+                &.btnl
+                    left: 0
+                    right: auto
 
-.app-portfolio .item-full .images .btn-mobile.btnl
-    left: 0
-    right: auto
+                &.btnr
+                    right: 0
+                    left: auto
 
-.app-portfolio .item-full .images .btn-mobile.btnr
-    right: 0
-    left: auto
+            .inner-wrap
+                width: 100000px
+                position: relative
+                left: 0
+                margin-top: 28px
 
-.app-portfolio .item-full .images .inner-wrap
-    width: 100000px
-    position: relative
-    left: 0
-    margin-top: 28px
+                img
+                    float: left
+                    padding: 0
 
-.app-portfolio .item-full .images .inner-wrap img
-    float: left
-    padding: 0
+                .no-polaroid
+                    background-color: transparent
+                    border: none
+                    box-shadow: none
 
-.app-portfolio .item-full .images .inner-wrap .no-polaroid
-    background-color: transparent
-    border: none
-    box-shadow: none
+        .item-more
+            article
+                clear: both
+                margin: 13px 19px 0
 
-.app-portfolio .item-full .item-more article
-    clear: both
-    margin: 13px 19px 0
-
-.app-portfolio .item-full .item-more p
-    margin: 12px auto
+            p
+                margin: 12px auto
 
 /* Media queries for portfolio */
 @media (max-width: 596px)
@@ -117,7 +124,6 @@
     .app-portfolio .outer
         width: 50%
         margin: 0 auto
-    
 
 @media (min-width: 871px)
     .app-portfolio .outer
@@ -139,4 +145,4 @@
 @media (min-width: 769px)
     .portfolio-item
         cursor: pointer
-        opacity 0.90    
+        opacity 0.90
