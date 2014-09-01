@@ -52,6 +52,7 @@ define 'ApplicationView',
                 templates[template.id] =
                     rawTemplate: template.innerHTML
                     template: Handlebars.compile template.innerHTML
+                    sort: jQuery("##{template.id}").data('sort') or 0
             @model.get('templates').set templates: templates
 
     ApplicationView
