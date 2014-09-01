@@ -1,12 +1,18 @@
+.img-polaroid
+    background-color: #fff
+    border: 1px solid rgba(0,0,0,0.2)
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1)
+    padding: 4px
+
 /* Footer */
-.footer
+footer
     width: 100%
     margin: 0 auto
-    background-color: #000000
+    background-color: #2D2D2D
     color: #EFEFEF
-    text-shadow: 0 6px 7px #090909
+    text-shadow: 0 6px 7px rgba(13, 13, 13, 0.62)
 
-.footer .copyright
+footer .copyright
     margin-right: 10px
     font-size: 20px
 
@@ -51,6 +57,7 @@ h6
     font-weight: 200
     line-height: 27px
     margin: 18px 10px 0
+    padding: 15px
 
 .custom-footer h4
     font-size: 25px
@@ -64,6 +71,7 @@ h6
 
 .custom-footer .contact-links
     text-shadow: 0 1px 3px #000000
+    float: right
 
 .custom-footer a:link,
 .custom-footer a:visited
@@ -71,12 +79,6 @@ h6
 
 /* For tablets - Backgrounds will overflow anyways so who cares, had to work with design */
 @media (max-width: 934px)
-    .header-top
-        background: url("../images/header_top_tablet.jpg") no-repeat scroll left top #000000
-    
-    .header-bottom
-        background: url("../images/header_bottom_tablet.jpg") no-repeat scroll left top #111415
-    
     .site-description
         color: #FFFFFF
         font-weight: normal
@@ -101,15 +103,12 @@ h6
 
 @media (max-width: 480px)
     .header-top
-        background: url("../images/header_top_phone.jpg") no-repeat scroll left top #000000
         height: 51px
     
     .header-bottom
-        background: url("../images/header_bottom_phone.jpg") no-repeat scroll left top #111415
         height: 30px
     
-    .footer .footer-width
-        background: url("../images/footer_middle_desktop.jpg") no-repeat scroll center top transparent
+    footer .footer-width
         height: 188px
         margin: 0 auto
     
@@ -126,27 +125,26 @@ h6
         font-size: 15px !important
 
 @media (min-width: 481px)
-    .footer .footer-width
-        background: url("../images/footer_middle_desktop.jpg") no-repeat scroll center top transparent
-        height: 188px
+    footer .footer-width
         margin: 0 auto
 
 @media (max-width: 768px)
     body
         padding-top: 0
-    
+
     .header
         background: transparent
-    
+
     .modal.fade
         top: -100%
 
     .custom-footer h4
         font-size: 22px
-    
+
     .custom-footer p
         font-size: 16px
-    
+
+@media (max-width: 991px)
     .custom-footer p.contact-links
         float: left
         margin-bottom: 17px
@@ -176,5 +174,5 @@ h6
     .header-bottom
         background: url("../images/header_bottom_desktop.jpg") no-repeat scroll center top #111415
     
-    .footer .footer-width
+    footer .footer-width
         width: 920px
