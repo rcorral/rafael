@@ -1,7 +1,8 @@
 script(id='portfolios-index', type='text/x-handlebars-template')
-    {{#each portfolios}}
-    .outer
-        .inner
-            .content
-                {{{template}}}
-    {{/each}}
+    .portfolio-wrapper
+        {{#each portfolios}}
+        .outer
+            .inner
+                .content
+                    {{{template}}}
+        {{/each}}
