@@ -1,0 +1,35 @@
+script(id='portfolio-stagingdev', type='text/x-handlebars-template')
+    .portfolio-item
+        img.img-polaroid(src='images/portfolio/staging/staging_server_thumb.jpg', alt='Staging server architecture thumbnail')
+        h3 Staging/Development Server
+        p.lead An internal staging server for clients and developers.
+
+    .hidden
+        button.close X
+        .item-more
+            .images
+                .inner-wrap
+                    img(src='images/portfolio/staging/staging_server.png', alt='Staging server architecture')
+                    img(src='images/portfolio/staging/cadbury_pull.png', alt='Git pull via HipChat')
+                    img(src='images/portfolio/staging/cadbury_permissions.png', alt='Fix permissions command on server.')
+
+            article
+                p The problem: When a client’s website is in the development stage there may be multiple back-end and front-end developers working together, the client may also want to enter content or configure different extensions on the site. Sharing and/or keeping database changes in sync can be a hassle. So the question is: How can we work together using a Distributed Version Control environment without having to sync databases?
+                p I created this architecture that works off a centralized server, this server contains a copy of the git repository for the project and hosts the project's database. Having this development server allows clients to update content, which can be seen immediately by developers. Developers will have an instance of the git repository on their local computer but they'll connect to the database on the development server. The server's website is used by non technical individuals and they are allowed to manage the website to it's fullest and upload files that will get versioned at a later time.
+                p
+                  | To automate the process of creating a project on the server, pulling and committing changesets, I setup a 
+                  a(href='http://hubot.github.com/', title='Hubot') hubot 
+                  | robot to connect to one of our hipchat chat rooms. The bot listens for commands and these commands are relayed to the development server via an API. Some of the available commands are, create project, pull changesets, stage/commit changes on server, and delete project. MongoDB is used to log all commands and responses that hubot sends to the server. There is a node.js daemon that I wrote, this is ran by a different user than the web and it is used to execute all git commands that are requested by the bot. This setup allows developers to easily deploy their changes to the development site for the client to view and approve, it also removes the hassle of having to log onto a development server to execute git commands.
+                p This solution allows all parties involved in the project to work together without hassle.
+                p: strong Notable points:
+                ul
+                    li PHP &amp; MySQL
+                    li HipChat
+                    li Hubot
+                    li CoffeeScript
+                    li JavaScript
+                    li node.js
+                    li MongoDB
+                    li GIT
+                    li RESTful API
+                    li Linux Extended ACLs

@@ -1,0 +1,23 @@
+script(id='portfolio-gotest', type='text/x-handlebars-template')
+    .portfolio-item
+        img.img-polaroid(src='images/portfolio/github-stargazers/github-stargazers-thumb.jpg', alt='GitHub Stargazers.')
+        h3 GitHub Stargazers
+        p.lead A fun way to visualize stargazers.
+
+    .hidden
+        button.close X
+        .item-more
+
+            article
+                p This was a fun idea I came up with one night. "Wouldn't it be cool if we could visualize everyone who has starred any of my repositories on GitHub?" – I thought to myself.
+                p I built this using Backbone.js as it makes it so simple to interact with APIs. I gave each avatar a twinkle effect with CSS3 animations to make all the avatars look as if they were stars.
+                p: strong Technologies used:
+                ul
+                    li JavaScript
+                    li Backbone.js
+                    li jQuery
+                    li CSS3
+                p: strong Further links:
+                ul
+                    li: a(href='http://rcorral.github.io/github-stargazers/') Demo
+                    li: a(href='https://github.com/rcorral/github-stargazers') GitHub repository

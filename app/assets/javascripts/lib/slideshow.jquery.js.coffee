@@ -33,6 +33,18 @@ do (
                     $this.smooth_scroll options.scrollToOffset
                 , 500
 
+            size = ->
+                width = $this.parents('.item-full').width()
+                $current = $inner.find 'img.current'
+                styles_width = $current.outerWidth(true) - $current.width()
+
+                $images.css 'max-width': width - styles_width
+                $this.css
+                    height: $current.outerHeight(true) + options.imgHeightOffset,
+                    'max-width': $current.outerWidth true
+
+                $inner.css eft: -$current.get(0).offsetLeft
+
             # Window listeners
             $(window)
                 .unbind 'resize.ss'
@@ -132,18 +144,6 @@ do (
 
                 $current.removeClass 'current'
                 $next.addClass 'current'
-
-            size = ->
-                width = $this.parents('.item-full').width()
-                $current = $inner.find 'img.current'
-                styles_width = $current.outerWidth(true) - $current.width()
-
-                $images.css 'max-width': width - styles_width
-                $this.css
-                    height: $current.outerHeight(true) + options.imgHeightOffset,
-                    'max-width': $current.outerWidth true
-
-                $inner.css eft: -$current.get(0).offsetLeft
 
             # Finally size
             size()

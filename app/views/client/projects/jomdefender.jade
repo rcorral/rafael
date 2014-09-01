@@ -1,0 +1,40 @@
+script(id='portfolio-jomdefender', type='text/x-handlebars-template')
+    .portfolio-item
+        img.img-polaroid(src='images/portfolio/jomdefender/jomdefender-parameters1-thumb.jpg', alt='jomDefender parameters thumbnail')
+        h3 jomDefender
+        p.lead Adds additional security layers to a Joomla website.
+
+    .hidden
+        button.close X
+        .item-more
+            .images
+                .inner-wrap
+                    img(src='images/portfolio/jomdefender/jomdefender-parameters1.png', alt='jomDefender parameters')
+                    img(src='images/portfolio/jomdefender/jomdefender-parameters2.png', alt='jomDefender parameters')
+                    img(src='images/portfolio/jomdefender/white_space.jpg', alt='jomDefender remove white space in HTML.')
+                    img(src='images/portfolio/jomdefender/remove-generator-header.jpg', alt='Remove generator header.')
+                    img(src='images/portfolio/jomdefender/admin_page.jpg', alt='Admin prompt secondary authentication.')
+                    img(src='images/portfolio/jomdefender/jomdefender-email-sample.jpg', alt='File integrity report email.')
+
+            article
+                p I developed this plugin from the ground up in 2010. This is a small plugin that aims to add additional security layers to a Joomla site. My interest in developing this extension is my drive for server and web application security.
+                p: strong Feature highlights:
+                ul
+                    li Secondary administrative password (two-factor authentication)
+                    li Removes white space on HTML page
+                    li Removes all instances of Joomla (security by obscurity)
+                    li File integrity check this alerts admin when files in filesystem have been modified
+                    li White/Black list of IP address
+                    li
+                        | Login/Logout 
+                        a(href='http://en.wikipedia.org/wiki/Cross-site_request_forgery', title='Cross site request forgery - Wikipedia') CSRF 
+                        | prevention
+                p: strong Other notable points:
+                ul
+                    li PHP &amp; MySQL
+                    li GIT
+                    li Phing
+                p: strong Further links:
+                p
+                  | - 
+                  a(href='http://www.corephp.com/joomla-products/jomdefender.html', title='jomDefender - corePHP') http://www.corephp.com/joomla-products/jomdefender.html
