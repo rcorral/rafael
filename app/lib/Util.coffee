@@ -31,7 +31,6 @@ Util =
             fs.unlinkSync path.join directory, file
 
     getAssets: (env) ->
-        # inDevelopment = env is 'development'
         assets = 'app/assets'
         publicAssets = path.join __dirname, '../../public/assets'
         filenames = ['app.js', 'app.css']
@@ -42,6 +41,11 @@ Util =
         environment.appendPath 'components'
         environment.appendPath 'node_modules'
         environment.appendPath path.join assets, 'stylesheets'
+
+        if env is 'production'
+            environment.jsCompressor  = 'uglify'
+            environment.cssCompressor = 'csso'
+            environment = environment.index
 
         manifest = new Mincer.Manifest environment, publicAssets
         manifest.compile filenames
