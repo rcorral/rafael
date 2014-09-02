@@ -10,7 +10,7 @@ class routes
         router = express.Router()
         proxyPort = app.get 'proxyPort'
         port = app.get 'port'
-        baseURL = "http://#{host}#{if proxyPort isnt 80 then (':' + port) else ''}/"
+        baseURL = "http://#{app.get('host')}#{if proxyPort isnt 80 then (':' + port) else ''}/"
 
         # GET home page.
         router.get '/', (req, res) ->
