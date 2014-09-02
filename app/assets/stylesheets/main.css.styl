@@ -22,6 +22,7 @@ html, body, body .container-fluid
 
 .main
     margin-top: 25px
+    width: 920px
 
 /* Headings */
 @font-face
@@ -101,6 +102,10 @@ footer .copyright
     color: #fff
 
 /* For tablets - Backgrounds will overflow anyways so who cares, had to work with design */
+@media (max-width: 979px)
+    .main
+        width: 100%
+
 @media (max-width: 934px)
     .site-description
         color: #FFFFFF
