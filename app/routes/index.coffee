@@ -8,7 +8,7 @@ class routes
         assets = app.get 'assets'
         clientTemplates = routesHelper.getClientTemplates app.get('env') is 'development'
         router = express.Router()
-        proxyPort = app.get 'proxyPort'
+        proxyPort = app.get('proxyPort')|0
         port = app.get 'port'
         baseURL = "http://#{app.get('host')}#{if proxyPort isnt 80 then (':' + port) else ''}/"
 
