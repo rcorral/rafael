@@ -23,7 +23,7 @@ app.set 'port', process.env.NODE_PORT
 app.set 'views', path.join(__dirname, 'views', 'server')
 app.set 'view engine', 'jade'
 app.set 'assets', Util.getAssets(environment)
-app.use favicon(__dirname + '/public/favicon.ico')
+app.use favicon(path.join(__dirname, '../public/favicon.ico'))
 app.use logger 'dev'
 app.use express.static(path.join(__dirname, '..', 'public'))
 routes.setup app
