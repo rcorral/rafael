@@ -3,7 +3,6 @@
     "name"        : "prod",
     "script"      : "bin/www",
     "log_date_format"  : "YYYY-MM-DD HH:mm Z",
-    "watch"       : "./",
     "ignoreWatch" : ["node_modules", "public\/assets\/app", "public\/assets\/manifest"],
     "env": {
         "DEBUG": "server,error",
