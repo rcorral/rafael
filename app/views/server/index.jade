@@ -18,9 +18,22 @@ html(lang='en')
             | !{template}
 
     body
+        .container-fluid.site-intro
+            section
+                h1 Hello, It's nice to meet you.
+                p My name is Rafael. I'm a software engineer, currently living in San Francisco.
+                    br
+                    | I work at a startup, 
+                    a(href='http://quid.com/', title='Quid, Inc.') Quid, Inc
+                    | . I've previously worked at 
+                    a(href='https://www.barracuda.com/', title='Barracuda Networks') Barracuda Networks
+                    |  and a small consulting firm '
+                    a(href='https://www.corephp.com/', title="'corePHP'") corePHP
+                    | '.
+            .read-more
+                span(class='glyphicon glyphicon-download')
         .container-fluid
-            header
-            .row.main
+            main(class='row main')
                 .app-wrapper
         footer
             .footer-width

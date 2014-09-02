@@ -4,23 +4,33 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.1)
     padding: 4px
 
-/* Footer */
-footer
-    width: 100%
-    margin: 0 auto
-    background-color: #2D2D2D
-    color: #EFEFEF
-    text-shadow: 0 6px 7px rgba(13, 13, 13, 0.62)
+html, body, body .container-fluid
+    height: 100%
+.site-intro
+    align-items: center
+    background-color: rgba(11, 31, 63, 0.82)
+    color: #fff
+    display: flex
+    flex-direction: row
+    font-family: Inconsolata, Helvetica, Arial, sans-serif
+    font-size: 18px
+    section
+        max-width: 400px
+        a
+            color: #FFFFFF
+            text-shadow: 0px 0px 2px rgba(11, 11, 11, 0.34)
 
-footer .copyright
-    margin-right: 10px
-    font-size: 20px
+.main
+    margin-top: 25px
 
 /* Headings */
 @font-face
     font-family: 'FontinSansB'
     src: url('../fonts/Fontin_Sans_B_45b.otf') format('opentype')
     font-weight: bold
+@font-face
+    font-family: Inconsolata
+    src: url('../fonts/Inconsolata.otf') format('opentype')
 
 h1, h2, h3, h4, h5, h6, .site-title
     font-family: 'FontinSansB', Helvetica, Arial, sans-serif
@@ -53,6 +63,19 @@ h6
     line-height: 14px
 
 /* Footer */
+footer
+    background-color: #2D2D2D
+    color: #EFEFEF
+    float: left
+    margin: 0 auto
+    text-shadow: 0 6px 7px rgba(13, 13, 13, 0.62)
+    width: 100%
+
+footer .copyright
+    margin-right: 10px
+    font-size: 20px
+
+/* Footer */
 .custom-footer
     font-weight: 200
     line-height: 27px
@@ -81,46 +104,21 @@ h6
 @media (max-width: 934px)
     .site-description
         color: #FFFFFF
-        font-weight: normal
-        left: -7px
-        text-align: right
-        text-shadow: 0 0 10px black
-        top: 110px
-        float: none
 
 @media (max-width: 616px)
     .site-description
         color: #000
-        font-weight: bold
-        left: 2px
-        text-align: center
-        text-shadow: 0 0 10px white
-        top: 176px
-        z-index: 99
-        float: none
-        display: table
-        margin: 0 auto
 
 @media (max-width: 480px)
-    .header-top
-        height: 51px
-    
-    .header-bottom
-        height: 30px
-    
+    h1
+        font-size: 22px
+
     footer .footer-width
-        height: 188px
         margin: 0 auto
-    
-    .site-description
-        top: 100px
-        font-weight: normal
-        font-size: 14px
-        text-shadow: none
-    
+
     .custom-footer h4
         font-size: 20px !important
-    
+
     .custom-footer p
         font-size: 15px !important
 
@@ -150,29 +148,12 @@ h6
         margin-bottom: 17px
 
 @media (max-width: 980px)
-    .navbar-fixed-top
-        margin-bottom: 0!important
-    
     .item-comment .item-image
         display: none
-    
+
     .well
         padding: 10px
 
-
 @media (min-width: 935px)
-    .header-top
-        background: url("../images/header_top_desktop.jpg") no-repeat scroll center top #000000
-    
-    .header-top-content,
-    .main
-        display: block
-        float: none
-        width: 920px
-        margin: 0 auto
-    
-    .header-bottom
-        background: url("../images/header_bottom_desktop.jpg") no-repeat scroll center top #111415
-    
     footer .footer-width
         width: 920px

@@ -1,130 +1,142 @@
-.portfolio-wrapper
-    padding: 0 20px
+.app-portfolio
 
-    .arrow-up
-        width: 0
-        height: 0
-        border-left: 17px solid transparent
-        border-right: 17px solid transparent
-        border-bottom: 17px solid #5D5D5D
-        position: absolute
-        bottom: 0px
-        left: 109px
+    h2
+        color: rgba(40, 40, 40, 0.9)
+        margin-bottom: 35px
+        text-align: center
 
-    .outer
-        float: left
-        position: relative
+    .portfolio-wrapper
+        padding: 0 20px
 
-    .inner
-        width: 100%
-
-    .content
-        max-width: 250px
-        margin: 0 auto
-
-    .portfolio-item
-        h3, p
-            max-width: 250px
-            padding: 0 5px
-        p
-            font-size: 18px
-
-    .portfolio-item img
-        max-width: 240px
-        height: 170px
-
-    .item-full
-        width: 100%
-        clear: both
-        background-color: #DCDCDC
-        border: 1px solid #5D5D5D
-        font-size: 15px
-        font-weight: 200
-        line-height: 22px
-        margin: 20px 0
-        padding: 0 0 10px 0
-        position: relative
-
-        .close
-            outline: none
-            padding: 6px 9px
+        .arrow-up
+            width: 0
+            height: 0
+            border-left: 17px solid transparent
+            border-right: 17px solid transparent
+            border-bottom: 17px solid #5D5D5D
             position: absolute
-            right: -1px
-            top: -1px
-            z-index: 999
+            bottom: 0px
+            left: 109px
 
-        .images
-            overflow: hidden
+        .outer
+            float: left
             position: relative
+
+        .inner
+            width: 100%
+
+        .content
+            max-width: 250px
             margin: 0 auto
 
-            .btnl,
-            .btnr
-                background-color: #e6e6e6
-                background-image: none
-                border-radius: 0px
-                cursor: pointer
-                font-size: 13px
-                line-height: 18px
-                opacity 0.33
-                outline: none
-                padding-bottom: 4px
-                padding-top: 4px
-                position: absolute
-                top: 0
-                z-index: 99
-
-            .btnl
-                right: 50%
-
-            .btnr
-                left: 50%
-
-            .btn-mobile
-                top: 42%
-
-                &.btnl
-                    left: 0
-                    right: auto
-
-                &.btnr
-                    right: 0
-                    left: auto
-
-            .inner-wrap
-                width: 100000px
-                position: relative
-                left: 0
-                margin-top: 28px
-
-                img
-                    float: left
-                    padding: 0
-
-                .no-polaroid
-                    background-color: transparent
-                    border: none
-                    box-shadow: none
-
-        .item-more
-            article
-                clear: both
-                margin: 13px 19px 0
-
+        .portfolio-item
+            h3, p
+                max-width: 250px
+                padding: 0 5px
             p
-                margin: 12px auto
+                font-size: 18px
+
+        .portfolio-item img
+            max-width: 240px
+            height: 170px
+
+        .item-full
+            width: 100%
+            clear: both
+            background-color: #DCDCDC
+            border: 1px solid #5D5D5D
+            font-size: 15px
+            font-weight: 200
+            line-height: 22px
+            margin: 20px 0
+            padding: 0 0 10px 0
+            position: relative
+
+            .close
+                outline: none
+                padding: 6px 9px
+                position: absolute
+                right: -1px
+                top: -1px
+                z-index: 999
+
+            .images
+                overflow: hidden
+                position: relative
+                margin: 0 auto
+
+                .btnl,
+                .btnr
+                    background-color: #e6e6e6
+                    background-image: none
+                    border-radius: 0px
+                    cursor: pointer
+                    font-size: 13px
+                    line-height: 18px
+                    opacity 0.33
+                    outline: none
+                    padding-bottom: 4px
+                    padding-top: 4px
+                    position: absolute
+                    top: 0
+                    z-index: 99
+
+                .btnl
+                    right: 50%
+
+                .btnr
+                    left: 50%
+
+                .btn-mobile
+                    top: 42%
+
+                    &.btnl
+                        left: 0
+                        right: auto
+
+                    &.btnr
+                        right: 0
+                        left: auto
+
+                .inner-wrap
+                    width: 100000px
+                    position: relative
+                    left: 0
+                    margin-top: 28px
+
+                    img
+                        float: left
+                        padding: 0
+
+                    .no-polaroid
+                        background-color: transparent
+                        border: none
+                        box-shadow: none
+
+            .item-more
+                article
+                    clear: both
+                    margin: 13px 19px 0
+
+                p
+                    margin: 12px auto
 
 /* Media queries for portfolio */
 @media (max-width: 596px)
     .portfolio-wrapper .outer
         width: 100%
         margin: 0 auto
-    
 
 @media (min-width: 597px)
     .portfolio-wrapper .outer
         width: 50%
         margin: 0 auto
+
+@media (max-width: 568px)
+    .app-portfolio
+        h2
+            font-size: 18px
+            margin: 0
 
 @media (min-width: 871px)
     .portfolio-wrapper .outer
@@ -133,7 +145,7 @@
 
 @media (max-width: 616px)
     .portfolio-wrapper
-        margin-top: 43px
+        margin-top: 25px
 
 @media (max-width: 480px)
     .portfolio-wrapper .outer
@@ -147,3 +159,10 @@
     .portfolio-item
         cursor: pointer
         opacity 0.90
+
+@media (max-width: 320px)
+    .app-portfolio
+        h2
+            margin-left: 10px
+            margin-right: 10px
+            text-align: left
