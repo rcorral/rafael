@@ -1,4 +1,4 @@
-Util = require './lib/util'
+Util = require './lib/Util'
 
 express = require 'express'
 path = require 'path'
