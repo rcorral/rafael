@@ -1,1 +1,31 @@
-h1=message
+doctype html
+html(lang='en')
+    head
+        meta(name='viewport', content='width=device-width', initial-scale='1.0')
+        title='404'
+
+        style.
+            body {
+                   text-align: center;
+               }
+               .video-container {
+                   position: relative;
+                   padding-bottom: 56.25%;
+                   padding-top: 30px;
+                   height: 0;
+                   overflow: hidden;
+               }
+               .video-container iframe,  
+               .video-container object,  
+               .video-container embed {
+                   position: absolute;
+                   top: 0;
+                   left: 0;
+                   width: 100%;
+                   height: 100%;
+               }
+
+    body
+        p I couldn't find the page you're looking for...so here's this
+        .video-container
+            iframe(src='http://www.youtube.com/embed/oHg5SJYRHA0?rel=0&amp;autoplay=1', frameborder='0', allowfullscreen)
