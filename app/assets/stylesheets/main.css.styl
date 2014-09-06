@@ -6,13 +6,13 @@
 
 html, body, body .site-intro
     height: 100%
+    font-family: 'Open Sans', sans-serif;
 .site-intro
     align-items: center
     background-color: rgba(11, 31, 63, 0.82)
     color: #fff
     display: flex
     flex-direction: row
-    font-family: 'Open Sans', sans-serif;
     font-size: 18px
     section
         max-width: 400px
@@ -21,12 +21,15 @@ html, body, body .site-intro
             padding-left: 8px;
             a
                 color: #FFFFFF
-                text-shadow: 0px 0px 2px rgba(11, 11, 11, 0.34)
+                text-shadow: 0px 0px 2px rgba(140, 140, 140, 0.85)
     .read-more
+        transition: opacity 0.4s ease;
         cursor: pointer
         font-size: 39px
         margin-left: 45px
-        opacity: .8
+        opacity: .7
+        &:hover
+            opacity: 1
 
 .main
     margin-left: auto
