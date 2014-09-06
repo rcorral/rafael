@@ -1,17 +1,21 @@
 define 'ApplicationModel',
-['TemplatesModel', 'PortfolioCollection'],
-(TemplatesModel, PortfolioCollection) ->
+['TemplatesModel', 'HomeModel', 'PortfolioCollection'],
+(TemplatesModel, HomeModel, PortfolioCollection) ->
 
     components = {}
 
     class ApplicationModel extends Backbone.Model
 
         initialize: ->
-            router = @get('router')
+            router = @get 'router'
+            @listenTo router, 'navigate:home', @renderHome
             @listenTo router, 'navigate:portfolio', @renderPortfolio
 
             @set
                 templates: new TemplatesModel
+
+            @registerComponent 'home',
+                modelKlass: HomeModel
 
             @registerComponent 'portfolio',
                 collectionKlass: PortfolioCollection
@@ -44,6 +48,10 @@ define 'ApplicationModel',
 
             instance: component.instance
             type: if component.collectionKlass then 'collection' else 'model'
+
+        renderHome: ->
+            {instance} = @getComponent 'home'
+            @set activeComponent: 'home'
 
         renderPortfolio: ->
             {instance} = @getComponent 'portfolio'

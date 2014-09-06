@@ -3,7 +3,11 @@ define 'Router', ->
     class Router extends Backbone.Router
 
         routes:
-            '': 'portfolio'
+            '': 'home'
+            'portfolio': 'portfolio'
+
+        home: ->
+            @trigger 'navigate:home'
 
         portfolio: ->
             @trigger 'navigate:portfolio'

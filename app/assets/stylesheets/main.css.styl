@@ -4,7 +4,7 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.1)
     padding: 4px
 
-html, body, body .container-fluid
+html, body, body .site-intro
     height: 100%
 .site-intro
     align-items: center
@@ -23,12 +23,10 @@ html, body, body .container-fluid
                 color: #FFFFFF
                 text-shadow: 0px 0px 2px rgba(11, 11, 11, 0.34)
     .read-more
-        bottom: 30px
-        font-size: 39px
-        left: 150px
-        opacity: .8
         cursor: pointer
-        position: absolute
+        font-size: 39px
+        margin-left: 45px
+        opacity: .8
 
 .main
     margin-left: auto
@@ -81,34 +79,38 @@ footer
     text-shadow: 0 6px 7px rgba(13, 13, 13, 0.62)
     width: 100%
 
-footer .copyright
-    margin-right: 10px
-    font-size: 20px
+    .copyright
+        margin-right: 10px
+        font-size: 20px
 
-/* Footer */
-.custom-footer
-    font-weight: 200
-    line-height: 27px
-    margin: 18px 10px 0
-    padding: 15px
+    .custom-footer
+        font-weight: 200
+        line-height: 27px
+        margin: 18px 10px 0
+        padding: 15px
 
-.custom-footer h4
-    font-size: 25px
-    margin-bottom: 22px
+        .row:last-child
+            div:last-child
+                max-width: 435px
+                float: right
 
-.custom-footer p
-    font-size: 18px
+    .custom-footer h4
+        font-size: 25px
+        margin-bottom: 22px
 
-.custom-footer p:last-child
-    margin: 0
+    .custom-footer p
+        font-size: 18px
 
-.custom-footer .contact-links
-    text-shadow: 0 1px 3px #000000
-    float: right
+    .custom-footer p:last-child
+        margin: 0
 
-.custom-footer a:link,
-.custom-footer a:visited
-    color: #fff
+    .custom-footer .contact-links
+        text-shadow: 0 1px 3px #000000
+        float: right
+
+    .custom-footer a:link,
+    .custom-footer a:visited
+        color: #fff
 
 /* For tablets - Backgrounds will overflow anyways so who cares, had to work with design */
 @media (max-width: 979px)
@@ -123,7 +125,15 @@ footer .copyright
     .site-description
         color: #000
 
+@media (max-width: 384px)
+    .site-intro .read-more
+        position: absolute
+        bottom: 30px
+        left: 108px
+
 @media (max-width: 480px)
+    .site-intro .read-more
+        margin-left: 25px
     h1
         font-size: 22px
 
@@ -157,9 +167,19 @@ footer .copyright
         font-size: 16px
 
 @media (max-width: 991px)
-    .custom-footer p.contact-links
-        float: left
-        margin-bottom: 17px
+    footer .custom-footer
+        max-width: 425px
+        margin-left: auto
+        margin-right: auto
+
+        p.contact-links
+            float: left
+            margin-bottom: 17px
+
+        .row:last-child
+            div:last-child
+                float: left
+                padding-top: 18px
 
 @media (max-width: 980px)
     .item-comment .item-image

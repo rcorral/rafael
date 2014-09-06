@@ -1,19 +1,29 @@
 define 'ApplicationView',
-['PortfolioView'],
-(PortfolioView) ->
+['HomeView', 'PortfolioView'],
+(HomeView, PortfolioView) ->
 
     componentViews = {}
 
     class ApplicationView extends Backbone.View
 
         initialize: ->
-            @listenTo @model, 'change:activeComponent', @renderActiveComponent
+            router = @model.get 'router'
+            @$componentsContainer = $ '.components-container'
+
+            @registerComponent 'home',
+                klass: HomeView
+                options: {router}
 
             @registerComponent 'portfolio',
                 klass: PortfolioView
 
             @registerPartials()
             @registerTemplates()
+
+            # Listeners
+            @listenTo @model, 'change:activeComponent', @renderActiveComponent
+            @listenToOnce router, 'route', (destination) ->
+                $('.site-intro').hide() if destination isnt 'home'
 
         registerComponent: (id, component) ->
             componentViews[id] = component
@@ -24,11 +34,12 @@ define 'ApplicationView',
             component = componentViews[id]
 
             unless component.instance
-                attributes = {}
+                _.defaults component,
+                    options: {}
                 {instance, type} = @model.getComponent id
-                attributes[type] = instance
-                view = new component.klass attributes
-                @$el.append view.el
+                component.options[type] = instance
+                view = new component.klass component.options
+                @$el.append view.el unless id is 'home'
                 component.instance = view
 
             component.instance
@@ -39,6 +50,11 @@ define 'ApplicationView',
             if previousComponent?
                 previousView = @getComponentView previousComponent
                 previousView.$el.hide()
+            if component is 'home'
+                @$componentsContainer.hide()
+            else
+                @$componentsContainer.show()
+
             view.$el.show()
             view.render()
 

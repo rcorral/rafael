@@ -34,9 +34,9 @@ html(lang='en')
                     |  and a small consulting firm '
                     a(href='https://www.corephp.com/', title="'corePHP'") corePHP
                     | '.
-            .read-more
-                i(class='fa fa-angle-down')
-        .container-fluid
+            .read-more(data-behavior='read-more')
+                i(class='fa fa-angle-right')
+        .container-fluid.components-container
             main(class='row main')
                 .app-wrapper
         footer
@@ -47,7 +47,7 @@ html(lang='en')
                             h4 Let's get to know each other.
                         .col-xs-12.col-sm-12.col-md-7
                             p.contact-links
-                                script(type='text/javascript')
+                                script
                                     <!--
                                     | var prefix = '&#109;a' + 'i&#108;' + '&#116;o', path = 'hr' + 'ef' + '=', addy22002 = 'm&#101;' + '&#64;'; addy22002 = addy22002 + 'r&#97;f&#97;&#101;lc&#111;rr&#97;l' + '&#46;' + 'c&#111;m'; var addy_text22002 = 'Em&#97;&#105;l' + ''; document.write('<a ' + path + '\'' + prefix + ':' + addy22002 + '\' title=\'' + addy_text22002 + ' me.\'>'); document.write(addy_text22002); document.write('</a>');
                                     //-->
@@ -67,6 +67,10 @@ html(lang='en')
                                 | living in San Francisco.
                         .col-xs-12.col-sm-12.col-md-7
                             p I started coding when I was 15 and haven't stopped since. I love it, finding and implementing solutions to problems gives me a great thrill.
+
+        script
+            | var config = 
+            != config
 
         each asset in assets['js']
             script(src='assets/' + asset)

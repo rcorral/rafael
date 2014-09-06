@@ -15,7 +15,7 @@ define 'PortfolioView', ->
             @constructor.template = templates['portfolios-index'].template
 
         render: ->
-            @$el.append @constructor.template portfolios: @collection.toJSON()
+            @$el.html @constructor.template portfolios: @collection.toJSON()
 
             @lastWindowPosition = 0
             outer_divs = jQuery '.portfolio-wrapper .outer'
