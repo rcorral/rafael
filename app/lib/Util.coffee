@@ -1,12 +1,12 @@
 Mincer = require 'mincer'
 
+_ = require 'lodash'
 fs = require 'fs'
 path = require 'path'
 
 Util =
 
     findFilesOfExtension: (directory, extension) ->
-        _ = require Util.componentPath 'lodash'
         bucket = []
         files = fs.readdirSync directory
         regex = new RegExp "\.#{extension}$", 'i'
@@ -56,15 +56,5 @@ Util =
             mappedAssets[match[1]].push asset
 
         mappedAssets
-
-    # Gets the path for a given component
-    componentPath: (name) ->
-        componentsFolder = '../../components'
-
-        switch name
-            when 'lodash' then componentPath = 'lodash-lodash/dist/lodash.compat'
-            else return ''
-
-        path.join componentsFolder, componentPath
 
 module.exports = Util

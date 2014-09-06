@@ -1,6 +1,6 @@
 Util = require '../lib/Util'
 
-_ = require Util.componentPath 'lodash'
+_ = require 'lodash'
 fs = require 'fs'
 jade = require 'jade'
 path = require 'path'
