@@ -1,0 +1,18 @@
+{
+  "apps" : [{
+    "name"        : "dev",
+    "script"      : "bin/www",
+    "log_date_format"  : "YYYY-MM-DD HH:mm Z",
+    "watch"       : "./",
+    "ignoreWatch" : ["node_modules", "public\/assets\/app", "public\/assets\/manifest"],
+    "instances"   : 1,
+    "exec_mode"  : "fork_mode",
+    "env": {
+        "DEBUG": "server,error",
+        "NODE_PATH": "./app:./app/lib",
+        "NODE_ENV": "development",
+        "NODE_PORT": 3010,
+        "NODE_HOST": "localhost"
+    }
+  }]
+}
