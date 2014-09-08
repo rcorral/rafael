@@ -7,6 +7,10 @@
 
     .portfolio-wrapper
         padding: 0 20px
+        display: flex
+        justify-content: center
+        flex-direction: row
+        flex-wrap: wrap
 
         .arrow-up
             width: 0
@@ -21,9 +25,11 @@
         .outer
             float: left
             position: relative
+            width: 290px
 
         .inner
-            width: 100%
+            margin: 0 auto
+            width: 235px
 
         .content
             max-width: 250px
@@ -132,11 +138,18 @@
         width: 50%
         margin: 0 auto
 
-@media (max-width: 568px)
+@media (max-width: 720px)
     .app-portfolio
         h2
             font-size: 18px
-            margin: 0
+            margin-left: auto
+            margin-right: auto
+
+@media (max-width: 664px)
+    .app-portfolio
+        h2
+            text-align: left
+            width: 235px
 
 @media (min-width: 871px)
     .portfolio-wrapper .outer
@@ -159,10 +172,3 @@
     .portfolio-item
         cursor: pointer
         opacity 0.90
-
-@media (max-width: 320px)
-    .app-portfolio
-        h2
-            margin-left: 10px
-            margin-right: 10px
-            text-align: left
