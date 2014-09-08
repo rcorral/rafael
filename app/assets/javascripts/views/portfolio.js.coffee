@@ -70,22 +70,23 @@ define 'PortfolioView', ->
 
             # Slideup any previous content
             jQuery('.outer .arrow-up').remove()
-            $prev_items.removeClass('item-full').css({height: '50px'}).slideUp 800, ->
-                $prev_items.remove()
+            $prev_items.removeClass('item-full').hide().remove()
 
             # Add item next to last element
             last.after '<div class="item-full" style="display:none;">' +$el.next().html()+ '</div>'
             $new_items = jQuery '.portfolio-wrapper .item-full'
             $image_div = $new_items.find '.item-more div.images'
-            $new_items.slideDown 1000
+            $restOfImages = $image_div.find 'img:not(:first-child)'
+            $restOfImages.hide()
+            $new_items.slideDown 500, -> $restOfImages.show()
 
             # Init the slideshow
-            $image_div.slideshow scrollToOffset: 20
+            $image_div.slideshow scrollToOffset: 375
 
             # Scrolling won't happen from plugin unless there are images, so do manually
             if 0 is $image_div.length
                 setTimeout ->
-                    $new_items.smooth_scroll 20
+                    $new_items.smoothScroll 375
                 , 300
 
             # Add arrow

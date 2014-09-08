@@ -20,6 +20,7 @@ do (
             $images = $inner.find 'img'
             $current = $ $images[0]
             is_moving = false
+            move = ->
 
             # Set some basics stuff
             $images.addClass('img-polaroid')
@@ -30,7 +31,7 @@ do (
 
             if options.scrollTo
                 setTimeout ->
-                    $this.smooth_scroll options.scrollToOffset
+                    $this.smoothScroll options.scrollToOffset
                 , 500
 
             size = ->
@@ -76,10 +77,10 @@ do (
 
             # Add buttons
             mblclass = if is_mobile then " #{options.btnmobile}" else ''
-            lbtn = create_element 'button', '<',
+            lbtn = createElement 'button', '<',
                 class: "btn btn-larg btnl#{mblclass}"
                 'data-direction': 'left'
-            rbtn = create_element 'button', '>',
+            rbtn = createElement 'button', '>',
                 class: "btn btn-larg btnr#{mblclass}"
                 'data-direction': 'right'
             $this.prepend lbtn, rbtn
@@ -163,7 +164,7 @@ do (
         this
 
     # Just animate scroll to element
-    $.fn.smooth_scroll = (offset) ->
+    $.fn.smoothScroll = (offset) ->
         offset = 0 if typeof offset is undefined
 
         $('html, body').animate
@@ -172,7 +173,7 @@ do (
 
         this
 
-    create_element = (type, html, attribs) ->
+    createElement = (type, html, attribs) ->
         element = document.createElement type
 
         for i of attribs
