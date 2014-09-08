@@ -14,7 +14,8 @@ Util =
         for file in files
             absolutePath = path.join directory, file
             if fs.lstatSync(absolutePath).isDirectory()
-                bucket.concat Util.findFilesOfExtension file, extension
+                filesInDir = Util.findFilesOfExtension path.join(directory, file), extension
+                bucket = bucket.concat filesInDir
             else if regex.test file
                 bucket.push absolutePath
             else
@@ -38,7 +39,6 @@ Util =
         Mincer.logger.use console
         environment = new Mincer.Environment path.join __dirname, '../../'
         environment.appendPath path.join assets, 'javascripts'
-        environment.appendPath 'components'
         environment.appendPath 'node_modules'
         environment.appendPath path.join assets, 'stylesheets'
 

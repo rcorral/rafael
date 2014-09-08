@@ -1,6 +1,6 @@
 define 'ApplicationView',
-['HomeView', 'PortfolioView'],
-(HomeView, PortfolioView) ->
+['NavbarView', 'HomeView', 'PortfolioView'],
+(NavbarView, HomeView, PortfolioView) ->
 
     componentViews = {}
 
@@ -20,10 +20,19 @@ define 'ApplicationView',
             @registerPartials()
             @registerTemplates()
 
+            @navbarView = new NavbarView
+                el: $ 'header'
+                templates: @model.get('templates')
+                router: router
+                model: @model
+
             # Listeners
             @listenTo @model, 'change:activeComponent', @renderActiveComponent
             @listenToOnce router, 'route', (destination) ->
                 $('.site-intro').hide() if destination isnt 'home'
+
+        render: ->
+            @navbarView.render()
 
         registerComponent: (id, component) ->
             componentViews[id] = component
@@ -69,6 +78,6 @@ define 'ApplicationView',
                     rawTemplate: template.innerHTML
                     template: Handlebars.compile template.innerHTML
                     sort: jQuery("##{template.id}").data('sort') or 0
-            @model.get('templates').set templates: templates
+            @model.set templates: templates
 
     ApplicationView

@@ -9,3 +9,4 @@ using 'ApplicationModel', 'ApplicationView', 'Router',
         el: $ '.app-wrapper'
 
     model.start()
+    view.render()

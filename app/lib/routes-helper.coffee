@@ -8,8 +8,8 @@ path = require 'path'
 routesHelper =
 
     getClientTemplates: (inDevelopment) ->
-        projectsDir = path.join __dirname, '../views/client/projects'
-        templatePaths = Util.findFilesOfExtension projectsDir, 'jade'
+        templatesDir = path.join __dirname, '../views/client'
+        templatePaths = Util.findFilesOfExtension templatesDir, 'jade'
         templates = []
 
         _.each templatePaths, (file) ->

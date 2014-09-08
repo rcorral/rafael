@@ -11,16 +11,13 @@ define 'ApplicationModel',
             @listenTo router, 'navigate:home', @renderHome
             @listenTo router, 'navigate:portfolio', @renderPortfolio
 
-            @set
-                templates: new TemplatesModel
-
             @registerComponent 'home',
                 modelKlass: HomeModel
 
             @registerComponent 'portfolio',
                 collectionKlass: PortfolioCollection
                 options:
-                    templates: @get 'templates'
+                    templates: null
 
         start: ->
             Backbone.history.start pushState: true
@@ -43,6 +40,9 @@ define 'ApplicationModel',
                 else
                     klass = component.modelKlass
                     arg1 = component.attributes
+
+                if 'templates' of component.options
+                    component.options.templates = @get 'templates'
 
                 component.instance = new klass arg1, component.options
 

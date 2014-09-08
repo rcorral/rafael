@@ -11,8 +11,7 @@ define 'PortfolioView', ->
             'mouseleave .portfolio-item': 'handleProjectMouseLeave'
 
         initialize: ->
-            templates = @collection.templates.get('templates')
-            @constructor.template = templates['portfolios-index'].template
+            @constructor.template = @collection.templates['portfolios-index'].template
             @isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test navigator.userAgent
 
         render: ->
