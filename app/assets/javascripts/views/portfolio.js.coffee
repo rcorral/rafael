@@ -92,7 +92,7 @@ define 'PortfolioView', ->
                 , 300
 
             # Add arrow
-            arrow = @createElement 'div', '', class: 'arrow-up'
+            arrow = @createElement 'i', '', class: 'fa fa-caret-up arrow-up'
             $outer_parent.append arrow
 
         handleProjectMouseEnter: (e) ->
