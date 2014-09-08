@@ -13,6 +13,7 @@ define 'PortfolioView', ->
         initialize: ->
             templates = @collection.templates.get('templates')
             @constructor.template = templates['portfolios-index'].template
+            @isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test navigator.userAgent
 
         render: ->
             @$el.html @constructor.template portfolios: @collection.toJSON()
@@ -50,7 +51,8 @@ define 'PortfolioView', ->
             found = false
             last = jQuery.extend {}, $outer_parent
             $prev_items = jQuery '.portfolio-wrapper .item-full'
-            lastWindowPosition = @winYPos()
+            @lastWindowPosition = @winYPos()
+            scrollOffset = if @isMobile then 20 else 345
 
             # Find the next item that has a different y pos
             # The max length is 3 so no need for more than that
@@ -78,15 +80,15 @@ define 'PortfolioView', ->
             $image_div = $new_items.find '.item-more div.images'
             $restOfImages = $image_div.find 'img:not(:first-child)'
             $restOfImages.hide()
-            $new_items.slideDown 500, -> $restOfImages.show()
+            $new_items.slideDown 1000, -> $restOfImages.show()
 
             # Init the slideshow
-            $image_div.slideshow scrollToOffset: 375
+            $image_div.slideshow scrollToOffset: scrollOffset
 
             # Scrolling won't happen from plugin unless there are images, so do manually
             if 0 is $image_div.length
                 setTimeout ->
-                    $new_items.smoothScroll 375
+                    $new_items.smoothScroll scrollOffset
                 , 300
 
             # Add arrow
