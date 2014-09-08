@@ -66,6 +66,7 @@ define 'ApplicationView',
 
             view.$el.show()
             view.render()
+            @scrollToTop()
 
         registerPartials: ->
             $('script[type="text/x-handlebars-template"][data-type=partial]').each (i, template)->
@@ -79,5 +80,10 @@ define 'ApplicationView',
                     template: Handlebars.compile template.innerHTML
                     sort: jQuery("##{template.id}").data('sort') or 0
             @model.set templates: templates
+
+        scrollToTop: ->
+            $('html, body').animate
+                'scrollTop': 0
+            , 'fast', 'swing'
 
     ApplicationView

@@ -1,6 +1,6 @@
 define 'ApplicationModel',
-['TemplatesModel', 'HomeModel', 'PortfolioCollection'],
-(TemplatesModel, HomeModel, PortfolioCollection) ->
+['HomeModel', 'PortfolioCollection'],
+(HomeModel, PortfolioCollection) ->
 
     components = {}
 
