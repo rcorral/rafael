@@ -76,12 +76,12 @@ do (
                     move 'left'
 
             # Add buttons
-            mblclass = if is_mobile then " #{options.btnmobile}" else ''
-            lbtn = createElement 'button', '<',
-                class: "btn btn-larg btnl#{mblclass}"
+            mblclass = " #{options.btnmobile}"
+            lbtn = createElement 'i', '',
+                class: "btn btn-larg btnl#{mblclass} fa fa-chevron-circle-left"
                 'data-direction': 'left'
-            rbtn = createElement 'button', '>',
-                class: "btn btn-larg btnr#{mblclass}"
+            rbtn = createElement 'i', '',
+                class: "btn btn-larg btnr#{mblclass} fa fa-chevron-circle-right"
                 'data-direction': 'right'
             $this.prepend lbtn, rbtn
 
