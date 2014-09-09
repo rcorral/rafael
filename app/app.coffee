@@ -1,5 +1,6 @@
 Util = require './lib/Util'
 
+debugError = require('debug')('error')
 express = require 'express'
 path = require 'path'
 favicon = require 'serve-favicon'
@@ -38,6 +39,7 @@ app.use (req, res, next) ->
 # error handlers
 app.use (err, req, res, next) ->
     res.status err.status or 500
+    debugError err
     res.render 'error',
         message: err.message
         error: {}

@@ -100,28 +100,41 @@ footer
         margin: 18px 10px 0
         padding: 15px
 
-        .row:last-child
+        .row
             div:last-child
                 max-width: 435px
                 float: right
 
-    .custom-footer h4
-        font-size: 25px
-        margin-bottom: 22px
+        h4
+            font-size: 25px
+            margin-bottom: 22px
 
-    .custom-footer p
-        font-size: 18px
+        p
+            font-size: 18px
 
-    .custom-footer p:last-child
-        margin: 0
+            &:last-child
+                margin: 0
 
-    .custom-footer .contact-links
-        text-shadow: 0 1px 3px #000000
-        float: right
+        .contact-links
+            text-shadow: 0 1px 3px #000000
+            float: left
+            .fa-twitter:hover
+                color: #55ACEE
+            .fa-linkedin:hover
+                color: #007BB6
+            .fa-github:hover
+                color: #818181
+            .fa-envelope:hover
+                color: #72d572
+            .fa-file-text:hover
+                color: #b0bec5
 
-    .custom-footer a:link,
-    .custom-footer a:visited
-        color: #fff
+        a
+            &:link,
+            &:visited
+                color: #fff
+                font-size: 36px
+                margin-right: 25px
 
 /* For tablets - Backgrounds will overflow anyways so who cares, had to work with design */
 @media (max-width: 979px)
@@ -151,11 +164,15 @@ footer
     footer .footer-width
         margin: 0 auto
 
-    .custom-footer h4
-        font-size: 20px !important
+        h4
+            font-size: 20px !important
 
-    .custom-footer p
-        font-size: 15px !important
+        p
+            font-size: 15px !important
+        .contact-links
+            margin: 0 0 9px 0
+            a
+                font-size: 27px
 
 @media (min-width: 481px)
     footer .footer-width
@@ -177,20 +194,18 @@ footer
     .custom-footer p
         font-size: 16px
 
-@media (max-width: 991px)
+@media (max-width: 845px)
     footer .custom-footer
         max-width: 425px
         margin-left: auto
         margin-right: auto
 
         p.contact-links
-            float: left
             margin-bottom: 17px
 
-        .row:last-child
-            div:last-child
-                float: left
-                padding-top: 18px
+        .row
+            div
+                width: 100%
 
 @media (max-width: 980px)
     .item-comment .item-image
