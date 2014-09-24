@@ -1,0 +1,5 @@
+define 'Util', ->
+
+    Util = {}
+
+    Util

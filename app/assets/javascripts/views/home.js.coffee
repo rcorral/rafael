@@ -1,4 +1,6 @@
-define 'HomeView', ->
+define 'HomeView',
+['Util'],
+(Util) ->
 
     class HomeView extends Backbone.View
 
@@ -6,19 +8,25 @@ define 'HomeView', ->
 
         events:
             'click [data-behavior~=read-more]': 'handleReadMore'
+            'swipeleft': 'handleReadMore'
+            'keyup': 'handleKeyPress'
 
         initialize: (options) ->
             @router = options.router
-            @setElement $ ".#{@className}"
-
-        render: ->
+            $el = $ ".#{@className}"
+            @setElement $el
+            $el.focus()
 
         ###
         # Handlers
         ###
 
-        handleReadMore: (e) ->
+        handleReadMore: ->
             @router.navigate 'portfolio',
                 trigger: true
+
+        handleKeyPress: (e) ->
+            if e.which is Util.keys.arrowRight
+                @handleReadMore()
 
     HomeView
