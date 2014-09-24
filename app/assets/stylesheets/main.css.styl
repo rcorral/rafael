@@ -48,7 +48,6 @@ header
 .site-intro
     align-items: center
     background-color: rgba(8, 8, 8, 0.82)
-    background-image: url('../images/baybridge.jpg')
     background-size: cover
     color: #fff
     display: flex
@@ -137,6 +136,23 @@ footer
                 color: #fff
                 font-size: 36px
                 margin-right: 25px
+
+// Homepage background image
+@media (max-width: 767px)
+    .site-intro
+        background-image: url('../images/baybridge-xs.jpg')
+
+@media (min-width: 768px)
+    .site-intro
+        background-image: url('../images/baybridge-sm.jpg')
+
+@media (min-width: 992px)
+    .site-intro
+        background-image: url('../images/baybridge-md.jpg')
+
+@media (min-width: 1200px)
+    .site-intro
+        background-image: url('../images/baybridge-lg.jpg')
 
 /* For tablets - Backgrounds will overflow anyways so who cares, had to work with design */
 @media (max-width: 979px)
