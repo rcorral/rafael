@@ -79,10 +79,12 @@ define 'PortfolioView', ->
             $image_div = $new_items.find '.item-more div.images'
             $restOfImages = $image_div.find 'img:not(:first-child)'
             $restOfImages.hide()
-            $new_items.slideDown 1000, -> $restOfImages.show()
+            $new_items.slideDown 800, -> $restOfImages.show()
 
             # Init the slideshow
-            $image_div.slideshow scrollToOffset: scrollOffset
+            _.delay ->
+                $image_div.slideshow(scrollToOffset: scrollOffset)
+            , 100
 
             # Scrolling won't happen from plugin unless there are images, so do manually
             if 0 is $image_div.length

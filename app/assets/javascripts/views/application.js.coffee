@@ -1,6 +1,6 @@
 define 'ApplicationView',
-['NavbarView', 'HomeView', 'PortfolioView'],
-(NavbarView, HomeView, PortfolioView) ->
+['NavbarView', 'FooterView', 'HomeView', 'PortfolioView'],
+(NavbarView, FooterView, HomeView, PortfolioView) ->
 
     componentViews = {}
 
@@ -26,6 +26,10 @@ define 'ApplicationView',
                 router: router
                 model: @model
 
+            @footerView = new FooterView
+                el: $ 'footer'
+                model: @model
+
             # Listeners
             @listenTo @model, 'change:activeComponent', @renderActiveComponent
             @listenToOnce router, 'route', (destination) ->
@@ -33,6 +37,7 @@ define 'ApplicationView',
 
         render: ->
             @navbarView.render()
+            @footerView.render()
 
         registerComponent: (id, component) ->
             componentViews[id] = component
