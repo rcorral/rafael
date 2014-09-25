@@ -1,6 +1,6 @@
 script(id='portfolio-wp4j', data-sort="1", type='text/x-handlebars-template')
     .portfolio-item
-        img.img-polaroid(src='images/portfolio/wp4j/wordpress-logo-thumb.jpg', alt='WordPress logo')
+        img.img-polaroid(src='#{getHost()}/images/portfolio/wp4j/wordpress-logo-thumb.jpg', alt='WordPress logo')
         h3 WordPress for Joomla!
         p.lead This is an integration for the WordPress CMS to work inside of Joomla.
 
@@ -9,7 +9,7 @@ script(id='portfolio-wp4j', data-sort="1", type='text/x-handlebars-template')
         .item-more
             .images
                 .inner-wrap
-                    img(src='images/portfolio/wp4j/wordpress-in-joomla.png', alt='WordPress blog in Joomla')
+                    img(src='#{getHost()}/images/portfolio/wp4j/wordpress-in-joomla.png', alt='WordPress blog in Joomla')
 
             article
                 p I originally developed this integration in two months during the winter of 2008. I have improved and continued developing this integration since I originally released it under the 'corePHP' umbrella. This extension has been one of the most popular and best selling extensions in the Joomla community.

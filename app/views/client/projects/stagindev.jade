@@ -1,6 +1,6 @@
 script(id='portfolio-stagingdev', data-sort="11", type='text/x-handlebars-template')
     .portfolio-item
-        img.img-polaroid(src='images/portfolio/staging/staging_server_thumb.jpg', alt='Staging server architecture thumbnail')
+        img.img-polaroid(src='#{getHost()}/images/portfolio/staging/staging_server_thumb.jpg', alt='Staging server architecture thumbnail')
         h3 Staging/Development Server
         p.lead An internal staging server for clients and developers.
 
@@ -9,9 +9,9 @@ script(id='portfolio-stagingdev', data-sort="11", type='text/x-handlebars-templa
         .item-more
             .images
                 .inner-wrap
-                    img(src='images/portfolio/staging/staging_server.png', alt='Staging server architecture')
-                    img(src='images/portfolio/staging/cadbury_pull.png', alt='Git pull via HipChat')
-                    img(src='images/portfolio/staging/cadbury_permissions.png', alt='Fix permissions command on server.')
+                    img(src='#{getHost()}/images/portfolio/staging/staging_server.png', alt='Staging server architecture')
+                    img(src='#{getHost()}/images/portfolio/staging/cadbury_pull.png', alt='Git pull via HipChat')
+                    img(src='#{getHost()}/images/portfolio/staging/cadbury_permissions.png', alt='Fix permissions command on server.')
 
             article
                 p The problem: When a client’s website is in the development stage there may be multiple back-end and front-end developers working together, the client may also want to enter content or configure different extensions on the site. Sharing and/or keeping database changes in sync can be a hassle. So the question is: How can we work together using a Distributed Version Control environment without having to sync databases?

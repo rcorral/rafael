@@ -1,6 +1,6 @@
 script(id='portfolio-jphoto', data-sort="2", type='text/x-handlebars-template')
     .portfolio-item
-        img.img-polaroid(src='images/portfolio/jphoto/slideshow-gallery-thumb.jpg', alt='Slideshow plugin thumbnail')
+        img.img-polaroid(src='#{getHost()}/images/portfolio/jphoto/slideshow-gallery-thumb.jpg', alt='Slideshow plugin thumbnail')
         h3 JPhoto
         p.lead This extension provides a photography gallery solution for Joomla!
 
@@ -9,12 +9,12 @@ script(id='portfolio-jphoto', data-sort="2", type='text/x-handlebars-template')
         .item-more
             .images
                 .inner-wrap
-                    img(src='images/portfolio/jphoto/slideshow-gallery.jpg', alt='Slideshow plugin in module')
-                    img(src='images/portfolio/jphoto/highslide-gallery-thumbnails.jpg', alt='Gallery view using HighSlide plugin')
-                    img(src='images/portfolio/jphoto/highslide-gallery.jpg', alt='HighSlide image view')
-                    img(src='images/portfolio/jphoto/gallery-management.jpg', alt='Gallery management')
-                    img(src='images/portfolio/jphoto/images-uploading.jpg', alt='Uploading images')
-                    img(src='images/portfolio/jphoto/jphoto-configuration.jpg', alt='JPhoto Configuration view')
+                    img(src='#{getHost()}/images/portfolio/jphoto/slideshow-gallery.jpg', alt='Slideshow plugin in module')
+                    img(src='#{getHost()}/images/portfolio/jphoto/highslide-gallery-thumbnails.jpg', alt='Gallery view using HighSlide plugin')
+                    img(src='#{getHost()}/images/portfolio/jphoto/highslide-gallery.jpg', alt='HighSlide image view')
+                    img(src='#{getHost()}/images/portfolio/jphoto/gallery-management.jpg', alt='Gallery management')
+                    img(src='#{getHost()}/images/portfolio/jphoto/images-uploading.jpg', alt='Uploading images')
+                    img(src='#{getHost()}/images/portfolio/jphoto/jphoto-configuration.jpg', alt='JPhoto Configuration view')
 
             article
                 p I developed this extension from the ground up. I had the idea of building a powerful and extensible image gallery extension for Joomla!.

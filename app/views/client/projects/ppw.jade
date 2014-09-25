@@ -1,6 +1,6 @@
 script(id='portfolio-ppw', data-sort="7", type='text/x-handlebars-template')
     .portfolio-item
-        img.img-polaroid(src='images/portfolio/ppw/user-dashboard-thumb.jpg', alt='Professional and Personal Wellness thumbnail')
+        img.img-polaroid(src='#{getHost()}/images/portfolio/ppw/user-dashboard-thumb.jpg', alt='Professional and Personal Wellness thumbnail')
         h3 Professional and Personal Wellness
         p.lead A wellness company.
 
@@ -9,10 +9,10 @@ script(id='portfolio-ppw', data-sort="7", type='text/x-handlebars-template')
         .item-more
             .images
                 .inner-wrap
-                    img(src='images/portfolio/ppw/user-dashboard.jpg', alt='User dashboard')
-                    img(src='images/portfolio/ppw/nutritional-application.jpg', alt='Nutrition activity log')
-                    img(src='images/portfolio/ppw/physiological-parameters.jpg', alt='Physiological parameters')
-                    img(src='images/portfolio/ppw/consultant-assessment.jpg', alt='Creating Assessment')
+                    img(src='#{getHost()}/images/portfolio/ppw/user-dashboard.jpg', alt='User dashboard')
+                    img(src='#{getHost()}/images/portfolio/ppw/nutritional-application.jpg', alt='Nutrition activity log')
+                    img(src='#{getHost()}/images/portfolio/ppw/physiological-parameters.jpg', alt='Physiological parameters')
+                    img(src='#{getHost()}/images/portfolio/ppw/consultant-assessment.jpg', alt='Creating Assessment')
 
             article
                 p This company helps their clients increase their quality of life by creating an environment that promotes healthy living. The core of their business is doing health assessments on their clients. Assessments consist in recording health risk factors, this data includes: BMI, body fat, heart rate, cholesterol, glucose, smoking and others, health questions are also asked at the time of the assessment, and depending on the client's answers an action plan is tailored that is unique to this assessment through an algorithm. When an assessment is complete emails are dispatched at specific times and follow up reminders are sent to the consultants. A client may be referred to their doctor, and their consultant will get follow up reminders from the system to check if their client went to the doctor.

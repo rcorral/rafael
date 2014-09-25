@@ -7,14 +7,15 @@ path = require 'path'
 
 routesHelper =
 
-    getClientTemplates: (inDevelopment) ->
+    getClientTemplates: (options) ->
         templatesDir = path.join __dirname, '../views/client'
         templatePaths = Util.findFilesOfExtension templatesDir, 'jade'
         templates = []
 
         _.each templatePaths, (file) ->
             templates.push jade.renderFile file,
-                pretty: inDevelopment
+                pretty: options.inDevelopment
+                getHost: options.assetHostsFn
 
         templates
 

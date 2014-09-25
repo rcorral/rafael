@@ -1,6 +1,6 @@
 script(id='portfolio-socialmedia', data-sort="6", type='text/x-handlebars-template')
     .portfolio-item
-        img.img-polaroid(src='images/portfolio/social/map-report-thumb.jpg', alt='Twitter report thumbnail')
+        img.img-polaroid(src='#{getHost()}/images/portfolio/social/map-report-thumb.jpg', alt='Twitter report thumbnail')
         h3 Social Media Influence
         p.lead An application to find the most influential individual/group.
 
@@ -9,7 +9,7 @@ script(id='portfolio-socialmedia', data-sort="6", type='text/x-handlebars-templa
         .item-more
             .images
                 .inner-wrap
-                    img(src='images/portfolio/social/map-report.jpg', alt='Twitter report')
+                    img(src='#{getHost()}/images/portfolio/social/map-report.jpg', alt='Twitter report')
 
             article
                 p  This project was developed for a company that wanted to offer a service that determined the most influential person(s) or group(s) for a given Facebook or Twitter account. This was achieved by different scraping methods on Facebook and Twitter. The search would start from an origin account and then the search would span across all of their friends and then all of their friend’s friends. The search could go deeper, but normally at 2-3 levels deep you could get pretty good data.

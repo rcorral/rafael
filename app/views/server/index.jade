@@ -4,9 +4,10 @@ html(lang='en')
         meta(name='viewport', content='width=device-width', initial-scale='1.0')
         base(href=baseURL)
         title=title
+        meta(name='description', content=description)
 
         each asset in assets['css']
-            link(href='assets/' + asset, rel='stylesheet', type='text/css')
+            link(href='#{getHost()}/assets/#{asset}', rel='stylesheet', type='text/css')
         link(href='//fonts.googleapis.com/css?family=Open+Sans:300', rel='stylesheet', type='text/css')
         link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet', type='text/css')
         //- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
@@ -59,7 +60,7 @@ html(lang='en')
                                     <!--
                                     | var prefix = '&#109;a' + 'i&#108;' + '&#116;o', path = 'hr' + 'ef' + '=', addy22002 = 'm&#101;' + '&#64;'; addy22002 = addy22002 + 'r&#97;f&#97;&#101;lc&#111;rr&#97;l' + '&#46;' + 'c&#111;m'; var addy_text22002 = 'Em&#97;&#105;l' + ''; var addy_text32712 = '<i class="fa fa-envelope"></i>'; document.write('<a ' + path + '\'' + prefix + ':' + addy22002 + '\' title=\'' + addy_text22002 + ' me.\'>'); document.write(addy_text32712); document.write('</a>');
                                     //-->
-                                a(href='/media/Rafael-Corral-Resume.pdf', title='Rafael Corral\'s Résumé.')
+                                a(href='#{getHost()}/media/Rafael-Corral-Resume.pdf', title='Rafael Corral\'s Résumé.')
                                     i(class='fa fa-file-text')
                     .row
                         .col-xs-12.col-sm-6.col-md-5
@@ -75,4 +76,4 @@ html(lang='en')
             != config
 
         each asset in assets['js']
-            script(src='assets/' + asset)
+            script(src='#{getHost()}/assets/#{asset}')

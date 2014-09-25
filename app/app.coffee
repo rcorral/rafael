@@ -1,5 +1,6 @@
 Util = require './lib/Util'
 
+_ = require 'lodash'
 debugError = require('debug')('error')
 express = require 'express'
 path = require 'path'
@@ -28,6 +29,17 @@ app.set 'assets', Util.getAssets(environment)
 app.use favicon(path.join(__dirname, '../public/favicon.ico'))
 app.use logger 'dev'
 app.use express.static(path.join(__dirname, '..', 'public'))
+
+# Set assets hosts function
+if process.env.NODE_CDNHOSTS
+    assetHosts = process.env.NODE_CDNHOSTS.split ','
+else
+    assetHosts = [app.get 'host']
+assetHosts = _.map assetHosts, (host) ->
+    "//#{host}"
+app.set 'assetHostsFn', Util.getAssetHostFn assetHosts
+
+# Setup routes
 routes.setup app
 
 # catch 404 and forward to error handler

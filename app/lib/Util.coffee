@@ -57,4 +57,14 @@ Util =
 
         mappedAssets
 
+    getAssetHostFn: (assets) ->
+        if assets.length is 1
+            -> assets[0]
+        else
+            counter = -1
+            ->
+                counter++
+                counter = 0 if counter is assets.length
+                assets[counter]
+
 module.exports = Util

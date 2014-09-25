@@ -6,7 +6,9 @@ class routes
     setup: (app) ->
         env = app.get 'env'
         assets = app.get 'assets'
-        clientTemplates = routesHelper.getClientTemplates env is 'development'
+        clientTemplates = routesHelper.getClientTemplates
+            inDevelopment: env is 'development'
+            assetHostsFn: app.get 'assetHostsFn'
         router = express.Router()
         proxyPort = app.get('proxyPort')|0
         port = app.get 'port'
@@ -18,9 +20,11 @@ class routes
                 assets: assets
                 templates: clientTemplates
                 baseURL: baseURL
-                title: 'Rafael Corral – Software engineer in San Francisco'
+                title: 'Rafael Corral'
+                description: 'Full stack engineer in San Francisco. Known language: JS, PHP, CSS, HTML, SQL, NoSQL'
                 config: JSON.stringify
                     environment: env
+                getHost: app.get 'assetHostsFn'
 
         # Finally set them up
         app.use '/', router
