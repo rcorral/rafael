@@ -4,8 +4,8 @@ routesHelper = require 'routes-helper'
 class routes
 
     setup: (app) ->
-        env = app.get 'env'
         assets = app.get 'assets'
+        env = app.get 'env'
         clientTemplates = routesHelper.getClientTemplates
             inDevelopment: env is 'development'
             assetHostsFn: app.get 'assetHostsFn'
@@ -18,13 +18,14 @@ class routes
         router.get /^\/(portfolio)?$/, (req, res) ->
             res.render 'index',
                 assets: assets
-                templates: clientTemplates
                 baseURL: baseURL
-                title: 'Rafael Corral'
-                description: 'Full stack engineer in San Francisco. Known language: JS, PHP, CSS, HTML, SQL, NoSQL'
                 config: JSON.stringify
                     environment: env
+                description: 'Full stack engineer in San Francisco. Known language: JS, PHP, CSS, HTML, SQL, NoSQL'
                 getHost: app.get 'assetHostsFn'
+                inProduction: env is 'production'
+                title: 'Rafael Corral'
+                templates: clientTemplates
 
         # Finally set them up
         app.use '/', router

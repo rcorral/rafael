@@ -21,6 +21,8 @@ html(lang='en')
             | !{template}
 
     body
+        if inProduction
+            include ./analytics.jade
         header
 
         .container-fluid.site-intro(tabindex=0)
