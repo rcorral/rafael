@@ -10,3 +10,11 @@ using 'ApplicationModel', 'ApplicationView', 'Router',
 
     model.start()
     view.render()
+
+    # Setup scroll listener
+    $win = $ window
+    $win.scroll _.debounce ->
+        doc = document.documentElement
+        pos = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0)
+        $win.trigger 'scroll-end', pos
+    , 150, leading: false, trailing: true, maxWait: 150

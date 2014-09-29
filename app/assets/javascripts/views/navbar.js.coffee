@@ -10,6 +10,13 @@ define 'NavbarView', ->
             @constructor.template = options.templates['navbar-template'].template
             @listenTo @model, 'change:activeComponent', @render
             @setBodyClass = false
+            $(window).on 'scroll-end', (e, pos) =>
+                return unless @$el
+
+                if pos >= 50
+                    @$el.addClass 'moved'
+                else
+                    @$el.removeClass 'moved'
 
         render: ->
             activeComponent = @model.get 'activeComponent'
@@ -22,6 +29,7 @@ define 'NavbarView', ->
             context = {}
             context["#{activeComponent}Active"] = true
             $('header').html @constructor.template context
+            @setElement $ 'header nav'
 
         handleRouteClick: (e) ->
             $el = $ e.currentTarget
