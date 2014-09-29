@@ -12,7 +12,7 @@
         "NODE_PROXYPORT": 80,
         "NODE_PORT": 3010,
         "NODE_HOST": "www.rafaelcorral.com",
-        "NODE_CDNHOSTS": "cdn5.rafaelcorral.com,cdn6.rafaelcorral.com,cdn7.rafaelcorral.com,cdn8.rafaelcorral.com"
+        "NODE_CDNHOSTS": "cdn5.rafaelcorral.com"
     }
   }]
 }
