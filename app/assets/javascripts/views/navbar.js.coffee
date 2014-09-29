@@ -9,13 +9,16 @@ define 'NavbarView', ->
             @model = options.model
             @constructor.template = options.templates['navbar-template'].template
             @listenTo @model, 'change:activeComponent', @render
-            @renderCount = 0
+            @setBodyClass = false
 
         render: ->
             activeComponent = @model.get 'activeComponent'
-            return if @renderCount is 0 and activeComponent is 'home'
+            return if not @setBodyClass and activeComponent is 'home'
 
-            @renderCount++
+            unless @setBodyClass
+                $('body').addClass 'has-nav'
+                @setBodyClass = true
+
             context = {}
             context["#{activeComponent}Active"] = true
             $('header').html @constructor.template context
