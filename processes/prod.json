@@ -4,7 +4,7 @@
     "script"      : "bin/www",
     "log_date_format"  : "YYYY-MM-DD HH:mm Z",
     "ignoreWatch" : ["node_modules", "public\/assets\/app", "public\/assets\/manifest"],
-    "instances"   : "3",
+    "instances"   : "2",
     "env": {
         "DEBUG": "server,error",
         "NODE_PATH": "./app:./app/lib",

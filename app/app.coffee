@@ -36,7 +36,10 @@ if process.env.NODE_CDNHOSTS
 else
     assetHosts = [app.get 'host']
 assetHosts = _.map assetHosts, (host) ->
-    "//#{host}"
+    if environment is 'development'
+        "http://#{host}:#{app.set('port')}"
+    else
+        "//#{host}"
 app.set 'assetHostsFn', Util.getAssetHostFn assetHosts
 
 # Setup routes
