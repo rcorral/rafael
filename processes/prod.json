@@ -11,8 +11,8 @@
         "NODE_ENV": "production",
         "NODE_PROXYPORT": 80,
         "NODE_PORT": 3010,
-        "NODE_HOST": "www.rafaelcorral.com",
-        "NODE_CDNHOSTS": "cdn5.rafaelcorral.com"
+        "NODE_HOST": "rafaelcorral.com",
+        "NODE_CDNHOSTS": "cdn1.rafaelcorral.com,cdn2.rafaelcorral.com,cdn3.rafaelcorral.com,cdn4.rafaelcorral.com"
     }
   }]
 }

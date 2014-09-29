@@ -16,7 +16,6 @@ class routes
 
         # GET home page.
         router.get /^\/(portfolio)?$/, (req, res) ->
-            res.set 'Access-Control-Allow-Origin', 'http://cdn5.rafaelcorral.com'
             res.render 'index',
                 assets: assets
                 templates: clientTemplates
