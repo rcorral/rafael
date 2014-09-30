@@ -51,7 +51,7 @@ define 'PortfolioView', ->
             last = jQuery.extend {}, $outer_parent
             $prev_items = jQuery '.portfolio-wrapper .item-full'
             @lastWindowPosition = @winYPos()
-            scrollOffset = if @isMobile then 20 else 345
+            scrollOffset = if @isMobile then 71 else 396
 
             # Find the next item that has a different y pos
             # The max length is 3 so no need for more than that
