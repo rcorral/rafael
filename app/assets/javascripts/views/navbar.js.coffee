@@ -13,7 +13,7 @@ define 'NavbarView', ->
             $(window).on 'scroll-end', (e, pos) =>
                 return unless @$el
 
-                if pos >= 50
+                if pos >= 10
                     @$el.addClass 'moved'
                 else
                     @$el.removeClass 'moved'
