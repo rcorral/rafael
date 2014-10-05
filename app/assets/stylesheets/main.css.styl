@@ -39,13 +39,20 @@ h6
     line-height: 14px
 
 header
-    nav
+    nav.navbar-default
         transition: box-shadow 2s
         &.navbar
             border-radius: 0
             margin-bottom: 0
         &.moved
             box-shadow: 0 -23px 40px -10px #000
+        ul.navbar-nav
+            li
+                &::first-letter
+                    color: #333
+                &.active
+                    a::first-letter
+                        color: #444
     &:empty + .site-intro
         margin-top: 0
 body.has-nav
@@ -138,16 +145,20 @@ footer
                 color: #007BB6
             .fa-github:hover
                 color: #818181
-            .fa-envelope:hover
-                color: #87C9E9
-            .fa-file-text:hover
-                color: #b0bec5
+            .fa-paper-plane
+                font-size: 31px
+                &:hover
+                    color: #87C9E9
+            .fa-file-text
+                font-size: 31px
+                &:hover
+                    color: #b0bec5
 
         a
             &:link,
             &:visited
                 color: #fff
-                font-size: 36px
+                font-size: 35px
                 margin-right: 25px
 
 // Homepage background image

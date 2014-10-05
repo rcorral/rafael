@@ -1,6 +1,6 @@
 define 'ApplicationView',
-['NavbarView', 'FooterView', 'HomeView', 'PortfolioView'],
-(NavbarView, FooterView, HomeView, PortfolioView) ->
+['NavbarView', 'FooterView', 'AboutView', 'HomeView', 'PortfolioView'],
+(NavbarView, FooterView, AboutView, HomeView, PortfolioView) ->
 
     componentViews = {}
 
@@ -9,6 +9,8 @@ define 'ApplicationView',
         initialize: ->
             router = @model.get 'router'
             @$componentsContainer = $ '.components-container'
+            @$footer = $ 'footer'
+            @originalTitle = $('title').html()
 
             @registerComponent 'home',
                 klass: HomeView
@@ -16,6 +18,9 @@ define 'ApplicationView',
 
             @registerComponent 'portfolio',
                 klass: PortfolioView
+
+            @registerComponent 'about',
+                klass: AboutView
 
             @registerPartials()
             @registerTemplates()
@@ -32,12 +37,56 @@ define 'ApplicationView',
 
             # Listeners
             @listenTo @model, 'change:activeComponent', @renderActiveComponent
+            @listenTo @model, 'change:title', @handleTitleChange
             @listenToOnce router, 'route', (destination) ->
                 $('.site-intro').hide() if destination isnt 'home'
+            $(window).on 'resize-end', @handleWindowResize.bind @
+
+        ###
+        # Event Handlers
+        ###
+
+        handleTitleChange: (model, title) ->
+            $('title').html "#{if title is 'Home' then '' else "#{title} – "}#{@originalTitle}"
+
+        handleWindowResize: (e, windowSize) ->
+            @updateComponentContainerHeight windowSize
+
+        ###
+        # Rendering
+        ###
 
         render: ->
             @navbarView.render()
             @footerView.render()
+            @updateComponentContainerHeight()
+
+        ###
+        # Helpers
+        ###
+
+        updateComponentContainerHeight: (windowSize) ->
+            windowSize = $('body').outerHeight true unless windowSize
+            minHeight = windowSize - $('header nav').outerHeight(true) - @$footer.outerHeight(true)
+            @$componentsContainer.css 'min-height', minHeight
+
+        registerPartials: ->
+            $('script[type="text/x-handlebars-template"][data-type=partial]').each (i, template)->
+                Handlebars.registerPartial template.id, template.innerHTML
+
+        registerTemplates: ->
+            templates = {}
+            $('script[type="text/x-handlebars-template"]').each (i, template) ->
+                templates[template.id] =
+                    rawTemplate: template.innerHTML
+                    template: Handlebars.compile template.innerHTML
+                    sort: jQuery("##{template.id}").data('sort') or 0
+            @model.set templates: templates
+
+        scrollToTop: ->
+            $('html, body').animate
+                'scrollTop': 0
+            , 'fast', 'swing'
 
         registerComponent: (id, component) ->
             componentViews[id] = component
@@ -72,23 +121,5 @@ define 'ApplicationView',
             view.$el.show()
             view.render()
             @scrollToTop()
-
-        registerPartials: ->
-            $('script[type="text/x-handlebars-template"][data-type=partial]').each (i, template)->
-                Handlebars.registerPartial template.id, template.innerHTML
-
-        registerTemplates: ->
-            templates = {}
-            $('script[type="text/x-handlebars-template"]').each (i, template) ->
-                templates[template.id] =
-                    rawTemplate: template.innerHTML
-                    template: Handlebars.compile template.innerHTML
-                    sort: jQuery("##{template.id}").data('sort') or 0
-            @model.set templates: templates
-
-        scrollToTop: ->
-            $('html, body').animate
-                'scrollTop': 0
-            , 'fast', 'swing'
 
     ApplicationView

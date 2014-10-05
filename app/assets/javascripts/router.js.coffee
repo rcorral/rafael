@@ -5,11 +5,13 @@ define 'Router', ->
         routes:
             '': 'home'
             'portfolio': 'portfolio'
+            'about': 'about'
 
-        home: ->
-            @trigger 'navigate:home'
+        initialize: ->
+            @on 'all', @doRoute
 
-        portfolio: ->
-            @trigger 'navigate:portfolio'
+        doRoute: (action, route) ->
+            return unless action is 'route'
+            @trigger "navigate:#{route}", route
 
     Router

@@ -1,6 +1,6 @@
 define 'ApplicationModel',
-['HomeModel', 'PortfolioCollection'],
-(HomeModel, PortfolioCollection) ->
+['DummyModel', 'PortfolioCollection', 'Util'],
+(DummyModel, PortfolioCollection, Util) ->
 
     components = {}
 
@@ -8,16 +8,18 @@ define 'ApplicationModel',
 
         initialize: ->
             router = @get 'router'
-            @listenTo router, 'navigate:home', @renderHome
-            @listenTo router, 'navigate:portfolio', @renderPortfolio
+            @listenTo router, 'navigate:home', @renderComponent
+            @listenTo router, 'navigate:portfolio', @renderComponent
+            @listenTo router, 'navigate:about', @renderComponent
 
             @registerComponent 'home',
-                modelKlass: HomeModel
+                modelKlass: DummyModel
 
             @registerComponent 'portfolio',
                 collectionKlass: PortfolioCollection
-                options:
-                    templates: null
+
+            @registerComponent 'about',
+                modelKlass: DummyModel
 
         start: ->
             Backbone.history.start pushState: true
@@ -37,24 +39,22 @@ define 'ApplicationModel',
                 if component.collectionKlass
                     klass = component.collectionKlass
                     arg1 = component.models
+                    component.options.templates = @get 'templates'
                 else
                     klass = component.modelKlass
                     arg1 = component.attributes
-
-                if 'templates' of component.options
-                    component.options.templates = @get 'templates'
+                    component.attributes.templates = @get 'templates'
 
                 component.instance = new klass arg1, component.options
 
             instance: component.instance
             type: if component.collectionKlass then 'collection' else 'model'
 
-        renderHome: ->
-            {instance} = @getComponent 'home'
-            @set activeComponent: 'home'
-
-        renderPortfolio: ->
-            {instance} = @getComponent 'portfolio'
-            @set activeComponent: 'portfolio'
+        # Renders a component that doesn't need any special treatment
+        renderComponent: (component) ->
+            {instance} = @getComponent component
+            @set
+                activeComponent: component
+                title: Util.capitalize component
 
     ApplicationModel

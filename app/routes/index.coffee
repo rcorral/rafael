@@ -15,7 +15,7 @@ class routes
         baseURL = "http://#{app.get('host')}#{if proxyPort isnt 80 then (':' + port) else ''}/"
 
         # GET home page.
-        router.get /^\/(portfolio)?$/, (req, res) ->
+        router.get /^\/(portfolio|about)?$/, (req, res) ->
             res.render 'index',
                 assets: assets
                 baseURL: baseURL

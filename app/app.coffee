@@ -18,6 +18,7 @@ if environment is 'development'
 # Settings
 app.enable 'trust proxy'
 app.enable 'case sensitive routing'
+app.enable 'view cache' if environment is 'production'
 
 # view engine setup
 app.set 'host', process.env.NODE_HOST

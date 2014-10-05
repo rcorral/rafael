@@ -1,0 +1,51 @@
+script(id='about-template', type='text/x-handlebars-template')
+    .col-xs-12.col-sm-12.col-md-10.col-md-offset-1.col-lg-8.col-lg-offset-2
+
+        p.hidden-xs.text-center.self-describing-nouns Entrepreneur . Programmer . Speaker . Security Enthusiast
+        .visible-xs-block.self-describing-nouns
+            p.text-center Entrepreneur . Programmer
+            p.text-center Security Enthusiast . Speaker
+
+        article.about-me.row
+
+            .col-sm-6
+                img.img-responsive.hidden-xs.pull-right(src='#{getHost()}/images/rafael-corral.jpg', title='Rafael Corral')
+                img.img-responsive.visible-xs-block.center-block(src='#{getHost()}/images/rafael-corral-xs.jpg', title='Rafael Corral')
+
+            .col-sm-6
+                section.my-info
+                    p At my core I have the mindset of a hacker. XSS, CSRF, SQL Injections, cryptography, DDOS, Sniffing, Spoofing, cracking and snooping were an everyday thing.
+                    p Gaining control of systems is how I learned to program; JavaScript, SQL, and PHP were languages I had to pick-up, and this was my gateway into programming.
+                    p As I look around now, I tend to be the most security concious person in most groups.
+                    p At some point I left hacking behind and persued a career in programming.
+                    - var programmingSince = 1202716800, now = Math.floor((new Date()).getTime() / 1000)
+                    - var years = (now - programmingSince) / 3.15569e7
+                    - var months = Math.floor(((now - programmingSince) % 3.15569e7) / 2.62974e6)
+                    - if (months) {months = '.' + months} else {months = ''}
+                    p I learned how to program over 10 years ago and I've been programming professionally for #{Math.floor(years)}#{months} years.
+                    p I currently work for a startup in San Francisco, 
+                        a(href='http://quid.com/', title='Quid, Inc.') Quid, Inc. 
+                        | I help maintain the single page application that we've developed. We use Backbone.js, Node.js, Ruby on Rails, Redis, MySQL and Elasticsearch among other technologies.
+                    p I enjoy public speaking, music, food, travel, jokes, volunteering, dogs, and sports.
+                    p: a(data-behavior='email-prompt') Let's get in touch.
+
+        section.hire-me
+            h2 Hire me!
+            p
+                | I'm always working on projects, either personal or with a group.
+                br
+                | I enjoy collaborating and building out new ideas. If you have an interesting idea and need help building it, let's talk.
+            - var hoursInWeek = 168, freeTime = hoursInWeek;
+            - freeTime -= (10 * 5); // Hours I work a week
+            - freeTime -= (8 * 7); // Hours I sleep a week
+            - freeTime -= (1.8 * 7); // Hours I spend doing shenanigans
+            - freeTime -= (2.5 * 2); // Hours I spend with friends
+            - var freeTimePercentage = Math.floor(100 * freeTime / hoursInWeek);
+            - var busyPercentage = Math.abs(freeTimePercentage - 100);
+            .progress
+                .progress-bar.progress-bar-dull(role='progressbar', aria-valuenow='#{busyPercentage}', aria-valuemin='0', aria-valuemax='100', style='width: #{busyPercentage}%')
+                    | #{busyPercentage}% Busy
+                .progress-bar.progress-bar-blue-sky(role='progressbar', aria-valuenow='#{freeTimePercentage}', aria-valuemin='0', aria-valuemax='100', style='width: #{freeTimePercentage}%')
+                    | #{freeTimePercentage}% Free
+            p I currently have about #{freeTimePercentage}% of free time during my week. If you don't have funds, that's ok, 
+                a(data-behavior='email-prompt') we should still talk.
