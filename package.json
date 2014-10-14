@@ -23,6 +23,7 @@
     "gulp-kraken": "*",
     "gulp-livereload": "*",
     "gulp-minify-css": "*",
+    "gulp-order": "*",
     "gulp-rename": "*",
     "gulp-rev": "*",
     "gulp-stylus": "*",
