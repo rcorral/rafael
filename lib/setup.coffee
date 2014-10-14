@@ -30,6 +30,7 @@ module.exports = (app) ->
     app.enable 'trust proxy'
     app.enable 'case sensitive routing'
     app.enable 'view cache' if inProduction
+    app.disable 'x-powered-by' # credit will be given elsewhere
 
     # #use
     app.use sharify

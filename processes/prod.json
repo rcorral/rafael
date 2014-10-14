@@ -1,5 +1,4 @@
 {
-  "_exec_in_production": "NODE_ENV=production gulp compile && pm2 start processes/prod.json -i max",
   "apps" : [{
     "name"        : "prod",
     "script"      : "bin/www",
