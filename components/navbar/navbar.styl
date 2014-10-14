@@ -1,0 +1,14 @@
+nav.navbar.navbar-default
+    transition: box-shadow 2s
+    &.navbar
+        border-radius: 0
+        margin-bottom: 0
+    &.moved
+        box-shadow: 0 -23px 40px -10px #000
+    ul.navbar-nav
+        li
+            &::first-letter
+                color: #333
+            &.active
+                a::first-letter
+                    color: #444

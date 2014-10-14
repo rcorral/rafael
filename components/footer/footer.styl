@@ -1,0 +1,100 @@
+footer
+    background-color: #2D2D2D
+    border-bottom: 3px solid rgba(255, 255, 255, 0.1)
+    color: #EFEFEF
+    float: left
+    margin: 0 auto
+    text-shadow: 0 6px 7px rgba(13, 13, 13, 0.35)
+    width: 100%
+
+    .copyright
+        margin-right: 10px
+        font-size: 20px
+
+    .custom-footer
+        font-weight: 200
+        line-height: 27px
+        margin: 18px 10px 0
+        padding: 15px
+
+        .row
+            div:last-child
+                max-width: 435px
+                float: right
+
+        h4
+            font-size: 25px
+            margin-bottom: 22px
+
+        p
+            font-size: 18px
+
+            &:last-child
+                margin: 0
+
+        .contact-links
+            text-shadow: 0 1px 3px #000000
+            float: left
+            .fa-twitter:hover
+                color: #55ACEE
+            .fa-linkedin:hover
+                color: #007BB6
+            .fa-github:hover
+                color: #818181
+            .fa-paper-plane
+                font-size: 31px
+                &:hover
+                    color: #87C9E9
+            .fa-file-text
+                font-size: 31px
+                &:hover
+                    color: #b0bec5
+
+        a
+            &:link,
+            &:visited
+                color: #fff
+                font-size: 35px
+                margin-right: 25px
+
+@media (max-width: 480px)
+    footer .footer-width
+        margin: 0 auto
+
+        h4
+            font-size: 20px !important
+
+        p
+            font-size: 15px !important
+        .contact-links
+            margin: 0 0 9px 0
+            a
+                font-size: 27px
+
+@media (min-width: 481px)
+    footer .footer-width
+        margin: 0 auto
+
+@media (max-width: 768px)
+    .custom-footer h4
+        font-size: 22px
+
+    .custom-footer p
+        font-size: 16px
+
+@media (max-width: 845px)
+    footer .custom-footer
+        max-width: 425px
+        margin-left: auto
+        margin-right: auto
+
+        p.contact-links
+            margin-bottom: 17px
+
+        .row
+            div
+                width: 100%
+
+@media (min-width: 935px)
+    footer .footer-width
+        width: 920px

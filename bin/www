@@ -1,8 +1,4 @@
 #!/usr/bin/env node
-require('coffee-script').register()
-var debug = require('debug')('server');
-var app = require('app');
-
-var server = app.listen(app.get('port'), function() {
-  return debug('Express server listening on port ' + server.address().port);
-});
+// This file allows us to use cluster mode with pm2
+require('coffee-script').register();
+require('../index').init();

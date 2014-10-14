@@ -1,0 +1,55 @@
+.portfolio-item
+    img.img-polaroid(src='#{getHost()}/images/portfolio/jomcdn/basic-parameters-thumb.jpg', alt='Basic parameters thumbnail')
+    h3 jomCDN
+    p.lead A content delivery solution for Joomla!
+
+.hidden
+    button.close.fa.fa-close
+    .item-more
+        .images
+            .inner-wrap
+                img(src='#{getHost()}/images/portfolio/jomcdn/basic-parameters.jpg', alt='Basic parameters')
+                img(src='#{getHost()}/images/portfolio/jomcdn/advanced-parameters.jpg', alt='Advanced plugin parameters')
+                img(src='#{getHost()}/images/portfolio/jomcdn/chart-before-after.gif', alt='Chrome network chart')
+                img(src='#{getHost()}/images/portfolio/jomcdn/info-before-after.gif', alt='pingdom.com speed test')
+                img(src='#{getHost()}/images/portfolio/jomcdn/firebug-before-after.gif', alt='Firebug network chart')
+
+        article
+            p
+                | This Joomla plugin provides the ability to deliver website assets such as css, js, images, videos, documents and more through a 
+                a(href='http://en.wikipedia.org/wiki/Content_delivery_network', title='Content delivery network - Wikipedia') content delivery network
+                | , CDN.
+            p
+                | I developed this extension in 2010 from the ground up. I always had an interest in CDNs and I tend to be impatient with slow websites! I decided to build this extension because of my interest in content delivery networks, there was also no Joomla extension that made it extremely simple for website administrators to set up a CDN on their website. I saw 
+                a(href='http://aws.amazon.com/cloudfront/', title='AWS CloudFront') CloudFront 
+                | an 
+                a(href='http://aws.amazon.com/', title='Amazon Web Services') Amazon Web Services
+                | , AWS, as an opportunity to create a plugin that would deliver a simple and affordable CDN solution for Joomla.
+            p
+                | It is incredibly simple to set this plugin up, it takes longer to setup the AWS account than to get the plugin configured, and that is exactly what my vision was from the start.
+            p Since the original release I have added the following features:
+            ul
+                li
+                  | Support for another CDN, 
+                  a(href='http://www.rackspace.com/cloud/files/', title='CloudFiles CDN') Rackspace CloudFiles
+                li
+                  | Automatic optimization of images using Yahoo's 
+                  a(href='http://www.smushit.com/ysmush.it/', title='Yahho Smush.it') Smush.it 
+                  | service
+                li gzip compression and minification of CSS and JS files
+            p: strong Other notable points:
+            ul
+                li PHP &amp; MySQL
+                li AWS API
+                li Rackspace API
+                li Smush.it API
+                li Cron jobs
+                li GIT
+                li Phing
+            p: strong Further links:
+            p
+              | - 
+              a(href='http://www.corephp.com/joomla-products/jomcdn.html', title='jomCDN - corePHP') http://www.corephp.com/joomla-products/jomcdn.html
+              br
+              | - 
+              a(href='http://extensions.joomla.org/extensions/core-enhancements/performance/content-networking/14395', title='jomCDN on the JED') jomCDN on the Joomla Extensions Directory

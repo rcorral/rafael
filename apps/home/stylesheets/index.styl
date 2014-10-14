@@ -1,0 +1,90 @@
+body.home-component
+    & > .components-container
+        height: 100%
+        margin: 0
+        min-height: initial !important
+        padding: 0
+
+        & > .row
+            height: 100%
+            margin: 0
+
+            & > .app-wrapper
+                height: 100%
+
+.app-home
+    height: 100%
+
+    .site-intro
+        height: 100%
+        font-family: 'Open Sans', sans-serif
+
+    header:empty + .site-intro
+        margin-top: 0
+
+    body.has-nav
+        .site-intro
+            margin-top: 0
+
+    .site-intro
+        align-items: center
+        background-color: rgba(8, 8, 8, 0.82)
+        background-size: cover
+        clear: both
+        color: #fff
+        display: flex
+        flex-direction: row
+        font-size: 18px
+        outline: none
+        section
+            max-width: 400px
+            p
+                border-left: 3px solid rgba(204, 204, 204, 0.49);
+                padding-left: 8px;
+                a
+                    color: #FFFFFF
+                    text-shadow: 0px 0px 2px rgba(140, 140, 140, 0.85)
+        .read-more
+            color: #fff
+            cursor: pointer
+            font-size: 39px
+            margin-left: 45px
+            opacity: .7
+            transition: opacity 0.4s ease
+            &:hover
+                opacity: 1
+
+// Homepage background image
+@media (max-width: 767px)
+    .site-intro
+        background-image: url('../images/baybridge-xs.jpg')
+
+@media (min-width: 768px)
+    .site-intro
+        background-image: url('../images/baybridge-sm.jpg')
+
+@media (min-width: 992px)
+    .site-intro
+        background-image: url('../images/baybridge-md.jpg')
+
+@media (min-width: 1200px)
+    .site-intro
+        background-image: url('../images/baybridge-lg.jpg')
+
+@media (min-width: 2400px)
+    .site-intro
+        background-image: url('../images/baybridge-xl.jpg')
+
+@media (min-width: 3000px)
+    .site-intro
+        background-image: url('../images/baybridge-xxl.jpg')
+
+@media (max-width: 384px)
+    .site-intro .read-more
+        position: absolute
+        bottom: 30px
+        left: 108px
+
+@media (max-width: 480px)
+    .site-intro .read-more
+        margin-left: 25px

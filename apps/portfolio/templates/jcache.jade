@@ -1,0 +1,25 @@
+.portfolio-item
+    img.img-polaroid(src='#{getHost()}/images/portfolio/jcache/jcache-thumb.jpg', alt='jcache thumbnail')
+    h3 jcache
+    p.lead jcache is a proxy for HTML5 localStorage with object storage and ability to set expiration time.
+
+.hidden
+    button.close.fa.fa-close
+    .item-more
+        article
+            p A proxy for HTML5 localStorage which contains many useful methods not part of localStorage. jcache has the ability to store objects, they get json encoded before storage. jcache has the ability set an expiration date on localStorage keys.
+            p: strong Additional Methods:
+            ul
+                li
+                    strong has 
+                    | – checks to to see if a given key exists in localStorage
+                li
+                    strong copy 
+                    | – copies a given key and it's value into another key
+                li
+                    strong rename 
+                    | – renames a localStorage key
+            p: strong Further links:
+            p
+              | - 
+              a(href='https://github.com/rcorral/jcache', title='jcache - GitHub') https://github.com/rcorral/jcache

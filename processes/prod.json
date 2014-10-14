@@ -1,13 +1,13 @@
 {
+  "_exec_in_production": "NODE_ENV=production gulp compile && pm2 start processes/prod.json -i max",
   "apps" : [{
     "name"        : "prod",
     "script"      : "bin/www",
     "log_date_format"  : "YYYY-MM-DD HH:mm Z",
-    "ignoreWatch" : ["node_modules", "public\/assets\/app", "public\/assets\/manifest"],
     "instances"   : "2",
     "env": {
         "DEBUG": "server,error",
-        "NODE_PATH": "./app:./app/lib",
+        "NODE_PATH": "./lib",
         "NODE_ENV": "production",
         "NODE_PROXYPORT": 80,
         "NODE_PORT": 3010,

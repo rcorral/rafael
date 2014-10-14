@@ -1,0 +1,67 @@
+@require './overrides'
+
+html, body, body
+    height: 100%
+    font-family: 'Open Sans', sans-serif
+
+/* Headings */
+@font-face
+    font-family: 'FontinSansB'
+    src: url('../fonts/Fontin_Sans_B_45b.otf') format('opentype')
+    font-weight: bold
+
+h1, h2, h3, h4, h5, h6
+    font-family: 'FontinSansB', Helvetica, Arial, sans-serif
+
+h1, h2, h3, h4, h5, h6
+    margin: 12px 0
+
+h1
+    font-size: 26px
+    line-height: 28px
+
+h2
+    font-size: 22px
+    line-height: 24px
+
+h3
+    font-size: 18px
+    line-height: 20px
+
+h4
+    font-size: 14px
+    line-height: 16px
+
+h5
+    font-size: 13px
+    line-height: 15px
+
+h6
+    font-size: 12px
+    line-height: 14px
+
+.img-polaroid
+    background-color: #fff
+    border: 1px solid rgba(0,0,0,0.2)
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1)
+    padding: 4px
+
+body.has-nav
+    padding-top: 51px
+
+.components-container
+    .main
+        margin: 25px 0 0
+
+/* For tablets - Backgrounds will overflow anyways so who cares, had to work with design */
+@media (max-width: 979px)
+    .main
+        width: 100%
+
+@media (max-width: 480px)
+    h1
+        font-size: 22px
+
+@media (max-width: 768px)
+    body
+        padding-top: 0
