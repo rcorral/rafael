@@ -20,6 +20,7 @@
     "gulp-clean": "*",
     "gulp-concat": "*",
     "gulp-gzip": "*",
+    "gulp-kraken": "*",
     "gulp-livereload": "*",
     "gulp-minify-css": "*",
     "gulp-rename": "*",
@@ -40,7 +41,6 @@
   },
   "devDependencies": {
     "benv": "*",
-    "gulp-kraken": "*",
     "html5": "*",
     "mocha": "*",
     "should": "*",
