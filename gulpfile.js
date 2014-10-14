@@ -159,7 +159,7 @@ gulp.task('watch', ['compile'], function() {
         'assets/**/*.coffee',
         'assets/**/*.styl',
         'components/**/*.coffee',
-        'components/**/*.styl'
+        'components/**/*.styl',
         'components/**/*.jade'
         ], ['compile']);
     gulp.watch('public/assets/bundle.*').on('change', refresh.changed);
