@@ -49,10 +49,11 @@ module.exports = (app) ->
     app.use require '../apps/about'
 
     # Mount static middleware for sub apps, components, and project-wide
+    maxAge = 1000 * 60 * 60 * 24 * 365 # 1 year
     fs.readdirSync(path.resolve __dirname, '../apps').forEach (fld) ->
-        app.use express.static(path.resolve __dirname, "../apps/#{fld}/public")
+        app.use express.static(path.resolve(__dirname, "../apps/#{fld}/public"), {maxAge})
     fs.readdirSync(path.resolve __dirname, '../components').forEach (fld) ->
-        app.use express.static(path.resolve __dirname, "../components/#{fld}/public")
-    app.use express.static(path.resolve __dirname, '../public')
+        app.use express.static(path.resolve(__dirname, "../components/#{fld}/public"), {maxAge})
+    app.use express.static(path.resolve(__dirname, '../public'), {maxAge})
 
     app.use require './error-handler'
