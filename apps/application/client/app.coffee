@@ -21,7 +21,7 @@ module.exports.init = ->
         doc = document.documentElement
         pos = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0)
         $win.trigger 'scroll-end', pos
-    , 150, leading: false, trailing: true, maxWait: 150
+    , 150
 
     # Resize listener
     $win.resize _.debounce ->

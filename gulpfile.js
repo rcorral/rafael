@@ -155,10 +155,12 @@ gulp.task('watch', ['compile'], function() {
     gulp.watch([
         'apps/**/*.coffee',
         'apps/**/*.styl',
+        'apps/**/*.jade',
         'assets/**/*.coffee',
         'assets/**/*.styl',
         'components/**/*.coffee',
         'components/**/*.styl'
+        'components/**/*.jade'
         ], ['compile']);
     gulp.watch('public/assets/bundle.*').on('change', refresh.changed);
 });
