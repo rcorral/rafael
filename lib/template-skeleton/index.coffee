@@ -34,6 +34,7 @@ module.exports =
         app.set 'view engine', 'jade'
 
     render: (req, res, opts) ->
+        res.removeHeader 'x-powered-by' # credit will be given elsewhere
         res.render 'index', _.defaults {}, appLocals, opts,
             appName: ''
             assets: parseAssets assets, req.acceptsEncodings('gzip')

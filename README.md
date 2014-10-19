@@ -2,7 +2,7 @@ rafael
 ======
 
 An isomorphic (buzzz) app, which takes some ideologies from Ezel. It leverages Browserify and shares code between the server and the browser. It's also my own [personal website](http://rafaelcorral.com/).  
-When loaded it's a single page application, but the first render will load the requested page so we get the benefirst for SEO. 
+It's a single page application, but the requested page will render server-side so we get the benefirst for SEO. 
 
 Install
 -------
