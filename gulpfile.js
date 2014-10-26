@@ -47,6 +47,18 @@ gulp.task('compile-css', ['clean-css'], function() {
     var assets = gulp.src('assets/index.styl')
             .pipe(stylus())
             .pipe(autoprefixer(['> 1%', 'last 2 versions']))
+            // Reorder -webkit-flex prefix so it works in mobile.
+            .pipe(transform(function(filename) {
+                var data = '';
+                return through(write, end);
+
+                function write(buf) {data += buf}
+                function end() {
+                    data = data.replace(/(display: -webkit-flex;)(\s+)(display: -webkit-box;)/g, '$3$2$1');
+                    this.emit('data', data);
+                    this.emit('end');
+                }
+            }));
     // Merge both streams
     var bundle = es.merge(deps, assets)
         .pipe(order([
