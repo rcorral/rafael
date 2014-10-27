@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "compile": "./node_modules/.bin/jison ./apps/blog/lib/post-language.jison -o ./apps/blog/lib/post-language.js",
+    "build-posts": "node ./bin/build-posts",
     "test": "./node_modules/.bin/mocha $(find apps/*/test -name '*.coffee' -not -path 'test/helpers/*')"
   },
   "dependencies": {
@@ -34,6 +35,7 @@
     "jadeify": "*",
     "jquery": "*",
     "morgan": "*",
+    "redis": "*",
     "serve-favicon": "*",
     "sharify": "*",
     "stylus": "*",
