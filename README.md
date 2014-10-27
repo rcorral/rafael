@@ -23,4 +23,6 @@ Run
 Tests
 -----
 
-Have yet to write some
+`$ npm test`
+
+Test coverage is low, but I'm working on it.
