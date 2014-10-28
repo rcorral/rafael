@@ -1,4 +1,4 @@
-parser = require('../lib/post-language.js').parser
+parser = require '../lib/post-language.js'
 
 describe 'post-language', ->
 

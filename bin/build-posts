@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 // This file allows us to use cluster mode with pm2
 require('coffee-script').register();
-require('../apps/blog/build').build();
+require('../apps/blog/build-posts').build();
