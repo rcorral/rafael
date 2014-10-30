@@ -1,4 +1,4 @@
-ApplicationModel = require '../model.coffee'
+ApplicationModel = require './model.coffee'
 ApplicationView = require './view.coffee'
 ApplicationRouter = require './router.coffee'
 

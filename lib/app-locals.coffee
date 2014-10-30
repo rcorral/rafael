@@ -1,6 +1,6 @@
 sd = require('sharify').data
 
-# #set assets hosts function
+# sd.cdnHosts comes from ENV variable
 if sd.cdnHosts
     hosts = sd.cdnHosts.split ','
 else
@@ -12,6 +12,9 @@ hosts = hosts.map (host) ->
     else
         "//#{host}"
 
+# Closure that returns a function
+# This function loops through available CDN hosts
+# returning a new one with each call
 assetHostsFn = do (hosts=hosts) ->
     if hosts.length is 1
       -> hosts[0]
