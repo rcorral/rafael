@@ -1,6 +1,6 @@
 _ = require 'underscore'
-buildPosts = require '../build-posts'
-parser = require '../lib/post-parser'
+buildPosts = require '../../lib/build-posts'
+parser = require '../../lib/post-parser'
 
 describe 'post-parser', ->
 

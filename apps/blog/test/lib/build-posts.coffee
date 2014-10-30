@@ -1,8 +1,8 @@
-builder = require '../build-posts'
+builder = require '../../lib/build-posts'
 fs = require 'fs'
 redis = require 'redis'
 path = require 'path'
-parser = require '../lib/post-parser'
+parser = require '../../lib/post-parser'
 
 client = redis.createClient()
 
@@ -11,7 +11,8 @@ client.on 'connect', ->
     describe 'build-posts', ->
 
         before ->
-            @postsPath = path.join __dirname, 'templates/posts'
+            @templatesPath =  path.join __dirname, '../templates'
+            @postsPath = path.join @templatesPath, 'posts'
 
         describe '#getPosts', ->
 
@@ -19,15 +20,15 @@ client.on 'connect', ->
                 @postFiles = fs.readdirSync @postsPath
                 @builderPosts = builder.getPosts @postsPath
 
-            it 'throws error at empty directory', ->
-                do( ->
-                    builder.getPosts path.join __dirname, 'templates/posts-empty'
-                ).should.throwError
-
             it 'throws error with improperly named post files', ->
                 do( ->
-                    path = path.join __dirname, 'templates/posts-invalid-name'
+                    path = path.join @templatesPath, 'posts-invalid-name'
                     builder.getPosts path
+                ).should.throwError
+
+            it 'throws error when two posts have the same slug', ->
+                do( ->
+                    builder.getPosts path.join @templatesPath, 'posts-same-slug'
                 ).should.throwError
 
             it 'gets posts', ->
