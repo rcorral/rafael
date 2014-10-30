@@ -41,19 +41,48 @@ client.on 'connect', ->
                 for post in @builderPosts
                     post.should.be.an.Object
 
+        describe '#getTags', ->
+
+            before ->
+                @posts = [
+                    tags: ['a', 'b']
+                    slug: 'first-post'
+                ,
+                    tags: ['a']
+                    slug: 'second-post'
+                ,
+                    tags: ['b', 'c']
+                    slug: 'third-post'
+                ]
+
+            it 'returns an object when an empty object is passed', ->
+                builder.getTags(@posts).should.be.an.Object
+
+            it 'returns an object when posts are passed', ->
+                builder.getTags(@posts).should.be.an.Object
+
+            it 'returns tags', ->
+                builder.getTags(@posts).should.eql
+                    a: ['first-post', 'second-post']
+                    b: ['first-post', 'third-post']
+                    c: ['third-post']
+
         describe '#build', ->
 
             before (done) ->
                 @builderPosts = builder.getPosts @postsPath
+                @builderTags = builder.getTags @builderPosts
                 builder.getPosts = => @builderPosts
 
                 # Custom namespace
                 @config =
                     postorderKey: 'test-postorder'
                     postKey: 'test-post'
+                    tagsKey: 'test-tags'
+                    tagKey: 'test-tag'
                 builder.build @config, done
 
-                @keysToDelete = [@config.postorderKey]
+                @keysToDelete = [@config.postorderKey, @config.tagsKey]
 
             # Comment out if debugging
             after (done) ->
@@ -61,7 +90,7 @@ client.on 'connect', ->
                     throw 'Request error' if err
                     done()
 
-            it 'postorder key should be populated', (done) ->
+            it 'populates postorder key', (done) ->
                 client.zcard @config.postorderKey, (err, count) =>
                     throw 'Request error' if err
                     count.should.be.exactly @builderPosts.length
@@ -77,7 +106,7 @@ client.on 'connect', ->
                     response.should.be.exactly timestamp
                     done()
 
-            it 'posts should be populated', (done) ->
+            it 'populates each post', (done) ->
                 cursor = 0
 
                 check = (post, next) =>
@@ -100,3 +129,33 @@ client.on 'connect', ->
                         done()
 
                 check @builderPosts[cursor], next
+
+            it 'populates tags key', (done) ->
+                client.get @config.tagsKey, (err, response) =>
+                    throw 'Request error' if err
+                    JSON.parse(response).should.eql Object.keys @builderTags
+                    done()
+
+            it 'populates each tag key', (done) ->
+                cursor = 0
+                tagNames = Object.keys @builderTags
+
+                check = (tag, next) =>
+                    key = "#{@config.tagKey}:#{tag}"
+                    @keysToDelete.push key
+
+                    client.smembers key,(err, posts) =>
+                        throw 'Request error' if err
+
+                        posts.should.eql @builderTags[tag]
+                        next()
+
+                next = =>
+                    cursor++
+
+                    if tagNames[cursor]
+                        check tagNames[cursor], next
+                    else
+                        done()
+
+                check tagNames[cursor], next

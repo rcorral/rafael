@@ -1,4 +1,6 @@
 {
     "postorderKey": "postorder",
-    "postKey": "post"
+    "postKey": "post",
+    "tagsKey": "tags",
+    "tagKey": "tag"
 }

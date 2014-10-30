@@ -29,6 +29,17 @@ module.exports.getPosts = (postsPath) ->
 
         declaration
 
+# Gets tags from posts
+module.exports.getTags = (posts) ->
+    tags = {}
+    return tags unless posts.length
+
+    for post in posts
+        for tag in post.tags
+            tags[tag] ?= []
+            tags[tag].push post.slug
+    tags
+
 module.exports.build = (config, callback) ->
     config ?= require '../config/redis.json'
     client = redis.createClient()
@@ -46,8 +57,37 @@ module.exports.build = (config, callback) ->
                 throw err if err
                 next()
 
+    writeTags = (tags, callback) ->
+        tagNames = Object.keys tags
+        cursor = 0
+
+        return callback?() unless tagNames.length
+
+        writeTag = (tag, next) ->
+            args = _.clone tags[tag]
+            args.unshift "#{config.tagKey}:#{tag}"
+
+            client.sadd args, (err, response) ->
+                throw err if err
+                next()
+
+        next = ->
+            cursor++
+
+            if tagNames[cursor]
+                writeTag tagNames[cursor], next
+            else
+                callback?()
+
+        # These could be stored as a sorted set
+        # if we wanted to quickly get counts
+        client.set [config.tagsKey, JSON.stringify(tagNames)], (err, response) ->
+            throw err if err
+            writeTag tagNames[cursor], next
+
     client.on 'connect', =>
         posts = @getPosts()
+        tags = @getTags posts
         cursor = 0
 
         next = ->
@@ -56,8 +96,9 @@ module.exports.build = (config, callback) ->
             if posts[cursor]
                 writePost posts[cursor], next
             else
-                debug "Added #{posts.length} posts."
-                callback?()
-                client.end()
+                writeTags tags, ->
+                    debug "Added #{posts.length} posts."
+                    callback?()
+                    client.end()
 
         writePost posts[cursor], next
