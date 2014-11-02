@@ -1,4 +1,7 @@
 express = require 'express'
-
 app = module.exports = express()
-app.use require('./routes')(app)
+
+routes = require './routes'
+routes.init app
+
+app.get '/portfolio', routes.index

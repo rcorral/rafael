@@ -5,5 +5,5 @@ routes = require './routes'
 routes.init app
 routesAPI = require './routes-api'
 
-app.use '/blog', routes.index
-app.use '/api/posts/page/:page/', routesAPI.posts
+app.get '/blog', routes.index
+app.get '/api/posts/page/:page/', routesAPI.posts
