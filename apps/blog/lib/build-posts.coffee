@@ -4,6 +4,7 @@ fs = require 'fs'
 path = require 'path'
 parser = require './post-parser'
 redis = require 'redis'
+Util = require '../../../components/Util'
 
 module.exports.getPosts = (postsPath) ->
     postsPath ?= path.join __dirname, '..', 'templates', 'posts'
@@ -49,9 +50,12 @@ module.exports.build = (config, callback) ->
         timestamp = post.date.getTime() / 1000
         args = [config.postorderKey, timestamp, post.slug]
 
+        # Write post to sorted set
+        # allows us to have ordering of posts/pagination
         client.zadd args, (err, response) ->
             throw err if err
 
+            # Write individual post with all it's properties
             parser.encode post
             client.hmset "#{config.postKey}:#{post.slug}", post, (err, response) ->
                 throw err if err
@@ -59,10 +63,9 @@ module.exports.build = (config, callback) ->
 
     writeTags = (tags, callback) ->
         tagNames = Object.keys tags
-        cursor = 0
-
         return callback() unless tagNames.length
 
+        # Writes tag with all posts that have the tag
         writeTag = (tag, next) ->
             args = _.clone tags[tag]
             args.unshift "#{config.tagKey}:#{tag}"
@@ -71,34 +74,18 @@ module.exports.build = (config, callback) ->
                 throw err if err
                 next()
 
-        next = ->
-            cursor++
-
-            if tagNames[cursor]
-                writeTag tagNames[cursor], next
-            else
-                callback()
-
         # These could be stored as a sorted set
         # if we wanted to quickly get counts
         client.set [config.tagsKey, JSON.stringify(tagNames)], (err, response) ->
             throw err if err
-            writeTag tagNames[cursor], next
+            Util.syncLoop tagNames, writeTag, callback
 
     client.on 'connect', =>
         posts = @getPosts()
         tags = @getTags posts
-        cursor = 0
 
-        next = ->
-            cursor++
-
-            if posts[cursor]
-                writePost posts[cursor], next
-            else
-                writeTags tags, ->
-                    debug "Added #{posts.length} posts."
-                    callback?()
-                    client.end()
-
-        writePost posts[cursor], next
+        Util.syncLoop posts, writePost, ->
+            writeTags tags, ->
+                debug "Added #{posts.length} posts."
+                callback?()
+                client.end()

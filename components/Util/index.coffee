@@ -7,7 +7,7 @@ Util.capitalize = (str) ->
          whitespace + firstLetter.toUpperCase() + rest
 
 Util.syncLoop = (array, iteratee, end) ->
-    cursor = 0
+    cursor = -1
     next = ->
         cursor++
 

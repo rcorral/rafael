@@ -3,6 +3,7 @@ fs = require 'fs'
 redis = require 'redis'
 path = require 'path'
 parser = require '../../lib/post-parser'
+Util = require '../../../../components/Util'
 
 client = redis.createClient()
 
@@ -103,8 +104,6 @@ client.on 'connect', ->
                     done()
 
             it 'populates each post', (done) ->
-                cursor = 0
-
                 check = (post, next) =>
                     key = "#{@config.postKey}:#{post.slug}"
                     @keysToDelete.push key
@@ -116,15 +115,7 @@ client.on 'connect', ->
                         hash.should.eql post
                         next()
 
-                next = =>
-                    cursor++
-
-                    if @builderPosts[cursor]
-                        check @builderPosts[cursor], next
-                    else
-                        done()
-
-                check @builderPosts[cursor], next
+                Util.syncLoop @builderPosts, check, done
 
             it 'populates tags key', (done) ->
                 client.get @config.tagsKey, (err, response) =>
@@ -133,7 +124,6 @@ client.on 'connect', ->
                     done()
 
             it 'populates each tag key', (done) ->
-                cursor = 0
                 tagNames = Object.keys @builderTags
 
                 check = (tag, next) =>
@@ -146,12 +136,4 @@ client.on 'connect', ->
                         posts.should.containDeep @builderTags[tag]
                         next()
 
-                next = =>
-                    cursor++
-
-                    if tagNames[cursor]
-                        check tagNames[cursor], next
-                    else
-                        done()
-
-                check tagNames[cursor], next
+                Util.syncLoop tagNames, check, done
