@@ -6,4 +6,16 @@ Util.capitalize = (str) ->
     str.replace /(^\s*)(\S)(.*)$/g, (match, whitespace, firstLetter, rest) ->
          whitespace + firstLetter.toUpperCase() + rest
 
+Util.syncLoop = (array, iteratee, end) ->
+    cursor = 0
+    next = ->
+        cursor++
+
+        if array[cursor]
+            iteratee array[cursor], next
+        else
+            end()
+
+    next()
+
 module.exports = Util

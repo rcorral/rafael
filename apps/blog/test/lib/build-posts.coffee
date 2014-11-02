@@ -75,11 +75,7 @@ client.on 'connect', ->
                 builder.getPosts = => @builderPosts
 
                 # Custom namespace
-                @config =
-                    postorderKey: 'test-postorder'
-                    postKey: 'test-post'
-                    tagsKey: 'test-tags'
-                    tagKey: 'test-tag'
+                @config = require '../config/redis.json'
                 builder.build @config, done
 
                 @keysToDelete = [@config.postorderKey, @config.tagsKey]
@@ -147,7 +143,7 @@ client.on 'connect', ->
                     client.smembers key,(err, posts) =>
                         throw 'Request error' if err
 
-                        posts.should.eql @builderTags[tag]
+                        posts.should.containDeep @builderTags[tag]
                         next()
 
                 next = =>

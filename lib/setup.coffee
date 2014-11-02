@@ -27,7 +27,7 @@ module.exports = (app) ->
     inProduction = sd.environment is 'production'
 
     # Settings
-    app.enable 'trust proxy'
+    app.enable 'trust proxy', 'loopback' if inProduction
     app.enable 'case sensitive routing'
     app.enable 'view cache' if inProduction
 
@@ -47,6 +47,7 @@ module.exports = (app) ->
     app.use require '../apps/home'
     app.use require '../apps/portfolio'
     app.use require '../apps/about'
+    app.use require '../apps/blog'
 
     # Mount static middleware for sub apps, components, and project-wide
     maxAge = 1000 * 60 * 60 * 24 * 365 # 1 year

@@ -23,6 +23,8 @@ Run
 Tests
 -----
 
+**Redis must be running for some tests**
+
 `$ npm test`
 
 Test coverage is low, but I'm working on it.

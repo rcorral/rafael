@@ -61,7 +61,7 @@ module.exports.build = (config, callback) ->
         tagNames = Object.keys tags
         cursor = 0
 
-        return callback?() unless tagNames.length
+        return callback() unless tagNames.length
 
         writeTag = (tag, next) ->
             args = _.clone tags[tag]
@@ -77,7 +77,7 @@ module.exports.build = (config, callback) ->
             if tagNames[cursor]
                 writeTag tagNames[cursor], next
             else
-                callback?()
+                callback()
 
         # These could be stored as a sorted set
         # if we wanted to quickly get counts
