@@ -1,4 +1,4 @@
-Util = require '../../components/Util/index.coffee'
+Util = require '../../../components/Util/index.coffee'
 
 components = {}
 
