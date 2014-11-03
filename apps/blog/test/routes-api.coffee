@@ -4,7 +4,7 @@ routesAPI = require '../routes-api'
 
 describe 'routes-api', ->
 
-    describe '/posts/page/:page', ->
+    describe '#posts', ->
 
         before (done) ->
             postsPath = path.join __dirname, 'templates/posts'
@@ -49,3 +49,24 @@ describe 'routes-api', ->
                 done()
 
             routesAPI.posts req, res
+
+    describe '#post', ->
+
+        before ->
+            routesAPI.config = require './config/redis.json'
+
+        it 'returns an empty object with a non-existent post slug', (done) ->
+            req = params: post: 'non-existent'
+            res = send: (post) ->
+                post.should.be.an.Object
+                post.should.be.empty
+                done()
+            routesAPI.post req, res
+
+        it 'returns an empty object with a invalid post slug', (done) ->
+            req = params: post: 'something!@#-inva($@'
+            res = send: (post) ->
+                post.should.be.an.Object
+                post.should.be.empty
+                done()
+            routesAPI.post req, res

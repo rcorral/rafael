@@ -3,7 +3,7 @@ parser = require './lib/post-parser'
 redis = require 'redis'
 Util = require '../../components/Util'
 
-module.exports.posts = (req, res, next) ->
+module.exports.posts = (req, res) ->
     @config ?= require './config/redis.json'
     client = redis.createClient()
     POSTS_PER_PAGE = 10
@@ -28,3 +28,16 @@ module.exports.posts = (req, res, next) ->
             Util.syncLoop postKeys, getPost, ->
                 client.end()
                 res.send posts
+
+module.exports.post = (req, res) ->
+    @config ?= require './config/redis.json'
+    client = redis.createClient()
+
+    if req.params.post isnt req.params.post.replace /[^a-z0-9\-]/, ''
+        return res.send {}
+
+    client.on 'connect', =>
+        client.hgetall "#{@config.postKey}:#{req.params.post}", (err, post) ->
+            throw 'DB error' if err
+            client.end()
+            res.send post or {}
