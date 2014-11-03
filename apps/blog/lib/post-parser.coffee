@@ -11,4 +11,5 @@ module.exports.encode = (post) ->
 module.exports.decode = (post) ->
     post.date = new Date post.date if post.date
     post.tags = JSON.parse post.tags if post.tags
+    post.hits = parseInt post.hits, 10 if post.hits
     post

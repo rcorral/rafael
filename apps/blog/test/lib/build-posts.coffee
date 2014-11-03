@@ -112,7 +112,7 @@ client.on 'connect', ->
                         throw 'Request error' if err
 
                         parser.decode hash
-                        hash.should.eql post
+                        hash.should.containDeep post
                         next()
 
                 Util.syncLoop @builderPosts, check, done

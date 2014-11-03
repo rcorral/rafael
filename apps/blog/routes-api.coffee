@@ -37,7 +37,16 @@ module.exports.post = (req, res) ->
         return res.send {}
 
     client.on 'connect', =>
-        client.hgetall "#{@config.postKey}:#{req.params.post}", (err, post) ->
+        key = "#{@config.postKey}:#{req.params.post}"
+        client.hgetall key, (err, post) ->
             throw 'DB error' if err
-            client.end()
-            res.send post or {}
+
+            unless post
+                res.send {}
+                client.end()
+                return
+
+            res.send parser.decode post
+            client.hincrby [key, 'hits', 1], (err, response) ->
+                throw 'DB error' if err
+                client.end()

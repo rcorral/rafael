@@ -70,3 +70,25 @@ describe 'routes-api', ->
                 post.should.be.empty
                 done()
             routesAPI.post req, res
+
+        it 'returns the requested post', (done) ->
+            req = params: post: 'first-post'
+            res = send: (post) ->
+                post.should.be.an.Object
+                post.post.should.be.ok
+                post.title.should.be.ok
+                post.tags.should.an.Array
+                post.slug.should.be.exactly 'first-post'
+                done()
+            routesAPI.post req, res
+
+        it 'increments hits', (done) ->
+            req = params: post: 'first-post'
+            res = send: (post) ->
+                currentHits = post.hits
+                req = params: post: 'first-post'
+                res = send: (post) ->
+                    post.hits.should.be.exactly currentHits + 1
+                    done()
+                routesAPI.post req, res
+            routesAPI.post req, res
