@@ -1,2 +1,9 @@
 each post in posts
-    .post
+    article.post
+        time.post-date #{post.date}
+        h2
+            a(href='#{sd.APP_URL}/#{post.slug}') #{post.title}
+        | !{post.abstract}
+
+p.pagination
+    a.prev(href='#{sd.APP_URL}/blog/#{page-1}', data-behavior='paginate', data-page=page-1) Older posts

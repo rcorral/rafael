@@ -1,7 +1,8 @@
 NavbarView = require '../../../components/navbar/client.coffee'
 FooterView = require '../../../components/footer/client.coffee'
-HomeView = require '../../home/client.coffee'
 AboutView = require '../../about/client.coffee'
+BlogView = require '../../blog/client.coffee'
+HomeView = require '../../home/client.coffee'
 PortfolioView = require '../../portfolio/client/index.coffee'
 
 componentViews = {}
@@ -16,15 +17,18 @@ class ApplicationView extends Backbone.View
         @originalTitle = $('title').html()
         @appRendered = false
 
+        @registerComponent 'about',
+            klass: AboutView
+
+        @registerComponent 'blog',
+            klass: BlogView
+
         @registerComponent 'home',
             klass: HomeView
             options: {router}
 
         @registerComponent 'portfolio',
             klass: PortfolioView
-
-        @registerComponent 'about',
-            klass: AboutView
 
         @navbarView = new NavbarView
             el: $ 'header'

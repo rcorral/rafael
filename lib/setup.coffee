@@ -5,6 +5,7 @@
 #
 
 Backbone = require 'backbone'
+backboneCacheSync = require 'backbone-cache-sync'
 compression = require 'compression'
 express = require 'express'
 inDevelopment = process.env.NODE_ENV is 'development'
@@ -19,12 +20,21 @@ module.exports = (app) ->
 
     # Inject some configuration & constant data into sharify
     sd = sharify.data =
-        environment: process.env.NODE_ENV
-        host: process.env.NODE_HOST
-        port: process.env.NODE_PORT
-        cdnHosts: process.env.NODE_CDNHOSTS
+        ENV: process.env.NODE_ENV
+        HOST: process.env.NODE_HOST
+        PORT: process.env.NODE_PORT
+        CDN_HOSTS: process.env.NODE_CDNHOSTS
+    proxyPort = process.env.NODE_PROXYPORT|0
+    port = if proxyPort isnt 80 then (':' + sd.PORT) else ''
+    sd.API_URL = "http://#{sd.HOST}#{port}"
+    sd.APP_URL = "http://#{sd.HOST}#{port}"
 
-    inProduction = sd.environment is 'production'
+    inProduction = sd.ENV is 'production'
+
+    # Override Backbone to use server-side sync
+    # add redis caching, and augment sync with Q promises.
+    Backbone.sync = require 'backbone-super-sync'
+    backboneCacheSync Backbone.sync, null, null, 'development'
 
     # Settings
     app.enable 'trust proxy', 'loopback' if inProduction
@@ -39,7 +49,7 @@ module.exports = (app) ->
     app.use compression threshold: 512 if inProduction
 
     # Test only
-    if 'test' is sd.environment
+    if 'test' is sd.ENV
         # Mount fake API server
         app.use '/__api', require('../test/helpers/integration.coffee').api
 

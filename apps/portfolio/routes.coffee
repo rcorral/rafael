@@ -1,7 +1,6 @@
 appLocals = require 'app-locals'
 jade = require 'jade'
 path = require 'path'
-sharify = require 'sharify'
 template = require 'template-skeleton'
 
 templatePath = path.join __dirname, 'templates'

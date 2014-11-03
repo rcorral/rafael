@@ -2,8 +2,9 @@ class Router extends Backbone.Router
 
     routes:
         '': 'home'
-        'portfolio': 'portfolio'
         'about': 'about'
+        'blog': 'blog'
+        'portfolio': 'portfolio'
 
     initialize: ->
         @on 'all', @doRoute

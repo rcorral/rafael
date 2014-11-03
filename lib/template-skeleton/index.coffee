@@ -3,18 +3,17 @@ appLocals = require 'app-locals'
 assets = require '../../public/assets/rev-manifest.json'
 jade = require 'jade'
 path = require 'path'
+sd = require('sharify').data
 
 proxyPort = process.env.NODE_PROXYPORT|0
-port = process.env.NODE_PORT
-baseURL = "http://#{process.env.NODE_HOST}#{if proxyPort isnt 80 then (':' + port) else ''}/"
 navbarPath = path.join __dirname, '../../components/navbar/navbar.jade'
 navbarView = jade.compileFile navbarPath
 footerPath = path.join __dirname, '../../components/footer/footer.jade'
 footerView = jade.compileFile footerPath
 
-# Returns {js: [], css: []} formatted assets
+# @return  {js: [], css: []} formatted assets
 parseAssets = (assets, gzip) ->
-    if process.env.NODE_ENV is 'development'
+    if sd.ENV is 'development'
         css = ['bundle.css']
         js = ['vendor.js', 'bundle.js']
     else
@@ -38,10 +37,9 @@ module.exports =
         res.render 'index', _.defaults {}, appLocals, opts,
             appName: ''
             assets: parseAssets assets, req.acceptsEncodings('gzip')
-            baseURL: baseURL
             description: 'Full stack engineer in San Francisco. Known language: JS, PHP, CSS, HTML, SQL, NoSQL'
             footerView: footerView appLocals
             hasNav: true
-            inProduction: process.env.NODE_ENV is 'production'
+            inProduction: sd.ENV is 'production'
             navbarView: navbarView opts.navbarOpts
             title: 'Rafael Corral'

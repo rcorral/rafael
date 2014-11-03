@@ -1,14 +1,14 @@
 sd = require('sharify').data
 
-# sd.cdnHosts comes from ENV variable
-if sd.cdnHosts
-    hosts = sd.cdnHosts.split ','
+# sd.CDN_HOSTS comes from ENV variable
+if sd.CDN_HOSTS
+    hosts = sd.CDN_HOSTS.split ','
 else
-    hosts = [sd.host]
+    hosts = [sd.HOST]
 
 hosts = hosts.map (host) ->
-    if sd.environment is 'development'
-        "http://#{host}:#{sd.port}"
+    if sd.ENV is 'development'
+        "http://#{host}:#{sd.PORT}"
     else
         "//#{host}"
 

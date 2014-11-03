@@ -1,3 +1,5 @@
+Posts = require '../../../collections/posts.coffee'
+sd = require('sharify').data
 Util = require '../../../components/Util/index.coffee'
 
 components = {}
@@ -6,17 +8,24 @@ class ApplicationModel extends Backbone.Model
 
     initialize: ->
         router = @get 'router'
-        @listenTo router, 'navigate:home', @renderComponent
-        @listenTo router, 'navigate:portfolio', @renderComponent
-        @listenTo router, 'navigate:about', @renderComponent
+        @listenTo router, 'navigate:about', @handleComponent
+        @listenTo router, 'navigate:blog', @handleBlog
+        @listenTo router, 'navigate:home', @handleComponent
+        @listenTo router, 'navigate:portfolio', @handleComponent
 
-        @registerComponent 'home',
+        @registerComponent 'about',
             modelKlass: Backbone.Model
+
+        @registerComponent 'blog',
+            collectionKlass: Posts
+            models: sd.posts
+            options:
+                page: sd.page
 
         @registerComponent 'portfolio',
             modelKlass: Backbone.Model
 
-        @registerComponent 'about',
+        @registerComponent 'home',
             modelKlass: Backbone.Model
 
     start: ->
@@ -47,10 +56,15 @@ class ApplicationModel extends Backbone.Model
         type: if component.collectionKlass then 'collection' else 'model'
 
     # Renders a component that doesn't need any special treatment
-    renderComponent: (component) ->
+    handleComponent: (component) ->
         {instance} = @getComponent component
         @set
             activeComponent: component
             title: Util.capitalize component
+
+    handleBlog: (component) ->
+        @handleComponent component
+        {instance} = @getComponent component
+        instance.fetch() unless instance.length
 
 module.exports = ApplicationModel
