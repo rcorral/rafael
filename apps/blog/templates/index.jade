@@ -6,4 +6,7 @@ each post in posts
         | !{post.abstract}
 
 p.pagination
-    a.prev(href='#{sd.APP_URL}/blog/#{page-1}', data-behavior='paginate', data-page=page-1) Older posts
+    unless isLastPage
+        a.prev(href='#{sd.APP_URL}#{nextPageUrl}', data-behavior='paginate', data-page=page+1) Older posts
+    if isFirstPage
+        a.prev(href='#{sd.APP_URL}#{prevPageUrl}', data-behavior='paginate', data-page=page-1) Newer posts

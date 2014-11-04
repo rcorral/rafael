@@ -18,9 +18,10 @@ class ApplicationModel extends Backbone.Model
 
         @registerComponent 'blog',
             collectionKlass: Posts
-            models: sd.posts
+            models: sd.blogPosts
             options:
-                page: sd.page
+                page: sd.blogPage
+                total: sd.totalPosts
 
         @registerComponent 'portfolio',
             modelKlass: Backbone.Model
@@ -62,9 +63,10 @@ class ApplicationModel extends Backbone.Model
             activeComponent: component
             title: Util.capitalize component
 
-    handleBlog: (component) ->
-        @handleComponent component
-        {instance} = @getComponent component
-        instance.fetch() unless instance.length
+    handleBlog: (page) ->
+        @handleComponent 'blog'
+        {instance} = @getComponent 'blog'
+        if not instance.length or page isnt instance.page
+            instance.loadPage page
 
 module.exports = ApplicationModel

@@ -13,12 +13,14 @@ module.exports.init = (app) ->
 
 module.exports.index = (req, res) ->
     page = parseInt req.params[0], 10
+    page = 0 if isNaN page
     posts = new Posts null, page: page
     posts.fetch
         # cache: true
         success: ->
-            res.locals.sd.page = page
-            res.locals.sd.posts = posts.toJSON()
+            res.locals.sd.blogPage = posts.page
+            res.locals.sd.blogPosts = posts.toJSON()
+            res.locals.sd.totalPosts = posts.total
             template.render req, res,
                 appName: 'blog'
                 appView: appView posts.forTemplate()

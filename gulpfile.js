@@ -174,8 +174,10 @@ gulp.task('watch', ['compile'], function() {
         'assets/**/*.coffee',
         'assets/**/*.styl',
         'components/**/*.coffee',
+        'collections/**/*.coffee',
         'components/**/*.styl',
-        'components/**/*.jade'
+        'components/**/*.jade',
+        'models/**/*.coffee'
         ], ['compile']);
     gulp.watch('public/assets/bundle.*').on('change', refresh.changed);
 });

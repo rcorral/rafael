@@ -4,6 +4,7 @@ AboutView = require '../../about/client.coffee'
 BlogView = require '../../blog/client.coffee'
 HomeView = require '../../home/client.coffee'
 PortfolioView = require '../../portfolio/client/index.coffee'
+Util = require '../../../components/Util/index.coffee'
 
 componentViews = {}
 
@@ -22,6 +23,7 @@ class ApplicationView extends Backbone.View
 
         @registerComponent 'blog',
             klass: BlogView
+            options: {router}
 
         @registerComponent 'home',
             klass: HomeView
@@ -74,11 +76,6 @@ class ApplicationView extends Backbone.View
         minHeight = windowSize - $('header nav').outerHeight(true) - @$footer.outerHeight(true)
         @$componentsContainer.css 'min-height', minHeight
 
-    scrollToTop: ->
-        $('html, body').animate
-            'scrollTop': 0
-        , 'fast', 'swing'
-
     registerComponent: (id, component) ->
         componentViews[id] = component
 
@@ -105,9 +102,8 @@ class ApplicationView extends Backbone.View
 
     renderActiveComponent: (model, component) ->
         previousComponentName = @model.previous 'activeComponent'
-        previousComponent = previousComponentName
-        if previousComponent?
-            previousView = @getComponentView previousComponent
+        if previousComponentName?
+            previousView = @getComponentView previousComponentName
             previousView.$el.hide()
             @$body.removeClass "#{previousComponentName}-component"
 
@@ -115,6 +111,6 @@ class ApplicationView extends Backbone.View
         view = @getComponentView component
         view.$el.show()
         view.render()
-        @scrollToTop()
+        Util.scrollToTop()
 
 module.exports = ApplicationView

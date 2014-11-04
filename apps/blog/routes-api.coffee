@@ -1,18 +1,18 @@
 _ = require 'underscore'
 jade = require 'jade'
 parser = require './lib/post-parser'
+Posts = require '../../collections/posts'
 redis = require 'redis'
 Util = require '../../components/Util'
 
 module.exports.posts = (req, res) ->
     @config ?= require './config/redis.json'
     client = redis.createClient()
-    POSTS_PER_PAGE = 10
     fields = ['title', 'slug', 'date', 'tags', 'abstract']
 
     client.on 'connect', =>
-        start = req.params.page * POSTS_PER_PAGE
-        stop = start + POSTS_PER_PAGE - 1
+        start = req.params.page * Posts::POSTS_PER_PAGE
+        stop = start + Posts::POSTS_PER_PAGE - 1
         client.zrange [@config.postorderKey, start, stop], (err, postKeys) =>
             throw 'DB error' if err
 
@@ -28,8 +28,9 @@ module.exports.posts = (req, res) ->
                     next()
 
             Util.syncLoop postKeys, getPost, ->
-                client.end()
-                res.send posts
+                client.zcard @config.postorderKey, (err, total) ->
+                    client.end()
+                    res.send {total, posts}
 
 module.exports.post = (req, res) ->
     @config ?= require './config/redis.json'

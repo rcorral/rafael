@@ -18,4 +18,9 @@ Util.syncLoop = (array, iteratee, end) ->
 
     next()
 
+Util.scrollToTop = (position=0) ->
+    $('html, body').animate
+        'scrollTop': position
+    , 'fast', 'swing'
+
 module.exports = Util

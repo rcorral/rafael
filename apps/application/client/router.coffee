@@ -3,14 +3,17 @@ class Router extends Backbone.Router
     routes:
         '': 'home'
         'about': 'about'
-        'blog': 'blog'
         'portfolio': 'portfolio'
+        'blog': 'blog'
+        'blog/page/:page': 'blog'
 
-    initialize: ->
-        @on 'all', @doRoute
+    home: -> @trigger 'navigate:home', 'home'
 
-    doRoute: (action, route) ->
-        return unless action is 'route'
-        @trigger "navigate:#{route}", route
+    about: -> @trigger 'navigate:about', 'about'
+
+    portfolio: -> @trigger 'navigate:portfolio', 'portfolio'
+
+    blog: (page=0) ->
+        @trigger 'navigate:blog', parseInt page, 10
 
 module.exports = Router
