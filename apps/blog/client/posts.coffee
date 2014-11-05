@@ -1,16 +1,16 @@
-appLocals = require '../../lib/app-locals.coffee'
-Util = require '../../components/Util/index.coffee'
+Util = require '../../../components/Util/index.coffee'
 
-class AboutView extends Backbone.View
+module.exports = class PostsView extends Backbone.View
 
-    className: 'app-about'
+    className: 'app-blog'
 
     events:
         'click [data-behavior~=paginate]': 'handlePaginationClick'
+        'click [data-behavior~=view-post]': 'handleViewPost'
 
     initialize: (options) ->
         @router = options.router
-        @constructor.template = require './templates/index.jade'
+        @constructor.template = require '../templates/posts.jade'
 
         @listenTo @collection, 'sync', @render
 
@@ -23,4 +23,8 @@ class AboutView extends Backbone.View
         page = $(e.currentTarget).data 'page'
         @router.navigate @collection.urlForPage(page), trigger: true
 
-module.exports = AboutView
+    handleViewPost: (e) ->
+        e.preventDefault()
+        id = $(e.currentTarget).data 'id'
+        post = @collection.get id
+        @router.navigate post.frontEndUrl(), trigger: true

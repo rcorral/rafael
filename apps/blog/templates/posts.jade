@@ -1,0 +1,13 @@
+each post in posts
+    article.post
+        time.post-date #{post.date}
+        h2
+            a(href='#{post.postUrl}', data-behavior='view-post', data-id='#{post.id}')
+                | #{post.title}
+        | !{post.abstract}
+
+p.pagination
+    unless isLastPage
+        a.prev(href='#{nextPageUrl}', data-behavior='paginate', data-page=page+1) Older posts
+    unless isFirstPage
+        a.prev(href='#{prevPageUrl}', data-behavior='paginate', data-page=page-1) Newer posts

@@ -1,7 +1,8 @@
 NavbarView = require '../../../components/navbar/client.coffee'
 FooterView = require '../../../components/footer/client.coffee'
 AboutView = require '../../about/client.coffee'
-BlogView = require '../../blog/client.coffee'
+PostsView = require '../../blog/client/posts.coffee'
+PostView = require '../../blog/client/post.coffee'
 HomeView = require '../../home/client.coffee'
 PortfolioView = require '../../portfolio/client/index.coffee'
 Util = require '../../../components/Util/index.coffee'
@@ -22,7 +23,11 @@ class ApplicationView extends Backbone.View
             klass: AboutView
 
         @registerComponent 'blog',
-            klass: BlogView
+            klass: PostsView
+            options: {router}
+
+        @registerComponent 'blogPost',
+            klass: PostView
             options: {router}
 
         @registerComponent 'home',

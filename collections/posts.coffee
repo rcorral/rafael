@@ -33,7 +33,7 @@ module.exports = class Posts extends Backbone.Collection
         posts: @toJSON()
         sd: sd
         page: @page
-        isFirstPage: @page isnt 0
+        isFirstPage: @page is 0
         isLastPage: (@page + 1) is Math.ceil @total / @POSTS_PER_PAGE
         prevPageUrl: @urlForPage if @page - 1 < 0 then 0 else @page - 1
         nextPageUrl: @urlForPage @page + 1

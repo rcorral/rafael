@@ -1,3 +1,4 @@
+Post = require '../../../models/post.coffee'
 Posts = require '../../../collections/posts.coffee'
 sd = require('sharify').data
 Util = require '../../../components/Util/index.coffee'
@@ -10,6 +11,7 @@ class ApplicationModel extends Backbone.Model
         router = @get 'router'
         @listenTo router, 'navigate:about', @handleComponent
         @listenTo router, 'navigate:blog', @handleBlog
+        @listenTo router, 'navigate:blogPost', @handleBlogPost
         @listenTo router, 'navigate:home', @handleComponent
         @listenTo router, 'navigate:portfolio', @handleComponent
 
@@ -22,6 +24,10 @@ class ApplicationModel extends Backbone.Model
             options:
                 page: sd.blogPage
                 total: sd.totalPosts
+
+        @registerComponent 'blogPost',
+            modelKlass: Post
+            attributes: sd.blogPost
 
         @registerComponent 'portfolio',
             modelKlass: Backbone.Model
@@ -68,5 +74,17 @@ class ApplicationModel extends Backbone.Model
         {instance} = @getComponent 'blog'
         if not instance.length or page isnt instance.page
             instance.loadPage page
+
+    handleBlogPost: (postID) ->
+        {instance} = @getComponent 'blogPost'
+        fn = =>
+            @set
+                activeComponent: 'blogPost'
+                title: instance.get 'title'
+        # Only downside with this is we don't increment the hits
+        if postID is instance.get 'id'
+            fn()
+        else
+            instance.loadPost postID, success: fn
 
 module.exports = ApplicationModel

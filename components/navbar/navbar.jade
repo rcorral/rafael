@@ -18,6 +18,6 @@ nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
                 - var className = aboutActive ? 'active' : ''
                 li(class='#{className}')
                     a(href='/about', data-behavior='route') About
-                - var className = blogActive ? 'active' : ''
+                - var className = blogActive || blogPostActive ? 'active' : ''
                 li(class='#{className}')
                     a(href='/blog', data-behavior='route') Blog

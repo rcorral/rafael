@@ -9,7 +9,8 @@ client.on 'error', -> throw 'DB connection error.'
 # Routes
 routes = require './routes'
 routes.init app
-app.get /^\/blog\/?(?:page)?(?:\/([^\/]+?))?\/?$/, routes.index
+app.get '/blog/:post', routes.post # must be first b/c of regex
+app.get /^\/blog\/?(?:page)?(?:\/([^\/]+?))?\/?$/, routes.posts
 
 # API Routes
 routesAPI = require './routes-api'
