@@ -1,5 +1,6 @@
 builder = require '../lib/build-posts'
 path = require 'path'
+Posts = require '../../../collections/posts'
 routesAPI = require '../routes-api'
 
 describe 'routes-api', ->
@@ -14,10 +15,19 @@ describe 'routes-api', ->
             builder.getPosts = -> builderPosts
             builder.build routesAPI.config, done
 
-        it 'only doesn\'t return more than 10 posts at a time', (done) ->
+        it 'returns the total number of posts', (done) ->
             req = params: page: 0
-            res = send: (posts) ->
-                posts.length.should.be.exactly 10
+            res = send: (response) ->
+                response.total.should.be.a.Number
+                response.total.should.greaterThan 0
+                done()
+
+            routesAPI.posts req, res
+
+        it "only doesn't return more than #{Posts::POSTS_PER_PAGE} posts at a time", (done) ->
+            req = params: page: 0
+            res = send: (response) ->
+                response.posts.length.should.be.exactly Posts::POSTS_PER_PAGE
                 done()
 
             routesAPI.posts req, res
@@ -27,7 +37,7 @@ describe 'routes-api', ->
             res = send: (firstSet) ->
                 req = params: page: 1
                 res = send: (secondSet) ->
-                    secondSet.should.not.containDeep firstSet
+                    secondSet.posts.should.not.containDeep firstSet.posts
                     done()
                 routesAPI.posts req, res
 
@@ -35,17 +45,17 @@ describe 'routes-api', ->
 
         it 'only returns results with necessary data', (done) ->
             req = params: page: 0
-            res = send: (posts) ->
-                posts[0].should.not.have.property 'post'
+            res = send: (response) ->
+                response.posts[0].should.not.have.property 'post'
                 done()
 
             routesAPI.posts req, res
 
         it 'returns parsed posts', (done) ->
             req = params: page: 0
-            res = send: (posts) ->
-                posts[0].date.should.be.an.instanceOf Date
-                posts[0].tags.should.be.an.instanceOf Array
+            res = send: (response) ->
+                response.posts[0].date.should.be.an.instanceOf Date
+                response.posts[0].tags.should.be.an.instanceOf Array
                 done()
 
             routesAPI.posts req, res

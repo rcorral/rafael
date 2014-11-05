@@ -27,7 +27,7 @@ module.exports.posts = (req, res) ->
                     posts.push post
                     next()
 
-            Util.syncLoop postKeys, getPost, ->
+            Util.syncLoop postKeys, getPost, =>
                 client.zcard @config.postorderKey, (err, total) ->
                     client.end()
                     res.send {total, posts}
