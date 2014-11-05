@@ -32,7 +32,6 @@ module.exports.posts = (req, res) ->
 module.exports.post = (req, res) ->
     post = new Post id: req.params.post
     post.fetch
-        cache: sd.ENV is 'production'
         success: ->
             res.locals.sd.blogPost = post.toJSON()
             template.render req, res,
