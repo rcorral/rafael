@@ -2,15 +2,19 @@ rafael
 ======
 
 An isomorphic app, which takes some ideologies from [Ezel](https://github.com/artsy/ezel/). It leverages Browserify and shares code between the server and the browser. It's also my own [personal website](http://rafaelcorral.com/).  
-It's a single page application, but the requested page will render server-side so we get the benefits of SEO. 
+It's a single page application, but the requested page will render server-side so we get the benefits of SEO and for performance.
 
 Install
 -------
 * npm install -g gulp
 * npm install [--production]
+* install [Redis](http://redis.io/)
 
-Run
----
+Starting the server
+-------------------
+
+### Start redis
+`$ redis-server`
 
 ### Running in development
 
@@ -23,7 +27,7 @@ Run
 Tests
 -----
 
-**Redis must be running for some tests**
+**Redis must be running**
 
 `$ npm test`
 
