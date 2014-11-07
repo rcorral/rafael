@@ -17,6 +17,7 @@ parseAssets = (assets, gzip) ->
         css = ['bundle.css']
         js = ['vendor.js', 'bundle.js']
     else
+        # This block will return the versioned asset
         if gzip
             css = [assets['bundle.css.gz']]
             js = [assets['vendor.js.gz'], assets['bundle.js.gz']]
