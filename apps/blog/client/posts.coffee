@@ -2,7 +2,7 @@ Util = require '../../../components/Util/index.coffee'
 
 module.exports = class PostsView extends Backbone.View
 
-    className: 'app-blog'
+    className: 'app-blog blog'
 
     events:
         'click [data-behavior~=paginate]': 'handlePaginationClick'

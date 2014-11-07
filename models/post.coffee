@@ -1,4 +1,5 @@
 Backbone = require 'backbone'
+moment = require 'moment'
 sd = require('sharify').data
 
 module.exports = class Post extends Backbone.Model
@@ -15,6 +16,13 @@ module.exports = class Post extends Backbone.Model
     toJSON: ->
         json = super
         json.postUrl = @frontEndUrl()
+
+        date = moment @get 'date'
+        json.uiDate = yyyymmdd: date.format 'YYYY-MM-DD'
+        if moment().diff(date, 'weeks') is 0
+            json.uiDate.friendly = date.fromNow()
+        else
+            json.uiDate.friendly = date.format 'dddd, MMMM Do YYYY'
         json
 
     loadPost: (postID, options={}) ->

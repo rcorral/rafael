@@ -2,7 +2,7 @@ Util = require '../../../components/Util/index.coffee'
 
 module.exports = class PostView extends Backbone.View
 
-    className: 'app-blog-post'
+    className: 'app-blog-post blog'
 
     initialize: (options) ->
         @router = options.router

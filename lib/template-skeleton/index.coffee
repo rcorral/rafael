@@ -42,5 +42,5 @@ module.exports =
             footerView: footerView appLocals
             hasNav: true
             inProduction: sd.ENV is 'production'
-            navbarView: navbarView opts.navbarOpts
+            navbarView: navbarView _.defaults {}, opts.navbarOpts, {sd}
             title: 'Rafael Corral'

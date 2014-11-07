@@ -10,7 +10,7 @@
 "'"('\\'[']|[^'])*"'"                             return 'STRING'
 \[(["]("\\"["]|[^"])*["](\,\s)?)+\]               return 'TAGS'
 ([0-9]{4}\-[0-9]{2}\-[0-9]{2}T[0-9]{2}\:[0-9]{2}) return 'DATETIME'
-JADE[^(JADE)]+JADE\;                              return 'JADE'
+JADE[\s\S]+?JADE\;                                return 'JADE'
 ':'                                               return ':'
 \<\!\-\-\s[a-z]+\s\-\-\>                          return 'HTMLIDENT'
 [a-zA-Z]+                                         return 'WORD'

@@ -28,6 +28,8 @@ class ApplicationModel extends Backbone.Model
         @registerComponent 'blogPost',
             modelKlass: Post
             attributes: sd.blogPost
+            options:
+                parse: true
 
         @registerComponent 'portfolio',
             modelKlass: Backbone.Model

@@ -1,0 +1,33 @@
+.app-wrapper
+    
+    .app-blog
+        h1
+            offscreen()
+
+    > .blog
+        color: #333
+        font-size: 1.85rem
+        margin: 0 auto
+        width: 500px
+
+        .post
+            line-height: 1.6
+            margin-bottom: 30px
+
+            h1, h2
+                color: #304251
+                font-size: 2.5rem
+                line-height: initial
+                margin: 30px 0
+
+                a
+                    color: #386388
+
+            p
+                margin-bottom: 30px
+
+/* Media queries for portfolio */
+@media (max-width: 556px)
+    .app-wrapper
+        > .blog
+            width: 95%
