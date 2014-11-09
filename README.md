@@ -1,8 +1,9 @@
 rafael
 ======
 
-[![Build Status](https://secure.travis-ci.org/twbs/bootstrap.svg?branch=master)](https://travis-ci.org/twbs/bootstrap)
-[![dependency Status](https://david-dm.org/rcorral/rafael/dev-status.svg)](https://david-dm.org/rcorral/rafael#info=dependencies)
+[![Build Status](http://img.shields.io/travis/rcorral/rafael.svg?style=flat)](https://travis-ci.org/rcorral/rafael)
+[![dependency Status](https://david-dm.org/rcorral/rafael.svg?style=flat)](https://david-dm.org/rcorral/rafael#info=dependencies)
+[![devDependency Status](https://david-dm.org/rcorral/rafael/dev-status.svg?style=flat)](https://david-dm.org/rcorral/rafael#info=devDependencies)
 
 An isomorphic app, which takes some ideologies from [Ezel](https://github.com/artsy/ezel/). It leverages Browserify and shares code between the server and the browser. It's also my own [personal website](http://rafaelcorral.com/).  
 It's a single page application, but the requested page will render server-side so we get the benefits of SEO and for performance.
