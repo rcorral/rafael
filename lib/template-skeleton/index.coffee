@@ -38,7 +38,7 @@ module.exports =
         res.render 'index', _.defaults {}, appLocals, opts,
             appName: ''
             assets: parseAssets assets, req.acceptsEncodings('gzip')
-            description: 'Full stack engineer in San Francisco. Known language: JS, PHP, CSS, HTML, SQL, NoSQL'
+            description: 'Full stack engineer in San Francisco. JS, PHP, CSS, HTML, SQL, NoSQL'
             footerView: footerView appLocals
             hasNav: true
             inProduction: sd.ENV is 'production'
