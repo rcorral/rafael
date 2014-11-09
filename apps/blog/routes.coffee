@@ -29,6 +29,9 @@ module.exports.posts = (req, res) ->
                 appView: postsView posts.forTemplate()
                 navbarOpts:
                     blogActive: true
+        error: ->
+            # TODO: actually user a 404 page
+            res.redirect '/blog'
 
 module.exports.post = (req, res) ->
     post = new Post id: req.params.post
@@ -41,3 +44,6 @@ module.exports.post = (req, res) ->
                 componentClassName: PostView::componentClassName
                 navbarOpts:
                     blogPostActive: true
+        error: ->
+            # TODO: actually user a 404 page
+            res.redirect '/blog'

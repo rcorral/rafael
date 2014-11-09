@@ -25,6 +25,20 @@
     .app-blog
         h1
             offscreen()
+        .pagination
+            display: flex
+            flex-direction: row
+            .btn
+                border-color: #D1D1D1
+                box-shadow: none
+                flex-grow: 1
+                
+                &:hover
+                    background-color: #3a3a3a
+                    color: #efefef
+
+                &+.btn
+                    border-left-width: 0
 
     .app-blog-post
         .post-date

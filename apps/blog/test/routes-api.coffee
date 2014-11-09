@@ -51,45 +51,65 @@ describe 'routes-api', ->
                         prevPost.date.getTime().should.be.greaterThan post.date.getTime()
                     prevPost = post
 
+        it 'returns 400 with an invalid page number', (done) ->
+            req = params: page: -1
+            res =
+                end: done
+                status: (code) ->
+                    code.should.be.exactly 400
+                    @
+
+            routesAPI.posts req, res
+
+        it 'returns 404 when a non-existent page is request', (done) ->
+            req = params: page: 999999
+            res =
+                end: done
+                status: (code) ->
+                    code.should.be.exactly 404
+                    @
+
+            routesAPI.posts req, res
+
     describe '#post', ->
 
-        before ->
+        before (done) ->
             routesAPI.config = require './config/redis.json'
-
-        it 'returns an empty object with a non-existent post slug', (done) ->
-            req = params: post: 'non-existent'
-            res = send: (post) ->
-                post.should.be.an.Object
-                post.should.be.empty
-                done()
-            routesAPI.post req, res
-
-        it 'returns an empty object with a invalid post slug', (done) ->
-            req = params: post: 'something!@#-inva($@'
-            res = send: (post) ->
-                post.should.be.an.Object
-                post.should.be.empty
-                done()
-            routesAPI.post req, res
-
-        it 'returns the requested post', (done) ->
             req = params: post: 'first-post'
-            res = send: (post) ->
-                post.should.be.an.Object
-                post.post.should.be.ok
-                post.title.should.be.ok
-                post.tags.should.an.Array
-                post.slug.should.be.exactly 'first-post'
+            res = send: (post) =>
+                @post = post
                 done()
             routesAPI.post req, res
+
+        it 'returns 404 when requesting a non-existent post', (done) ->
+            req = params: post: 'non-existent'
+            res =
+                end: done
+                status: (code) ->
+                    code.should.be.exactly 404
+                    @
+            routesAPI.post req, res
+
+        it 'returns 400 with an invalid request', (done) ->
+            req = params: post: 'something!@#-inva($@'
+            res =
+                end: done
+                status: (code) ->
+                    code.should.be.exactly 400
+                    @
+            routesAPI.post req, res
+
+        it 'returns the requested post', ->
+            @post.should.be.an.Object
+            @post.post.should.be.ok
+            @post.title.should.be.ok
+            @post.tags.should.an.Array
+            @post.slug.should.be.exactly 'first-post'
 
         it 'increments hits', (done) ->
+            @post.hits ?= 0
             req = params: post: 'first-post'
-            res = send: (post) ->
-                currentHits = post.hits
-                req = params: post: 'first-post'
-                res = send: (post) ->
-                    post.hits.should.be.exactly currentHits + 1
-                    done()
-                routesAPI.post req, res
+            res = send: (post) =>
+                post.hits.should.be.exactly @post.hits + 1
+                done()
             routesAPI.post req, res
