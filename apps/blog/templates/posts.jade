@@ -7,10 +7,11 @@ each post in posts
                 | #{post.title}
         | !{post.abstract}
 
-p.pagination
-    - var classes = 'btn'
-    - if (isLastPage) classes += ' disabled'
-    a(class=classes, href='#{nextPageUrl}', data-behavior='paginate', data-page=page+1) Older posts
-    - var classes = 'btn'
-    - if (isFirstPage) classes += ' disabled'
-    a(class=classes, href='#{prevPageUrl}', data-behavior='paginate', data-page=page-1) Newer posts
+if !isLastPage || !isFirstPage
+    p.pagination
+        - var classes = 'btn'
+        - if (isLastPage) classes += ' disabled'
+        a(class=classes, href='#{nextPageUrl}', data-behavior='paginate', data-page=page+1) Older posts
+        - var classes = 'btn'
+        - if (isFirstPage) classes += ' disabled'
+        a(class=classes, href='#{prevPageUrl}', data-behavior='paginate', data-page=page-1) Newer posts
