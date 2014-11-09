@@ -2,6 +2,7 @@ appLocals = require 'app-locals'
 jade = require 'jade'
 path = require 'path'
 Post = require '../../models/post'
+PostView = require './client/post'
 Posts = require '../../collections/posts'
 sd = require('sharify').data
 template = require 'template-skeleton'
@@ -37,5 +38,6 @@ module.exports.post = (req, res) ->
             template.render req, res,
                 appName: 'blogPost'
                 appView: postView res.locals.sd.blogPost
+                componentClassName: PostView::componentClassName
                 navbarOpts:
                     blogPostActive: true

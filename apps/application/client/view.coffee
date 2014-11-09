@@ -110,10 +110,11 @@ class ApplicationView extends Backbone.View
         if previousComponentName?
             previousView = @getComponentView previousComponentName
             previousView.$el.hide()
-            @$body.removeClass "#{previousComponentName}-component"
+            className = "#{previousView.componentClassName ? previousComponentName}-component"
+            @$body.removeClass className
 
-        @$body.addClass "#{component}-component"
         view = @getComponentView component
+        @$body.addClass "#{view.componentClassName ? component}-component"
         view.$el.show()
         view.render()
         Util.scrollToTop()

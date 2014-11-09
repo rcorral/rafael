@@ -13,8 +13,9 @@ html(lang='en')
         script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
         <![endif]-->
 
-    - var bodyClass = appName + '-component'
-    - if (hasNav) bodyClass += ' has-nav'
+    - if (!componentClassName) {componentClassName = appName;}
+    - var bodyClass = componentClassName + '-component';
+    - if (hasNav) {bodyClass += ' has-nav';}
     body(class=bodyClass)
         if inProduction
             include ./analytics.jade
@@ -26,7 +27,7 @@ html(lang='en')
             main(class='row main')
                 .app-wrapper
                     if appView
-                        div(class='app-#{appName}')
+                        div(class='app-#{componentClassName}')
                             != appView
 
         != footerView
