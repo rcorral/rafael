@@ -14,6 +14,7 @@ class ApplicationModel extends Backbone.Model
         @listenTo router, 'navigate:blogPost', @handleBlogPost
         @listenTo router, 'navigate:home', @handleComponent
         @listenTo router, 'navigate:portfolio', @handleComponent
+        @listenTo @, 'change:activeComponent', @handleActiveComponentChange
 
         @registerComponent 'about',
             modelKlass: Backbone.Model
@@ -88,5 +89,17 @@ class ApplicationModel extends Backbone.Model
             fn()
         else
             instance.loadPost postID, success: fn
+
+    handleActiveComponentChange: ->
+        previousComponentID = @previous 'activeComponent'
+        if previousComponentID?
+            previousComponent = @getComponent previousComponentID
+            if previousComponent.type is 'model'
+                previousComponent.instance.set 'isActive', false
+
+        currentComponentID = @get 'activeComponent'
+        activeComponent = @getComponent currentComponentID
+        if activeComponent.type is 'model'
+            activeComponent.instance.set 'isActive', true
 
 module.exports = ApplicationModel

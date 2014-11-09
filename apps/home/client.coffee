@@ -7,7 +7,6 @@ class HomeView extends Backbone.View
     events:
         'click [data-behavior~=read-more]': 'handleReadMore'
         'swipeleft': 'handleReadMore'
-        'keyup': 'handleKeyPress'
 
     initialize: (options) ->
         @router = options.router
@@ -16,6 +15,14 @@ class HomeView extends Backbone.View
     render: ->
         @$el.html @constructor.template()
         @$el.focus()
+
+    delegateEvents: ->
+        super
+        $('body').on 'keyup.homeDelegateEvents', @handleKeyPress.bind @
+
+    undelegateEvents: ->
+        super
+        $('body').off '.homeDelegateEvents'
 
     ###
     # Handlers
@@ -27,6 +34,7 @@ class HomeView extends Backbone.View
         false
 
     handleKeyPress: (e) ->
+        return unless @model.get 'isActive'
         if e.which is Util.keys.arrowRight
             @handleReadMore()
 

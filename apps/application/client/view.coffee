@@ -106,11 +106,11 @@ class ApplicationView extends Backbone.View
         component.instance
 
     renderActiveComponent: (model, component) ->
-        previousComponentName = @model.previous 'activeComponent'
-        if previousComponentName?
-            previousView = @getComponentView previousComponentName
+        previousComponentID = @model.previous 'activeComponent'
+        if previousComponentID?
+            previousView = @getComponentView previousComponentID
             previousView.$el.hide()
-            className = "#{previousView.componentClassName ? previousComponentName}-component"
+            className = "#{previousView.componentClassName ? previousComponentID}-component"
             @$body.removeClass className
 
         view = @getComponentView component
