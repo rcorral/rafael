@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "compile": "./node_modules/.bin/jison ./apps/blog/lib/post-language.jison -o ./apps/blog/lib/post-language.js",
     "build-posts": "DEBUG=debug node ./bin/build-posts",
-    "test": "./node_modules/.bin/mocha $(find apps/*/test -name '*.coffee' -not -path 'test/helpers/*')"
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha $(find ./test -name '*.coffee') $(find apps/*/test -name '*.coffee')"
   },
   "dependencies": {
     "backbone": "*",

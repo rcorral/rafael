@@ -4,7 +4,7 @@ sd = require('sharify').data
 
 module.exports = class Post extends Backbone.Model
 
-    urlRoot: "#{sd.API_URL}/api/posts"
+    urlRoot: -> "#{sd.API_URL}/api/posts"
 
     frontEndUrl: -> "/blog/#{@id}"
 

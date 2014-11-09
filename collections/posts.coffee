@@ -10,14 +10,14 @@ module.exports = class Posts extends Backbone.Collection
 
     url: -> "#{sd.API_URL}/api/posts/page/#{@page}"
 
-    urlForPage: (page) ->
+    frontEndUrl: (page) ->
         url = "/blog"
         url += "/page/#{page}" if page
         url
 
     model: Post
 
-    initialize: (models, options) ->
+    initialize: (models, options={}) ->
         @page = options.page if options.page
         @total = options.total if options.total
 
@@ -35,5 +35,5 @@ module.exports = class Posts extends Backbone.Collection
         page: @page
         isFirstPage: @page is 0
         isLastPage: (@page + 1) is Math.ceil @total / @POSTS_PER_PAGE
-        prevPageUrl: @urlForPage if @page - 1 < 0 then 0 else @page - 1
-        nextPageUrl: @urlForPage @page + 1
+        prevPageUrl: @frontEndUrl if @page - 1 < 0 then 0 else @page - 1
+        nextPageUrl: @frontEndUrl @page + 1

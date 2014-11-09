@@ -21,7 +21,7 @@ module.exports = class PostsView extends Backbone.View
     handlePaginationClick: (e) ->
         e.preventDefault()
         page = $(e.currentTarget).data 'page'
-        @router.navigate @collection.urlForPage(page), trigger: true
+        @router.navigate @collection.frontEndUrl(page), trigger: true
 
     handleViewPost: (e) ->
         e.preventDefault()

@@ -1,29 +1,33 @@
 sd = require('sharify').data
 
-# sd.CDN_HOSTS comes from ENV variable
-if sd.CDN_HOSTS
-    hosts = sd.CDN_HOSTS.split ','
-else
-    hosts = [sd.HOST]
-
-hosts = hosts.map (host) ->
-    if sd.ENV is 'development'
-        "http://#{host}:#{sd.PORT}"
+getHost = ->
+    # sd.CDN_HOSTS comes from ENV variable
+    if sd.CDN_HOSTS and sd.ENV is 'production'
+        hosts = sd.CDN_HOSTS.split ','
     else
-        "//#{host}"
+        hosts = [sd.HOST]
 
-# Closure that returns a function
-# This function loops through available CDN hosts
-# returning a new one with each call
-assetHostsFn = do (hosts=hosts) ->
-    if hosts.length is 1
-      -> hosts[0]
-    else
-        counter = -1
-        ->
-            counter++
-            counter = 0 if counter is hosts.length
-            hosts[counter]
+    hosts = hosts.map (host) ->
+        if sd.ENV is 'development'
+            "http://#{host}:#{sd.PORT}"
+        else
+            "//#{host}"
+
+    # Closure that returns a function
+    # This function loops through available CDN hosts
+    # returning a new one with each call
+    assetHostsFn = do (hosts=hosts) ->
+        if hosts.length is 1
+          -> hosts[0]
+        else
+            counter = -1
+            ->
+                counter++
+                counter = 0 if counter is hosts.length
+                hosts[counter]
 
 module.exports =
-    getHost: assetHostsFn
+    getHost: getHost()
+
+if process?.env?.NODE_ENV is 'test'
+    module.exports.getHostFn = getHost

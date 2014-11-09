@@ -48,11 +48,6 @@ module.exports = (app) ->
     app.use livereload port: process.env.NODE_LIVERELOAD_PORT if inDevelopment
     app.use compression threshold: 512 if inProduction
 
-    # Test only
-    if 'test' is sd.ENV
-        # Mount fake API server
-        app.use '/__api', require('../test/helpers/integration.coffee').api
-
     # Mount apps
     app.use require '../apps/home'
     app.use require '../apps/portfolio'
@@ -63,8 +58,9 @@ module.exports = (app) ->
     maxAge = 1000 * 60 * 60 * 24 * 365 # 1 year
     fs.readdirSync(path.resolve __dirname, '../apps').forEach (fld) ->
         app.use express.static(path.resolve(__dirname, "../apps/#{fld}/public"), {maxAge})
-    fs.readdirSync(path.resolve __dirname, '../components').forEach (fld) ->
-        app.use express.static(path.resolve(__dirname, "../components/#{fld}/public"), {maxAge})
+    # There's no components with public folders atm
+    # fs.readdirSync(path.resolve __dirname, '../components').forEach (fld) ->
+        # app.use express.static(path.resolve(__dirname, "../components/#{fld}/public"), {maxAge})
     app.use express.static(path.resolve(__dirname, '../public'), {maxAge})
 
     app.use require './error-handler'
