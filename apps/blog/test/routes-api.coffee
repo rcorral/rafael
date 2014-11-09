@@ -13,52 +13,43 @@ describe 'routes-api', ->
             routesAPI.config = require './config/redis.json'
             builderPosts = builder.getPosts postsPath
             builder.getPosts = -> builderPosts
-            builder.build routesAPI.config, done
+            builder.build routesAPI.config, =>
+                req = params: page: 0
+                res = send: (response) =>
+                    @firstPage = response
+                    req = params: page: 1
+                    res = send: (response) =>
+                        @secondPage = response
+                        done()
 
-        it 'returns the total number of posts', (done) ->
-            req = params: page: 0
-            res = send: (response) ->
-                response.total.should.be.a.Number
-                response.total.should.greaterThan 0
-                done()
+                    routesAPI.posts req, res
 
-            routesAPI.posts req, res
-
-        it "only doesn't return more than #{Posts::POSTS_PER_PAGE} posts at a time", (done) ->
-            req = params: page: 0
-            res = send: (response) ->
-                response.posts.length.should.be.exactly Posts::POSTS_PER_PAGE
-                done()
-
-            routesAPI.posts req, res
-
-        it 'paginates', (done) ->
-            req = params: page: 0
-            res = send: (firstSet) ->
-                req = params: page: 1
-                res = send: (secondSet) ->
-                    secondSet.posts.should.not.containDeep firstSet.posts
-                    done()
                 routesAPI.posts req, res
 
-            routesAPI.posts req, res
+        it 'returns the total number of posts', ->
+            @firstPage.total.should.be.a.Number
+            @firstPage.total.should.greaterThan 0
 
-        it 'only returns results with necessary data', (done) ->
-            req = params: page: 0
-            res = send: (response) ->
-                response.posts[0].should.not.have.property 'post'
-                done()
+        it "doesn't return more than #{Posts::POSTS_PER_PAGE}", ->
+            @firstPage.posts.length.should.be.exactly Posts::POSTS_PER_PAGE
 
-            routesAPI.posts req, res
+        it 'paginates', ->
+            @secondPage.posts.should.not.containDeep @firstPage.posts
 
-        it 'returns parsed posts', (done) ->
-            req = params: page: 0
-            res = send: (response) ->
-                response.posts[0].date.should.be.an.instanceOf Date
-                response.posts[0].tags.should.be.an.instanceOf Array
-                done()
+        it 'only returns results with necessary data', ->
+            @firstPage.posts[0].should.not.have.property 'post'
 
-            routesAPI.posts req, res
+        it 'returns parsed posts', ->
+            @firstPage.posts[0].date.should.be.an.instanceOf Date
+            @firstPage.posts[0].tags.should.be.an.instanceOf Array
+            @firstPage.posts[0].hits.should.be.an.instanceOf Number if @firstPage.posts[0].hits
+
+        it 'returns posts in decending chronological order', ->
+            for results in [@firstPage, @secondPage]
+                for post in results.posts
+                    if prevPost
+                        prevPost.date.getTime().should.be.greaterThan post.date.getTime()
+                    prevPost = post
 
     describe '#post', ->
 

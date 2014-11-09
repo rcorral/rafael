@@ -13,7 +13,7 @@ module.exports.posts = (req, res) ->
     client.on 'connect', =>
         start = req.params.page * Posts::POSTS_PER_PAGE
         stop = start + Posts::POSTS_PER_PAGE - 1
-        client.zrange [@config.postorderKey, start, stop], (err, postKeys) =>
+        client.zrevrange [@config.postorderKey, start, stop], (err, postKeys) =>
             throw 'DB error' if err
 
             posts = []
