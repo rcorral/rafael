@@ -29,7 +29,7 @@ p some longer text
 JADE;
 ```
 
-Compile posts
+Compiling posts
 -------------
 Post files need to be parsed and then inserted into Redis.  
 To do this, simply run the following command:  
