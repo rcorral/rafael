@@ -118,7 +118,8 @@ gulp.task('compile-js', ['clean-js'], function(done) {
         './node_modules/underscore/underscore.js',
         './node_modules/backbone/backbone.js',
         './node_modules/bootstrap/dist/js/bootstrap.js',
-        './lib/jquery/*.*'
+        './lib/jquery/*.*',
+        './lib/highlight.js/highlight.pack.js'
         ])
         .pipe(concat('vendor.js'));
     if (inProduction) {
