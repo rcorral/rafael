@@ -77,7 +77,9 @@ client.on 'connect', ->
 
                 # Custom namespace
                 @config = require '../config/redis.json'
-                builder.build @config, done
+                builder.build
+                    config: @config
+                    callback: done
 
                 @keysToDelete = [@config.postorderKey, @config.tagsKey]
 

@@ -14,9 +14,10 @@ module.exports.getPosts = (postsPath) ->
     throw 'No posts found' unless postFiles.length
 
     for fileName in postFiles
+        continue if fileName[0] is '.'
         matches = fileName.match /([\d]{4}-[\d]{2}-[\d]{2})-(.*)\.jade/
         if not matches or not matches[1] or not matches[2]
-            throw 'Invalid post filename.'
+            throw "Invalid post filename: #{fileName}"
 
         if matches[2] in slugs
             throw 'Can\'t have two posts with the same slug.'
@@ -41,7 +42,7 @@ module.exports.getTags = (posts) ->
             tags[tag].push post.slug
     tags
 
-module.exports.build = (config, callback) ->
+module.exports.build = ({config, callback}) ->
     config ?= require '../config/redis.json'
     client = redis.createClient()
 

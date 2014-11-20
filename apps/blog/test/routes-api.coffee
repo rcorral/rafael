@@ -13,18 +13,20 @@ describe 'routes-api', ->
             routesAPI.config = require './config/redis.json'
             builderPosts = builder.getPosts postsPath
             builder.getPosts = -> builderPosts
-            builder.build routesAPI.config, =>
-                req = params: page: 0
-                res = send: (response) =>
-                    @firstPage = response
-                    req = params: page: 1
+            builder.build
+                config: routesAPI.config
+                callback: =>
+                    req = params: page: 0
                     res = send: (response) =>
-                        @secondPage = response
-                        done()
+                        @firstPage = response
+                        req = params: page: 1
+                        res = send: (response) =>
+                            @secondPage = response
+                            done()
+
+                        routesAPI.posts req, res
 
                     routesAPI.posts req, res
-
-                routesAPI.posts req, res
 
         it 'returns the total number of posts', ->
             @firstPage.total.should.be.a.Number

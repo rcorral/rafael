@@ -1,8 +1,10 @@
 'use strict';
+require('coffee-script').register();
 
 var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     browserify = require('browserify'),
+    buildPosts = require('./apps/blog/lib/build-posts.coffee'),
     clean = require('gulp-clean'),
     concat = require('gulp-concat'),
     coffee = require('coffee-script'),
@@ -43,7 +45,10 @@ gulp.task('clean-css', function() {
 
 gulp.task('compile-css', ['clean-css'], function() {
     debug('stylus');
-    var deps = gulp.src('node_modules/bootstrap/dist/css/bootstrap.min.css');
+    var deps = gulp.src([
+        'node_modules/bootstrap/dist/css/bootstrap.min.css',
+        'lib/highlight.js/solarized_dark.css'
+        ]);
     var assets = gulp.src('assets/index.styl')
             .pipe(stylus())
             .pipe(autoprefixer(['> 1%', 'last 2 versions']))
@@ -63,6 +68,7 @@ gulp.task('compile-css', ['clean-css'], function() {
     var bundle = es.merge(deps, assets)
         .pipe(order([
             'node_modules/bootstrap/dist/css/bootstrap.min.css',
+            'lib/highlight.js/solarized_dark.css',
             'assets/index.styl'
             ]))
         .pipe(concat('bundle.css'));
@@ -180,7 +186,16 @@ gulp.task('watch', ['compile'], function() {
         'components/**/*.jade',
         'models/**/*.coffee'
         ], ['compile']);
+
+    // Watch bundled assets
     gulp.watch('public/assets/bundle.*').on('change', refresh.changed);
+
+    // Watch post changes
+    gulp.watch('apps/blog/templates/posts/*').on('change', function() {
+        buildPosts.build({
+            callback: refresh.changed
+        });
+    });
 });
 
 gulp.task('auto-reload', ['watch'], function() {
