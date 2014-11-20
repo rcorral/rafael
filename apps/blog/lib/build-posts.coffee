@@ -42,7 +42,8 @@ module.exports.getTags = (posts) ->
             tags[tag].push post.slug
     tags
 
-module.exports.build = ({config, callback}) ->
+module.exports.build = (opts={}) ->
+    {config, callback} = opts
     config ?= require '../config/redis.json'
     client = redis.createClient()
 
