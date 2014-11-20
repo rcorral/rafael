@@ -1,0 +1,239 @@
+title: 'Building a RESTful API in Node using hapi.js'
+date: 2014-11-16T19:25
+tags: ["Node.js", "APIs"]
+<!-- abstract -->
+JADE
+p
+    | There's plenty of options when it comes to building an API using Node.js.
+    | We'll take a look at building a RESTful API using 
+    a(hrefp="http://hapijs.com/") hapi.js 
+    | a rich API framework built by the folks at Walmart Labs.
+JADE;
+<!-- post -->
+JADE
+p
+    | This is the first of a series of posts for building a node API using hapi.
+    | In this tutorial we'll dive into the basics of 
+    a(href="http://hapijs.com/") hapi.js
+    | . We'll be building a simple API to keep track of 
+    strong tasks
+    | . I'm hoping that by the end of this post you'll have a basic understanding of hapi and be comfortable building a simple API.
+p
+    strong TL;DR 
+    a(href='https://github.com/rcorral/hapijs-restful-api-example') just look at the code
+    | .
+p
+    | Before we get started let's initialize 
+    a(href='http://blog.npmjs.org/post/85484771375/how-to-install-npm') npm
+    |  in a directory.
+    pre
+        code.bash
+            | $ mkdir hapijs-restful-api-example
+            | $ cd hapijs-restful-api-example
+            | $ touch index.js
+            | $ npm init
+p
+    | and now install the 
+    a(href='https://www.npmjs.org/package/hapi') hapi npm module
+pre
+    code.bash
+        | $ npm install hapi --save
+p
+    | Open 
+    code.bash index.js
+    |  which we previously created and paste this code:
+pre
+    code.javascript
+        | // Require the Hapi node module
+        | var Hapi = require('hapi');
+        | // Create a server which will listen in port 8000
+        | var server = new Hapi.Server('localhost', 8000);
+        | 
+        | // Add a GET endpoint /hello
+        | server.route({
+        |     method: 'GET',
+        |     path: '/hello',
+        |     handler: function (request, reply) {
+        |         reply('world');
+        |     }
+        |  });
+        | 
+        | // Start the server
+        | server.start();
+p
+    | The code should be self explanatory, but you can see that we've created a single endpoint for our API.
+    br
+    | The API will respond to 
+    code GET
+    |  requests to 
+    code /hello
+    | . And it should respond with the string 
+    code 'world'
+    | . Any requests not directed to this endpoint should result in a 
+    code 404
+    |  .
+    | So let's see it in action. In one termial window start the server:
+pre
+    code.bash
+        | $ node index.js
+p
+    | And in another terminal session, make a request to our API:
+pre
+    code.bash
+        | $ curl -XGET http://localhost:8000/hello
+p
+    | If you see a response of 
+    code world
+    |  you've created your first hapi API server, yay!
+h2 Meet hapi plugins
+p
+    | Plugins can do an array of things, they're plugins after all. For now we'll be using plugins to modularize the route we just created.
+    br
+    | Let's create a 
+    code routes
+    |  folder.
+pre
+    code.bash
+        $ mkdir routes
+        $ touch tasks.js
+p
+    | Now open the 
+    code tasks.js
+    |  file we've created and paste this into it:
+pre
+    code.javascript
+        | exports.register = function(plugin, options, next) {
+        |     plugin.route([
+        |         {
+        |             method: 'GET',
+        |             path: '/tasks',
+        |             handler: function (request, reply) {
+        |                 reply('Do all the things!');
+        |             }
+        |         }
+        |     ]);
+        |  
+        |     next();
+        | }
+        |  
+        | exports.register.attributes = {
+        |     name: 'tasks-route',
+        |     version: '1.0.0'
+        | };
+p
+    | This file will be responsible for all routes related to the 
+    code /tasks
+    |  endpoint.
+p
+    | Now we'll need to update our 
+    code index.js
+    | .
+    br
+    | Replace its current contents with the following code:
+pre
+    code.javascript
+        | var Hapi = require('hapi');
+        |  
+        | var server = new Hapi.Server('localhost', 8000);
+        | 
+        | // Declare plugins
+        | var plugins = [
+        |     { plugin: require('./routes/tasks.js') }
+        | ];
+        | 
+        | // Register plugins, and start the server if none of them fail
+        | server.pack.register(plugins, function (err) {
+        |     if (err) { throw err; }
+        |  
+        |     server.start(function () {
+        |         server.log('info', 'Server running at: ' + server.info.uri);
+        |     });
+        | });
+
+p
+    code server.pack.register
+    |  WAT? Let's not worry about server packs right now, the gist is that it allows us to create clusters of servers with different configurations.
+    br
+    | We are going to configure the one server we are creating to use a plugin that registers endpoints for tasks.
+    br
+    | Start the server again 
+    code $ node index.js
+    |  and execute this in another terminal session:
+pre
+    code.bash
+        $ curl -XGET http://localhost:8000/tasks
+p
+    | You should get a successful server response, yay!
+p
+    | Now let's add an endpoint that would allow us to save a task.
+    | Update the 
+    code tasks.js
+    |  file with the following contents:
+pre
+    code.javascript
+        | exports.register = function(plugin, options, next) {
+        |     var tasks = [];
+        |     plugin.route([
+        |         {
+        |             method: 'GET',
+        |             path: '/tasks',
+        |             handler: function (request, reply) {
+        |                 // We now return the list of tasks
+        |                 reply(tasks);
+        |             }
+        |         },
+        |         {
+        |             method: 'POST',
+        |             path: '/tasks',
+        |             handler: function (request, reply) {
+        |                 // Let's store the tasks
+        |                 var task = request.payload.task;
+        |                 var key = tasks.push(task);
+        |                 reply({key: key - 1, task: task});
+        |             }
+        |         }
+        |     ]);
+        |  
+        |     next();
+        | }
+        |  
+        | // Plugins require a small manifest
+        | exports.register.attributes = {
+        |     name: 'routes-tasks', // Must be unique
+        |     version: '1.0.0'
+        | };
+p
+    | If we start the server again we can now add our first task to the API:
+pre
+    code.bash
+        | curl -XPOST http://localhost:8000/tasks -H 'Content-Type: application/json' -d '{"task": "first task ever!"}'
+p The response to this request should be:
+pre
+    code.bash
+        | {"key":0,"task":"first task ever!"}
+p
+    | We are sending a JSON document to the API, so for it to parse it corrently we must send a 
+    code Content-Type
+    |  header along with the request.
+p
+    | Request all of the tasks will return an array containing all of the stored tasks.
+pre
+    code.bash
+        | $ curl -XGET http://localhost:8000/tasks
+        | ["first task ever!"]
+p
+    | So there you have it, you've learned to create a very basic.
+p
+    | In follow up posts, I'll be talking about:
+    ul
+        li PUT/DELETE endpoints
+        li Logging
+        li Input validation
+        li Separation of concerns
+        li Testing
+    | In the meantime feel free to checkout 
+    a(href='https://github.com/rcorral/hapijs-restful-api-example') the repository
+    |  I've built that contains the final product of the posts I plan to write.
+
+
+JADE;
