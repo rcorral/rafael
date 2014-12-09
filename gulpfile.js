@@ -16,6 +16,7 @@ var gulp = require('gulp'),
     kraken = require('gulp-kraken'),
     minifyCSS = require('gulp-minify-css'),
     order = require('gulp-order'),
+    redis = require('redis'),
     refresh = require('gulp-livereload'),
     rename = require('gulp-rename'),
     rev = require('gulp-rev'),
@@ -200,6 +201,12 @@ gulp.task('watch', ['compile'], function() {
 
 gulp.task('auto-reload', ['watch'], function() {
     var p;
+
+    var client = redis.createClient();
+    client.on('connect', function() {
+        client.flushall();
+        buildPosts.build();
+    });
 
     gulp.watch([
         'apps/**/*.coffee',

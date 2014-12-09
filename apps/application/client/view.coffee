@@ -117,6 +117,6 @@ class ApplicationView extends Backbone.View
         @$body.addClass "#{view.componentClassName ? component}-component"
         view.$el.show()
         view.render()
-        Util.scrollToTop()
+        Util.scrollToTop() if previousComponentID?
 
 module.exports = ApplicationView

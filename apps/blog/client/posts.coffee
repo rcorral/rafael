@@ -16,15 +16,16 @@ module.exports = class PostsView extends Backbone.View
 
     render: ->
         @$el.html @constructor.template @collection.forTemplate()
-        Util.scrollToTop()
 
     handlePaginationClick: (e) ->
         e.preventDefault()
         page = $(e.currentTarget).data 'page'
         @router.navigate @collection.frontEndUrl(page), trigger: true
+        Util.scrollToTop()
 
     handleViewPost: (e) ->
         e.preventDefault()
         id = $(e.currentTarget).data 'id'
         post = @collection.get id
         @router.navigate post.frontEndUrl(), trigger: true
+        Util.scrollToTop()

@@ -17,4 +17,3 @@ module.exports = class PostView extends Backbone.View
         @$el.html @constructor.template @model.toJSON()
         @$('pre code').each (i, block) ->
             hljs.highlightBlock block
-        Util.scrollToTop()
