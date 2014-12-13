@@ -10,6 +10,7 @@
 "'"('\\'[']|[^'])*"'"                             return 'STRING'
 \[(["]("\\"["]|[^"])*["](\,\s)?)+\]               return 'TAGS'
 ([0-9]{4}\-[0-9]{2}\-[0-9]{2}T[0-9]{2}\:[0-9]{2}) return 'DATETIME'
+(true)|(false)                                    return 'BOOL'
 JADE[\s\S]+?JADE\;                                return 'JADE'
 ':'                                               return ':'
 \<\!\-\-\s[a-z]+\s\-\-\>                          return 'HTMLIDENT'
@@ -51,6 +52,14 @@ JADE[\s\S]+?JADE\;                                return 'JADE'
         return date;
     }
 
+    function parseBool($b) {
+        if ($b === 'false') {
+            return false;
+        } else if ($b === 'true') {
+            return true;
+        }
+    }
+
     function stripHtmlIdent($s) {
         $s = $s.match(/<!--(.*)-->/);
         $s = $s[1].trim();
@@ -82,6 +91,7 @@ key : HTMLIDENT {$$ = stripHtmlIdent($1);}
 
 val : STRING {$$ = strip($1);}
     | DATETIME {$$ = parseDate($1);}
+    | BOOL {$$ = parseBool($1);}
     | TAGS {$$ = JSON.parse($1);}
     | JADE {$$ = cleanJADE($1);}
     ;

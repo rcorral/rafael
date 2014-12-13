@@ -72,12 +72,12 @@
   }
 */
 var parser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,6],$V2=[5,10,11],$V3=[1,11],$V4=[1,12],$V5=[1,13],$V6=[1,14],$V7=[8,12,13,14,15];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,6],$V2=[5,10,11],$V3=[1,11],$V4=[1,12],$V5=[1,13],$V6=[1,14],$V7=[1,15],$V8=[8,12,13,14,15,16];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"start":3,"declaration":4,"EOF":5,"keyval":6,"key":7,":":8,"val":9,"HTMLIDENT":10,"WORD":11,"STRING":12,"DATETIME":13,"TAGS":14,"JADE":15,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",8:":",10:"HTMLIDENT",11:"WORD",12:"STRING",13:"DATETIME",14:"TAGS",15:"JADE"},
-productions_: [0,[3,2],[4,2],[4,1],[6,3],[6,2],[7,1],[7,1],[9,1],[9,1],[9,1],[9,1]],
+symbols_: {"error":2,"start":3,"declaration":4,"EOF":5,"keyval":6,"key":7,":":8,"val":9,"HTMLIDENT":10,"WORD":11,"STRING":12,"DATETIME":13,"BOOL":14,"TAGS":15,"JADE":16,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",8:":",10:"HTMLIDENT",11:"WORD",12:"STRING",13:"DATETIME",14:"BOOL",15:"TAGS",16:"JADE"},
+productions_: [0,[3,2],[4,2],[4,1],[6,3],[6,2],[7,1],[7,1],[9,1],[9,1],[9,1],[9,1],[9,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -105,14 +105,17 @@ case 9:
 this.$ = parseDate($$[$0]);
 break;
 case 10:
-this.$ = JSON.parse($$[$0]);
+this.$ = parseBool($$[$0]);
 break;
 case 11:
+this.$ = JSON.parse($$[$0]);
+break;
+case 12:
 this.$ = cleanJADE($$[$0]);
 break;
 }
 },
-table: [{3:1,4:2,6:3,7:4,10:$V0,11:$V1},{1:[3]},{5:[1,7],6:8,7:4,10:$V0,11:$V1},o($V2,[2,3]),{8:[1,9],9:10,12:$V3,13:$V4,14:$V5,15:$V6},o($V7,[2,6]),o($V7,[2,7]),{1:[2,1]},o($V2,[2,2]),{9:15,12:$V3,13:$V4,14:$V5,15:$V6},o($V2,[2,5]),o($V2,[2,8]),o($V2,[2,9]),o($V2,[2,10]),o($V2,[2,11]),o($V2,[2,4])],
+table: [{3:1,4:2,6:3,7:4,10:$V0,11:$V1},{1:[3]},{5:[1,7],6:8,7:4,10:$V0,11:$V1},o($V2,[2,3]),{8:[1,9],9:10,12:$V3,13:$V4,14:$V5,15:$V6,16:$V7},o($V8,[2,6]),o($V8,[2,7]),{1:[2,1]},o($V2,[2,2]),{9:16,12:$V3,13:$V4,14:$V5,15:$V6,16:$V7},o($V2,[2,5]),o($V2,[2,8]),o($V2,[2,9]),o($V2,[2,10]),o($V2,[2,11]),o($V2,[2,12]),o($V2,[2,4])],
 defaultActions: {7:[2,1]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
@@ -284,6 +287,14 @@ parse: function parse(input) {
             throw date.toString();
         }
         return date;
+    }
+
+    function parseBool($b) {
+        if ($b === 'false') {
+            return false;
+        } else if ($b === 'true') {
+            return true;
+        }
     }
 
     function stripHtmlIdent($s) {
@@ -632,26 +643,28 @@ case 2:return 12
 break;
 case 3:return 12
 break;
-case 4:return 14
+case 4:return 15
 break;
 case 5:return 13
 break;
-case 6:return 15
+case 6:return 14
 break;
-case 7:return 8
+case 7:return 16
 break;
-case 8:return 10
+case 8:return 8
 break;
-case 9:return 11
+case 9:return 10
 break;
-case 10:return 5
+case 10:return 11
 break;
-case 11:return 'INVALID'
+case 11:return 5
+break;
+case 12:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:\n|\r)/,/^(?:"(\\["]|[^"])*")/,/^(?:'(\\[']|[^'])*')/,/^(?:\[(["](\\["]|[^"])*["](,\s)?)+\])/,/^(?:([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}))/,/^(?:JADE[\s\S]+?JADE;)/,/^(?::)/,/^(?:<!--\s[a-z]+\s-->)/,/^(?:[a-zA-Z]+)/,/^(?:$)/,/^(?:.)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11],"inclusive":true}}
+rules: [/^(?:\s+)/,/^(?:\n|\r)/,/^(?:"(\\["]|[^"])*")/,/^(?:'(\\[']|[^'])*')/,/^(?:\[(["](\\["]|[^"])*["](,\s)?)+\])/,/^(?:([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}))/,/^(?:(true)|(false))/,/^(?:JADE[\s\S]+?JADE;)/,/^(?::)/,/^(?:<!--\s[a-z]+\s-->)/,/^(?:[a-zA-Z]+)/,/^(?:$)/,/^(?:.)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12],"inclusive":true}}
 });
 return lexer;
 })();

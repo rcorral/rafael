@@ -52,16 +52,22 @@ module.exports.build = (opts={}) ->
         timestamp = post.date.getTime() / 1000
         args = [config.postorderKey, timestamp, post.slug]
 
-        # Write post to sorted set
-        # allows us to have ordering of posts/pagination
-        client.zadd args, (err, response) ->
-            throw err if err
-
+        writePost = ->
             # Write individual post with all it's properties
             parser.encode post
             client.hmset "#{config.postKey}:#{post.slug}", post, (err, response) ->
                 throw err if err
                 next()
+
+        # Only write to sorted set if published
+        if post.published
+            # Write post to sorted set
+            # allows us to have ordering of posts/pagination
+            client.zadd args, (err, response) ->
+                throw err if err
+                writePost()
+        else
+            writePost()
 
     writeTags = (tags, callback) ->
         tagNames = Object.keys tags

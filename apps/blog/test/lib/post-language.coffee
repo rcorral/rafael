@@ -17,6 +17,12 @@ describe 'post-language', ->
         dateString = '0000-99-99T99:99'
         do(->parser.parse("datetime: #{dateString}")).should.throw
 
+    it 'parses bool truthy', ->
+        parser.parse('published: true').should.eql published: true
+
+    it 'parses bool falsy', ->
+        parser.parse('published: false').should.eql published: false
+
     it 'parses tag', ->
         parser.parse('tags: ["some tag"]').should.eql
             tags: ['some tag']
