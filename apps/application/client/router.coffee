@@ -1,3 +1,5 @@
+sd = require('sharify').data
+
 class Router extends Backbone.Router
 
     routes:
@@ -7,6 +9,15 @@ class Router extends Backbone.Router
         'blog': 'blog'
         'blog/page/:page': 'blog'
         'blog/:post': 'blogPost'
+
+    initialize: ->
+        @on 'all', @_trackPageview if sd.ENV is 'production'
+
+    _trackPageview: (action, route) ->
+        return unless action is 'route' # Avoids multiple calls
+        url = Backbone.history.getFragment()
+        ga = window[window.GoogleAnalyticsObject]
+        ga 'send', 'pageview', "/#{url}" if ga
 
     home: -> @trigger 'navigate:home', 'home'
 
