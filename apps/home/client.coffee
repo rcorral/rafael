@@ -29,8 +29,7 @@ class HomeView extends Backbone.View
     ###
 
     handleReadMore: ->
-        @router.navigate 'portfolio',
-            trigger: true
+        @router.navigate 'blog', trigger: true
         false
 
     handleKeyPress: (e) ->
