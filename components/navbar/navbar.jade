@@ -12,9 +12,8 @@ nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
                 li(class='#{className}')
                     a(href='/', data-behavior='route') Home
                 - var className = blogActive || blogPostActive ? 'active' : ''
-                unless sd.ENV === 'production'
-                    li(class='#{className}')
-                        a(href='/blog', data-behavior='route') Blog
+                li(class='#{className}')
+                    a(href='/blog', data-behavior='route') Blog
                 - var className = portfolioActive ? 'active' : ''
                 li(class='#{className}')
                     a(href='/portfolio', data-behavior='route') Portfolio
