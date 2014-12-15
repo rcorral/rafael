@@ -1,0 +1,133 @@
+title: 'Writing a JavaScript parser using Jison'
+date: 2014-12-15T06:25
+tags: ["javascript", "parsers"]
+published: true
+<!-- abstract -->
+JADE
+p
+    | Parsers help computers make sense of arbitrary text.
+    br
+    | We'll be writing a lexical parser using 
+    a(href="http://zaach.github.io/jison/") Jison
+    | .
+JADE;
+<!-- post -->
+JADE
+p
+    | Earlier this year I went to JSConf 2014, where 
+    a(href="https://twitter.com/neilfeyn") Neil Green
+    |  gave a talk on "Writing custom DSLs".
+    | I recommend watching 
+    a(href="https://www.youtube.com/watch?v=lm4jEcnWeKI") his talk
+    |  before reading this post. The parser we'll build is based on the code example at the end of his talk.
+p
+    strong tl;dr
+    |  take a look at the 
+    a(href='https://github.com/rcorral/jison-dsl-parser-example') code
+    |  and 
+    a(href="http://rcorral.github.io/jison-dsl-parser-example/") demo
+    | .
+p
+    | Ever wonder how Google parses search queries like this:
+    br
+    code telnet AND ssh ext:log intext:password
+    br
+    | They certainly don't rely on regular expressions alone. They most likely have a parser that turns queries into an Abstract Syntax Tree, like this:
+pre
+    code.javascript.
+        {
+            'type': 'AND',
+            'values': ['telnet', 'ssh']
+        },
+        {
+            'type': 'MATCH',
+            'values': ['ext', 'log']
+        },
+        {
+            'type': 'MATCH',
+            'values': ['intext', 'password']
+        }
+p
+    | This can more easily be digested by a computer.
+p
+    a(href='http://zaach.github.io/jison/') Jison
+    |  generates 
+    a(href='http://en.wikipedia.org/wiki/Bottom-up_parsing') bottom-up
+    |  parsers in JavaScript. Its API is similar to Bison’s, hence the name. If you are new to parser generators such as Bison, and Context-free Grammars in general, a good introduction is found in the 
+    a(href='http://dinosaur.compilertools.net/bison/bison_4.html') Bison manual
+    | .
+p
+    | Jison let's us conveniently declare our lexical and language grammar all in one file. If you haven't taken a look at the 
+    a(href='https://github.com/rcorral/jison-dsl-parser-example/blob/master/shipping.jison') grammar
+    |  I wrote, now would be a good time.
+p
+    | Defining our 
+    strong lexical grammar
+    |  is simple.
+    br
+    | For example:
+pre
+    code
+        | domestically|internationally    return 'LOCATION'
+p
+    | When the lexer finds the string 
+    code domestically
+    |  or 
+    code internationally
+    |  then tokenize it as 
+    code LOCATION
+    | .
+p
+    | The 
+    strong language grammar
+    |  can be more complex.
+    br
+    | Take this 
+    em rule
+    |  for example:
+pre
+    code
+        | conditions : conditions condition
+        |         {$$ = merge($1, $2);}
+        |     | condition
+        |     ;
+p
+    | Where 
+    code conditions
+    |  is the nonterminal symbol that this rule describes.
+    br
+    em Components
+    |  refers to everything after the colon.
+    br
+    code conditions condition
+    |  is saying that this rule can have multiple conditions, this is a recursive component.
+    br
+    | This component also has an 
+    em action 
+    code {$$ = merge($1, $2);}
+    |  that merges two conditions into one.
+    br
+    | The second component of this rule 
+    code | condition
+    , indicates that this rule can have one condition if it so pleases. 
+p
+    | Easy right? ʘ‿ʘ
+p
+    | Jison can be easily installed using npm.
+pre
+    code.bash
+        | $ npm install -g jison
+p
+    | Compiling a Jison grammar file is just as simple:
+pre
+    code.bash
+        | jison grammar.jison -o ./parser.js
+p
+    | Now you too can write your own parser!
+    br
+    | To learn more about Jison, check out the 
+    a(href='http://zaach.github.io/jison/docs/') docs
+    | .
+p
+    | Happy parsing!
+JADE;
