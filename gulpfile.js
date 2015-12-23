@@ -231,7 +231,7 @@ gulp.task('auto-reload', ['watch'], function() {
                 NODE_PATH: './lib',
                 NODE_ENV: 'development',
                 NODE_PORT: 3010,
-                NODE_HOST: 'localhost',
+                NODE_HOST: process.env.NODE_HOST || 'localhost',
                 NODE_LIVERELOAD_PORT: livereloadport
             }
         });
