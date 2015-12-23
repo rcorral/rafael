@@ -1,4 +1,5 @@
 sd = require('sharify').data
+Util = require('../components/Util/index.coffee');
 
 getHost = ->
     # sd.CDN_HOSTS comes from ENV variable
@@ -28,6 +29,7 @@ getHost = ->
 
 module.exports =
     getHost: getHost()
+    pluralize: Util.pluralize
 
 if process?.env?.NODE_ENV is 'test'
     module.exports.getHostFn = getHost

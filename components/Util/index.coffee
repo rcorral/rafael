@@ -6,6 +6,18 @@ Util.capitalize = (str) ->
     str.replace /(^\s*)(\S)(.*)$/g, (match, whitespace, firstLetter, rest) ->
          whitespace + firstLetter.toUpperCase() + rest
 
+Util.pluralize = (string, arity) ->
+    arity ?= 2
+
+    return "" if string.length is 0
+
+    arity = parseInt arity, 10
+
+    if arity isnt 1
+      string = string.replace(/y$/, "ie") + "s";
+
+    string
+
 Util.syncLoop = (array, iteratee, end) ->
     cursor = -1
     next = ->

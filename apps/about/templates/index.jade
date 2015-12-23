@@ -19,13 +19,16 @@
                 p At some point I left hacking behind and persued a career in programming.
                 - var programmingSince = 1202716800, now = Math.floor((new Date()).getTime() / 1000)
                 - var years = (now - programmingSince) / 3.15569e7
-                - var months = Math.floor(((now - programmingSince) % 3.15569e7) / 2.62974e6)
-                - if (months) {months = '.11'} else {months = ''}
-                p I learned how to program over 10 years ago and I've been programming professionally for #{Math.floor(years)}#{months} years.
+                - var months = Math.round(((now - programmingSince) % 3.15569e7) / 2.62974e6)
+                p
+                    | I learned how to program over 10 years ago and I've been programming professionally for #{Math.floor(years)} years
+                    if months
+                        |  and #{months} #{pluralize('month', months)}
+                    | .
                 p I currently work for a startup in San Francisco, 
-                    a(href='http://quid.com/', title='Quid, Inc.') Quid, Inc. 
-                    | I help maintain the single page application that we've developed. We use Backbone.js, Node.js, Ruby on Rails, Redis, MySQL and Elasticsearch among other technologies.
-                p I enjoy public speaking, music, food, travel, jokes, volunteering, dogs, and sports.
+                    a(href='http://mesosphere.io/', title='Mesosphere, Inc.') Mesosphere, Inc. 
+                    | I helped build the UI for the datacenter and am now leading a team of engineers who are building on this UI and other UI projects.
+                p I enjoy public speaking, climbing, music, food, travel, jokes, volunteering, dogs, and sports.
                 p: a.link--no-href(data-behavior='email-prompt') Let's get in touch.
 
     section.hire-me
@@ -36,11 +39,11 @@
             | I enjoy collaborating and building out new ideas. If you have an interesting idea and need help building it, 
             a(data-behavior='email-prompt') let's talk.
         - var hoursInWeek = 168, freeTime = hoursInWeek;
-        - freeTime -= (10 * 5); // Hours I work a week
+        - freeTime -= (11 * 5) + (3 * 2); // Hours I work a week
         - freeTime -= (8 * 7); // Hours I sleep a week
-        - freeTime -= (1.8 * 7); // Hours I spend doing shenanigans
-        - freeTime -= (2.5 * 2); // Hours I spend with friends
-        - freeTime -= (3 * 5); // Current time spent on side jobs
+        - freeTime -= (2 * 7); // Hours I spend doing shenanigans
+        - freeTime -= (2.5 * 7); // Hours I spend with friends
+        - freeTime -= (0 * 7); // Current time spent on side jobs
         - var freePercentage = Math.floor(100 * freeTime / hoursInWeek);
         - var busyPercentage = Math.abs(freePercentage - 100);
         .progress
@@ -48,4 +51,9 @@
                 | #{busyPercentage}% Busy
             .progress-bar.progress-bar-blue-sky(role='progressbar', aria-valuenow='#{freePercentage}', aria-valuemin='0', aria-valuemax='100', style='width: #{freePercentage}%')
                 | #{freePercentage}% Free
-        p I currently have about #{freePercentage}% of free time during my week. So if you have an idea we should get in touch.
+        p
+            | I currently have about #{freePercentage}% of free time during my week. 
+            if freePercentage > 20
+                | So if you have an idea we should get in touch!
+            else
+                | So it doesn't look like I have much time to take on anything else.
